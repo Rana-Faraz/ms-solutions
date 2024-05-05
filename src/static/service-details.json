@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "Lead Generation",
+    "description": "Lead Generation is the process of attracting and converting strangers and prospects into someone who has indicated interest in your company's product or service. Some examples of lead generators are job applications, blog posts, coupons, live events, and online content.",
+    "link": "#"
+  },
+  {
+    "id": 2,
+    "name": "App Development",
+    "description": "Lead nurturing is the process of developing relationships with buyers at every stage of the sales funnel, and through every step of the buyer's journey. It focuses marketing and communication efforts on listening to the needs of prospects, and providing the information and answers they need.",
+    "link": "#"
+  },
+  {
+    "id": 3,
+    "name": "UI/UX Design",
+    "description": "Lead scoring is a methodology used to rank prospects against a scale that represents the perceived value each lead represents to the organization. The resulting score is used to determine which leads a receiving function (e.g. sales, partners, teleprospecting) will engage, in order of priority.",
+    "link": "#"
+  },
+  {
+    "id": 4,
+    "name": "Digital Marketing",
+    "description": "Lead segmentation is the process of dividing leads into different categories based on their behavior, demographics, psychographics, and other characteristics. This allows marketers to target leads with the right content at the right time, and to personalize their marketing efforts.",
+    "link": "#"
+  }
+]

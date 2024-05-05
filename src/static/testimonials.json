@@ -1,0 +1,17 @@
+[
+  {
+    "name": "John Doe",
+    "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+    "stars": 4
+  },
+  {
+    "name": "Jane Doe",
+    "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+    "stars": 5
+  },
+  {
+    "name": "John Smith",
+    "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+    "stars": 3
+  }
+]
