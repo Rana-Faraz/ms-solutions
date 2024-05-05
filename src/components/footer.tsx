@@ -69,7 +69,7 @@ const Footer = () => {
               Services
             </h4>
             <ul className="font-degular list-none font-semibold">
-              {Services.splice(6).map((service) => (
+              {[...Services].splice(6).map((service) => (
                 <li key={"Footer_" + service} className="mb-1">
                   <a href="#">{service}</a>
                 </li>
