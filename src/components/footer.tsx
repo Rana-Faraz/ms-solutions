@@ -16,7 +16,7 @@ const Footer = () => {
       <div className="container mx-auto grid grid-cols-1 border-t border-[#B9B9B9] px-4 py-8 md:grid-cols-2">
         <div className="my-4 flex flex-col items-center justify-center gap-4 text-center md:items-start md:justify-start md:text-start">
           <a href="#landing">
-            <Image src={Logo} alt="Logo" />
+            <Image src={Logo} alt="Logo" placeholder="blur" />
           </a>
           <span className="w-full text-sm text-muted-foreground md:w-[300px]">
             Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -40,10 +40,10 @@ const Footer = () => {
         </div>
         <div className="grid grid-cols-1 place-items-center gap-4 text-center md:grid-cols-3 md:place-items-start md:text-start lg:gap-8">
           <div>
-            <h4 className="font-degular mb-2 text-xl font-bold text-primary">
+            <h4 className="mb-2 font-degular text-xl font-bold text-primary">
               Quick Links
             </h4>
-            <ul className="font-degular list-none font-semibold">
+            <ul className="list-none font-degular font-semibold">
               <li className="mb-1">
                 <a href="#landing">Home</a>
               </li>
@@ -65,10 +65,10 @@ const Footer = () => {
             </ul>
           </div>
           <div>
-            <h4 className="font-degular mb-2 text-xl font-bold text-primary">
+            <h4 className="mb-2 font-degular text-xl font-bold text-primary">
               Services
             </h4>
-            <ul className="font-degular list-none font-semibold">
+            <ul className="list-none font-degular font-semibold">
               {[...Services].splice(6).map((service) => (
                 <li key={"Footer_" + service} className="mb-1">
                   <a href="#">{service}</a>
@@ -77,7 +77,7 @@ const Footer = () => {
             </ul>
           </div>
           <div>
-            <h4 className="font-degular mb-2 text-xl font-bold text-primary">
+            <h4 className="mb-2 font-degular text-xl font-bold text-primary">
               Contact Us
             </h4>
             <div className="flex flex-col items-center justify-center gap-4 text-center font-semibold md:place-items-start md:justify-start md:text-start">

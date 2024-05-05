@@ -31,7 +31,7 @@ const Sidebar = () => (
     </SheetTrigger>
     <SheetContent>
       <SheetHeader className="my-4">
-        <Image src={Logo} alt="Logo" />
+        <Image src={Logo} alt="Logo" placeholder="blur" />
       </SheetHeader>
       <hr className="mb-4" />
       <ul className="flex flex-col gap-4 font-semibold">
@@ -103,7 +103,7 @@ export default function Navbar() {
       <div className="mx-auto h-[1px] w-[90%] bg-[#FDE4D9]" />
       <div className="sticky left-0 right-0 top-0 z-50 bg-white">
         <div className="mx-auto flex w-[90%] items-center justify-between py-4">
-          <Image src={Logo} alt="Logo" />
+          <Image src={Logo} alt="Logo" placeholder="blur" />
           <ul className="hidden items-center gap-4 font-semibold md:flex">
             <li>
               <a href="#landing">Home</a>

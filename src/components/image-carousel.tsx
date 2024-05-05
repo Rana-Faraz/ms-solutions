@@ -37,6 +37,7 @@ export default function ImageCarousel({
             className="my-8 whitespace-nowrap px-4 md:basis-1/2 lg:basis-1/4"
           >
             <Image
+              placeholder="blur"
               src={item}
               alt={`Image ${index}`}
               className="w-full cursor-pointer rounded-lg object-cover shadow-lg"

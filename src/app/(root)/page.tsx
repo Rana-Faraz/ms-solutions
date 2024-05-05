@@ -29,8 +29,14 @@ export default function Home() {
       <section id="landing" className="snap-start scroll-m-36 scroll-smooth">
         <div className="my-16 grid grid-cols-1 gap-4 px-4 sm:place-items-center md:grid-cols-2">
           <div className="relative flex flex-col justify-center space-y-4">
-            <Image src={Plane} alt="Plane" className="absolute -top-16" />
             <Image
+              src={Plane}
+              alt="Plane"
+              className="absolute -top-16"
+              placeholder="blur"
+            />
+            <Image
+              placeholder="blur"
               src={Rings}
               alt="Rings"
               className="absolute bottom-4 hidden xl:-right-64 xl:block"
@@ -48,7 +54,7 @@ export default function Home() {
             </div>
           </div>
           <div>
-            <Image src={Hero} alt="Hero" />
+            <Image src={Hero} alt="Hero" placeholder="blur" />
           </div>
         </div>
       </section>
@@ -58,7 +64,7 @@ export default function Home() {
       <section id="about" className="snap-start scroll-m-36 scroll-smooth">
         <div className="container my-16 grid grid-cols-1 gap-4 px-4 sm:place-items-center md:grid-cols-2">
           <div>
-            <Image src={About} alt="About" />
+            <Image src={About} alt="About" placeholder="blur" />
           </div>
           <div className="space-y-4">
             <span className="font-degular text-xl text-primary ">
@@ -67,7 +73,7 @@ export default function Home() {
             <h2 className="font-degular text-5xl font-bold md:text-5xl xl:text-5xl">
               We’re a digital design studio connecting brands to people
             </h2>
-            <p className="font-poppins text-pretty text-lg text-muted-foreground">
+            <p className="text-pretty font-poppins text-lg text-muted-foreground">
               Lorem Ipsum is simply dummy text of the printing and typesetting
               industry. Lorem Ipsum has been the industry's standard dummy text
               ever since the 1500s, when an unknown printer took a galley of
@@ -80,7 +86,7 @@ export default function Home() {
         </div>
       </section>
       <section id="services" className="snap-start scroll-m-36 scroll-smooth">
-        <div className="font-degular container flex flex-col items-center border-t border-[#B9B9B9] px-4 py-8">
+        <div className="container flex flex-col items-center border-t border-[#B9B9B9] px-4 py-8 font-degular">
           <span className="text-center text-xl">
             Contact Us or Send An Email to{" "}
             <a
@@ -91,13 +97,13 @@ export default function Home() {
             </a>
           </span>
           <div className="flex w-full flex-col items-center justify-center">
-            <span className="font-degular mt-16 text-xl text-primary">
+            <span className="mt-16 font-degular text-xl text-primary">
               TRUSTED SERVICES
             </span>
-            <h2 className="font-degular my-4 max-w-[600px] text-5xl font-bold md:text-center md:text-5xl xl:text-5xl">
+            <h2 className="my-4 max-w-[600px] font-degular text-5xl font-bold md:text-center md:text-5xl xl:text-5xl">
               We’re a digital design studio connecting brands to people
             </h2>
-            <div className="vt-name-[main-content] grid w-full grid-cols-1 gap-4 md:grid-cols-2 md:gap-8">
+            <div className="grid w-full grid-cols-1 gap-4 vt-name-[main-content] md:grid-cols-2 md:gap-8">
               {DeatilServices.map((service) => (
                 <Card key={service.id} service={service} />
               ))}
@@ -114,7 +120,7 @@ export default function Home() {
       </div>
       <section
         id="portfolio"
-        className="bg-squiggly-pattern snap-start scroll-m-36 scroll-smooth bg-contain bg-center bg-no-repeat"
+        className="snap-start scroll-m-36 scroll-smooth bg-squiggly-pattern bg-contain bg-center bg-no-repeat"
       >
         <div className="container my-16 flex flex-col gap-4">
           <span className="font-degular text-xl text-primary">PORTFOLIO</span>
@@ -140,11 +146,11 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <div className="bg-squiggly-pattern h-64 w-full bg-cover bg-center bg-no-repeat " />
+      <div className="h-64 w-full bg-squiggly-pattern bg-cover bg-center bg-no-repeat " />
       <div className="mx-4 flex items-center justify-center">
         <section
           id="contact"
-          className="bg-contact-pattern container my-8 grid snap-start scroll-m-36 grid-cols-1 place-items-center gap-4 scroll-smooth rounded-md bg-cover bg-center bg-no-repeat md:grid-cols-2"
+          className="container my-8 grid snap-start scroll-m-36 grid-cols-1 place-items-center gap-4 scroll-smooth rounded-md bg-contact-pattern bg-cover bg-center bg-no-repeat md:grid-cols-2"
         >
           <div className="my-16 flex flex-col gap-4 py-8">
             <span className="font-degular text-xl text-primary">
@@ -174,6 +180,7 @@ export default function Home() {
           <Image
             src={ContactImage}
             alt="Contact"
+            placeholder="blur"
             className="hidden h-[600px] w-full object-contain md:block"
           />
         </section>
