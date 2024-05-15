@@ -16,12 +16,11 @@ const Footer = () => {
       <div className="container mx-auto grid grid-cols-1 border-t border-[#B9B9B9] px-4 py-8 md:grid-cols-2">
         <div className="my-4 flex flex-col items-center justify-center gap-4 text-center md:items-start md:justify-start md:text-start">
           <a href="#landing">
-            <Image src={Logo} alt="Logo" placeholder="blur" />
+            <Image src={Logo} alt="Logo" />
           </a>
           <span className="w-full text-sm text-muted-foreground md:w-[300px]">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s,
+            Leading the Charge in Call Center Excellence and Customer Service
+            Solutions
           </span>
           <div className="flex gap-2">
             <a target="_blank" href={`${process.env.NEXT_PUBLIC_INSTAGRAM}`}>
@@ -57,7 +56,7 @@ const Footer = () => {
                 <a href="#portfolio">Case Study</a>
               </li>
               <li className="mb-1">
-                <a href="#testimonial">Testimonial</a>
+                <a href="#misson">Misson</a>
               </li>
               <li className="mb-1">
                 <a href="#contact">Contact</a>
@@ -69,7 +68,7 @@ const Footer = () => {
               Services
             </h4>
             <ul className="list-none font-degular font-semibold">
-              {[...Services].splice(6).map((service) => (
+              {[...Services].map((service) => (
                 <li key={"Footer_" + service} className="mb-1">
                   <a href="#">{service}</a>
                 </li>

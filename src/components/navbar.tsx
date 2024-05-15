@@ -10,6 +10,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import Link from "next/link";
 
 const Sidebar = () => (
   <Sheet>
@@ -31,7 +32,7 @@ const Sidebar = () => (
     </SheetTrigger>
     <SheetContent>
       <SheetHeader className="my-4">
-        <Image src={Logo} alt="Logo" placeholder="blur" />
+        <Image src={Logo} alt="Logo" />
       </SheetHeader>
       <hr className="mb-4" />
       <ul className="flex flex-col gap-4 font-semibold">
@@ -57,7 +58,7 @@ const Sidebar = () => (
         </li>
         <li>
           <SheetTrigger>
-            <a href="#testimonial">Testimonial</a>
+            <a href="#misson">Misson</a>
           </SheetTrigger>
         </li>
         <li>
@@ -67,7 +68,11 @@ const Sidebar = () => (
         </li>
         <hr />
         <li>
-          <Button className="w-full">Schedule A Call</Button>
+          <SheetTrigger className="w-full">
+            <Link href={"#contact"} className="w-full">
+              <Button className="w-full">Schedule A Call</Button>
+            </Link>
+          </SheetTrigger>
         </li>
       </ul>
     </SheetContent>
@@ -103,7 +108,7 @@ export default function Navbar() {
       <div className="mx-auto h-[1px] w-[90%] bg-[#FDE4D9]" />
       <div className="sticky left-0 right-0 top-0 z-50 bg-white">
         <div className="mx-auto flex w-[90%] items-center justify-between py-4">
-          <Image src={Logo} alt="Logo" placeholder="blur" />
+          <Image src={Logo} alt="Logo" />
           <ul className="hidden items-center gap-4 font-semibold md:flex">
             <li>
               <a href="#landing">Home</a>
@@ -118,14 +123,16 @@ export default function Navbar() {
               <a href="#portfolio">Work</a>
             </li>
             <li>
-              <a href="#testimonial">Testimonial</a>
+              <a href="#misson">Mission</a>
             </li>
             <li>
               <a href="#contact">Contact Us</a>
             </li>
             <hr />
             <li>
-              <Button className="w-full">Schedule A Call</Button>
+              <Link href={"#contact"}>
+                <Button className="w-full">Schedule A Call</Button>
+              </Link>
             </li>
           </ul>
           <div className="md:hidden">

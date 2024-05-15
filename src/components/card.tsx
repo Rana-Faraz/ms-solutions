@@ -26,11 +26,10 @@ export default function Card({ service }: CardProps) {
           />
         </div>
       </div>
-      <p className="text-pretty text-muted-foreground">
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard dummy text ever
-        since the 1500s,
-      </p>
+      <p
+        className="text-pretty text-muted-foreground"
+        dangerouslySetInnerHTML={{ __html: service.description }}
+      />
     </div>
   );
 }

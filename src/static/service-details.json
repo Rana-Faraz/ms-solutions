@@ -1,26 +1,26 @@
 [
   {
     "id": 1,
-    "name": "Lead Generation",
-    "description": "Lead Generation is the process of attracting and converting strangers and prospects into someone who has indicated interest in your company's product or service. Some examples of lead generators are job applications, blog posts, coupons, live events, and online content.",
+    "name": "Call centre",
+    "description": "Welcome to our Contact Center Services, where technology meets skill to deliver exceptional customer care. Our contact center is powered by advanced call distribution systems, modern infrastructure, and real-time reporting capabilities, ensuring seamless assistance from confident, qualified, and experienced virtual assistants. With a focus on maximizing resource utilization and implementing regular fraud prevention checks, we guarantee trusted and comfortable support for your business needs. <br /><br />Experience the difference with our professional and managed call agents who not only provide exemplary customer care but also deliver outcomes performance tailored to your requirements.",
     "link": "#"
   },
   {
     "id": 2,
-    "name": "App Development",
-    "description": "Lead nurturing is the process of developing relationships with buyers at every stage of the sales funnel, and through every step of the buyer's journey. It focuses marketing and communication efforts on listening to the needs of prospects, and providing the information and answers they need.",
+    "name": "Customer Support",
+    "description": "In today's fast-paced business environment, having qualified assistance is paramount for efficiently managing daily tasks and avoiding energy drain on non-productive activities. Thanks to technological advancements, managers and directors can now easily hire virtual assistants from anywhere in the world. <br /><br />At our company, customer support encompasses a range of services aimed at helping you maximize the value of our products and resolving any issues that may arise. From assisting with onboarding and troubleshooting to facilitating upgrades to new products or services, our dedicated team is here to support you every step of the way.",
     "link": "#"
   },
   {
     "id": 3,
-    "name": "UI/UX Design",
-    "description": "Lead scoring is a methodology used to rank prospects against a scale that represents the perceived value each lead represents to the organization. The resulting score is used to determine which leads a receiving function (e.g. sales, partners, teleprospecting) will engage, in order of priority.",
+    "name": "Virtual assistance",
+    "description": "Our virtual assistants are reliable and adaptable professionals ready to bolster your team's productivity remotely. They excel in organizing data, handling phone inquiries, and supporting the creation of presentations and sales materials. Partnering with our Call Center Services ensures access to skilled virtual assistants proficient in utilizing platforms like Skype and Zoom, all while upholding stringent professional standards.",
     "link": "#"
   },
   {
     "id": 4,
-    "name": "Digital Marketing",
-    "description": "Lead segmentation is the process of dividing leads into different categories based on their behavior, demographics, psychographics, and other characteristics. This allows marketers to target leads with the right content at the right time, and to personalize their marketing efforts.",
+    "name": "Live chat support",
+    "description": "Effective live chat support requires patience and adaptability, as customers reach out with various emotions and concerns. Our adept customer service representatives handle interactions with joy, anger, confusion, frustration, and curiosity calmly and courteously, ensuring customer satisfaction in every situation. Delegating tasks to capable assistants allows you to prioritize core responsibilities, while our live chat support assures customers that their issues will be promptly addressed and resolved.",
     "link": "#"
   }
 ]

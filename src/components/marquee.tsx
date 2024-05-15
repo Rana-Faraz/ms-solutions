@@ -52,7 +52,8 @@ export default function Marquee({ content, direction, variant }: MarqueeProps) {
             key={index}
             className="basis-auto whitespace-nowrap px-4 pl-0"
           >
-            <span>{item}</span> <span className="ml-4">-</span>
+            <span className="text-sm tracking-wider">{item}</span>{" "}
+            <span className="ml-4">-</span>
           </CarouselItem>
         ))}
       </CarouselContent>
