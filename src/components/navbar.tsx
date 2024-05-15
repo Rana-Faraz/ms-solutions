@@ -88,14 +88,14 @@ export default function Navbar() {
           <span>We Will Grow Your Small Business To The Next Level</span>
         </div>
         <div className="flex gap-4">
-          <a
+          {/* <a
             href={`tel:${process.env.NEXT_PUBLIC_PHONE}`}
             className="flex gap-2"
           >
             <Phone size={20} />
             <span>{process.env.NEXT_PUBLIC_PHONE}</span>
           </a>
-          <div className="h-[26px] w-[1px] bg-[#FDE4D9]" />
+          <div className="h-[26px] w-[1px] bg-[#FDE4D9]" /> */}
           <a
             href={`mialto:${process.env.NEXT_PUBLIC_EMAIL}`}
             className="flex gap-2"

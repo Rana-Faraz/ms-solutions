@@ -80,13 +80,13 @@ const Footer = () => {
               Contact Us
             </h4>
             <div className="flex flex-col items-center justify-center gap-4 text-center font-semibold md:place-items-start md:justify-start md:text-start">
-              <a
+              {/* <a
                 href={`tel:${process.env.NEXT_PUBLIC_PHONE}`}
                 className="flex gap-2"
               >
                 <Phone size={20} />
                 <span>{process.env.NEXT_PUBLIC_PHONE}</span>
-              </a>
+              </a> */}
               <a
                 href={`mialto:${process.env.NEXT_PUBLIC_EMAIL}`}
                 className="flex gap-2"
