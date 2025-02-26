@@ -1,0 +1,165 @@
+.rich-text-editor .ProseMirror {
+  outline: none;
+}
+
+.rich-text-editor .ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: hsl(var(--muted-foreground));
+  pointer-events: none;
+  height: 0;
+}
+
+/* Heading styles */
+.rich-text-editor .ProseMirror h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.rich-text-editor .ProseMirror h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+}
+
+.rich-text-editor .ProseMirror h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 1.25rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
+}
+
+/* List styles */
+.rich-text-editor .ProseMirror ul,
+.rich-text-editor .ProseMirror ol {
+  padding-left: 1.5rem;
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.rich-text-editor .ProseMirror ul {
+  list-style-type: disc;
+}
+
+.rich-text-editor .ProseMirror ol {
+  list-style-type: decimal;
+}
+
+.rich-text-editor .ProseMirror li {
+  margin-bottom: 0.25rem;
+}
+
+/* Blockquote styles */
+.rich-text-editor .ProseMirror blockquote {
+  border-left: 3px solid hsl(var(--primary));
+  padding-left: 1rem;
+  margin-left: 0;
+  margin-right: 0;
+  font-style: italic;
+  color: hsl(var(--muted-foreground));
+}
+
+/* Code block styles */
+.rich-text-editor .ProseMirror pre {
+  background-color: hsl(var(--muted));
+  color: hsl(var(--foreground));
+  padding: 0.75rem 1rem;
+  border-radius: 0.375rem;
+  overflow-x: auto;
+  font-family: monospace;
+  margin: 1rem 0;
+}
+
+.rich-text-editor .ProseMirror code {
+  font-family: monospace;
+  background-color: hsl(var(--muted));
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+}
+
+/* Table styles */
+.rich-text-editor .ProseMirror table {
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 100%;
+  margin: 1rem 0;
+  overflow: hidden;
+}
+
+.rich-text-editor .ProseMirror table td,
+.rich-text-editor .ProseMirror table th {
+  border: 1px solid hsl(var(--border));
+  padding: 0.5rem;
+  position: relative;
+}
+
+.rich-text-editor .ProseMirror table th {
+  background-color: hsl(var(--muted));
+  font-weight: bold;
+}
+
+/* Image styles */
+.rich-text-editor .ProseMirror img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.375rem;
+  margin: 1rem 0;
+}
+
+/* Link styles */
+.rich-text-editor .ProseMirror a {
+  color: hsl(var(--primary));
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Text alignment */
+.rich-text-editor .ProseMirror .text-left {
+  text-align: left;
+}
+
+.rich-text-editor .ProseMirror .text-center {
+  text-align: center;
+}
+
+.rich-text-editor .ProseMirror .text-right {
+  text-align: right;
+}
+
+.rich-text-editor .ProseMirror .text-justify {
+  text-align: justify;
+}
+
+/* Highlight styles */
+.rich-text-editor .ProseMirror mark {
+  background-color: rgba(var(--highlight-color, 255, 255, 0), 0.3);
+  border-radius: 0.125rem;
+  padding: 0 0.125rem;
+}
+
+/* Selection styles */
+.rich-text-editor .ProseMirror ::selection {
+  background-color: hsl(var(--primary) / 0.2);
+}
+
+/* Focus styles */
+.rich-text-editor .ProseMirror:focus {
+  outline: none;
+}
+
+/* Text color styles */
+.rich-text-editor .ProseMirror [style*="color"] {
+  color: var(--text-color) !important;
+}
+
+/* Font family styles */
+.rich-text-editor .ProseMirror [style*="font-family"] {
+  font-family: var(--font-family) !important;
+}

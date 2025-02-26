@@ -13,7 +13,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { MoreHorizontal, Eye, Pencil, Trash } from "lucide-react";
+import { MoreHorizontal, Eye, Pencil, Trash, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { format } from "date-fns";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -65,9 +65,12 @@ export const BlogColumns: ColumnDef<BlogPost>[] = [
       return (
         <div className="flex items-center gap-2">
           <Avatar className="h-8 w-8">
-            <AvatarImage src={author.image || undefined} alt={author.name} />
+            <AvatarImage
+              src={author.image || undefined}
+              alt={author.name || ""}
+            />
             <AvatarFallback>
-              {author.name.substring(0, 2).toUpperCase()}
+              {author.name?.substring(0, 2).toUpperCase()}
             </AvatarFallback>
           </Avatar>
           <span>{author.name}</span>
@@ -80,10 +83,10 @@ export const BlogColumns: ColumnDef<BlogPost>[] = [
     header: "Status",
     cell: ({ row }) => {
       const isPublished = row.original.isPublished;
-      return isPublished ? (
-        <Badge variant="default">Published</Badge>
-      ) : (
-        <Badge variant="outline">Draft</Badge>
+      return (
+        <Badge variant={isPublished ? "default" : "secondary"}>
+          {isPublished ? "Published" : "Draft"}
+        </Badge>
       );
     },
   },
@@ -122,10 +125,9 @@ export const BlogColumns: ColumnDef<BlogPost>[] = [
     accessorKey: "publishedAt",
     header: "Published",
     cell: ({ row }) => {
-      const publishedAt = row.original.publishedAt;
-      return publishedAt
-        ? format(new Date(publishedAt), "MMM d, yyyy")
-        : "Not published";
+      const date = row.original.publishedAt;
+      if (!date) return <span className="text-muted-foreground">-</span>;
+      return format(new Date(date), "MMM d, yyyy");
     },
   },
   {
@@ -144,9 +146,15 @@ export const BlogColumns: ColumnDef<BlogPost>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem asChild>
-              <Link href={`/blog/${post.slug}`} target="_blank">
+              <Link href={`/admin/blogs/${post.id}/preview`}>
                 <Eye className="mr-2 h-4 w-4" />
-                View
+                Preview
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link href={`/blog/${post.slug}`} target="_blank">
+                <ExternalLink className="mr-2 h-4 w-4" />
+                View Live
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>

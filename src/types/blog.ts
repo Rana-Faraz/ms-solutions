@@ -16,11 +16,14 @@ export interface BlogPost {
   createdAt: Date;
   updatedAt: Date;
   authorId: string;
-  author: {
-    name: string;
-    email: string;
-    image: string | null;
-  } | null;
+  author:
+    | {
+        name: string | null;
+        email: string;
+        image: string | null;
+      }
+    | null
+    | undefined;
   categories?: {
     id: string;
     name: string;
