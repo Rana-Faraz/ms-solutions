@@ -200,7 +200,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      {/* <section
+      <section
         id="testimonial"
         className="snap-start scroll-m-36 scroll-smooth"
       >
@@ -213,7 +213,7 @@ export default function Home() {
             <Testimonial reviews={Testimonials} />
           </div>
         </div>
-      </section> */}
+      </section>
       <section id="why-us" className="snap-start scroll-m-36 scroll-smooth">
         <div className="container my-8 py-8">
           <span className="font-degular text-xl text-primary">WHY US</span>

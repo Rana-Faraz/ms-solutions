@@ -1,0 +1,40 @@
+import {
+  Loader2,
+  User,
+  Mail,
+  Calendar,
+  Clock,
+  MapPin,
+  FileText,
+  Star,
+  Send,
+  Check,
+  X,
+  ChevronDown,
+  ChevronUp,
+  Plus,
+  Trash,
+  Edit,
+  type LucideIcon,
+} from "lucide-react";
+
+export type Icon = LucideIcon;
+
+export const Icons = {
+  spinner: Loader2,
+  user: User,
+  mail: Mail,
+  calendar: Calendar,
+  clock: Clock,
+  location: MapPin,
+  file: FileText,
+  star: Star,
+  send: Send,
+  check: Check,
+  close: X,
+  chevronDown: ChevronDown,
+  chevronUp: ChevronUp,
+  add: Plus,
+  delete: Trash,
+  edit: Edit,
+};
