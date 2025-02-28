@@ -2,105 +2,120 @@ import React from "react";
 import Link from "next/link";
 import { ROUTES } from "@/lib/routes";
 import {
-  FaChartLine,
-  FaLaptopCode,
-  FaLightbulb,
-  FaPaintBrush,
-  FaFileAlt,
+  FaStethoscope,
+  FaLaptopMedical,
+  FaUserMd,
+  FaHospitalUser,
+  FaFileMedical,
   FaChartBar,
+  FaHeartbeat,
+  FaClinicMedical,
+  FaHandHoldingMedical,
+  FaTablets,
+  FaBriefcaseMedical,
+  FaHospital,
 } from "react-icons/fa";
 import { CustomAccordion } from "@/components/CustomAccordion";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 export const metadata = {
-  title: "Services | Your Business Name",
+  title: "Medical Services | Healthcare Solutions Provider",
   description:
-    "Explore our range of services designed to help your small business grow to the next level.",
+    "Explore our comprehensive range of healthcare services designed to help medical practices improve patient care and operational efficiency.",
 };
 
 // Service data with icons
 const services = [
   {
     id: 1,
-    title: "Digital Marketing",
+    title: "Electronic Health Records",
     description:
-      "Comprehensive digital marketing strategies to increase your online presence and drive qualified leads to your business.",
-    icon: FaChartLine,
-    color: "bg-blue-50 text-blue-600",
+      "Streamlined EHR solutions that improve clinical documentation, enhance patient care, and ensure regulatory compliance.",
+    icon: FaFileMedical,
+    color: "bg-primary/10 text-primary",
     features: [
-      "Search Engine Optimization (SEO)",
-      "Pay-Per-Click Advertising (PPC)",
-      "Social Media Marketing",
-      "Email Marketing Campaigns",
+      "Customized EHR Implementation",
+      "Legacy System Migration",
+      "Interoperability Solutions",
+      "Regulatory Compliance (HIPAA, MACRA)",
     ],
   },
   {
     id: 2,
-    title: "Web Development",
+    title: "Telehealth Services",
     description:
-      "Custom website design and development services that create engaging, responsive, and conversion-focused online experiences.",
-    icon: FaLaptopCode,
-    color: "bg-purple-50 text-purple-600",
+      "Secure, user-friendly telehealth platforms that expand your practice's reach and improve patient access to care.",
+    icon: FaLaptopMedical,
+    color: "bg-secondary/10 text-secondary",
     features: [
-      "Custom Website Design",
-      "E-commerce Solutions",
-      "Website Maintenance",
-      "Performance Optimization",
+      "Virtual Visit Platform",
+      "Remote Patient Monitoring",
+      "Secure Messaging Systems",
+      "Mobile Health Applications",
     ],
   },
   {
     id: 3,
-    title: "Business Consulting",
+    title: "Practice Management",
     description:
-      "Strategic business consulting to help you identify opportunities, overcome challenges, and achieve sustainable growth.",
-    icon: FaLightbulb,
-    color: "bg-amber-50 text-amber-600",
+      "Comprehensive practice management solutions to optimize workflows, improve efficiency, and enhance the patient experience.",
+    icon: FaClinicMedical,
+    color: "bg-primary/10 text-primary",
     features: [
-      "Business Strategy Development",
-      "Market Research & Analysis",
-      "Process Optimization",
-      "Growth Planning",
+      "Scheduling Optimization",
+      "Revenue Cycle Management",
+      "Staff Training & Development",
+      "Operational Efficiency Analysis",
     ],
   },
   {
     id: 4,
-    title: "Branding & Identity",
+    title: "Patient Engagement",
     description:
-      "Develop a strong, consistent brand identity that resonates with your target audience and sets you apart from competitors.",
-    icon: FaPaintBrush,
-    color: "bg-green-50 text-green-600",
+      "Tools and strategies to enhance patient communication, satisfaction, and involvement in their healthcare journey.",
+    icon: FaHospitalUser,
+    color: "bg-secondary/10 text-secondary",
     features: [
-      "Logo Design & Brand Guidelines",
-      "Brand Messaging & Positioning",
-      "Visual Identity Development",
-      "Brand Strategy",
+      "Patient Portal Implementation",
+      "Automated Appointment Reminders",
+      "Patient Education Resources",
+      "Satisfaction Survey Systems",
     ],
   },
   {
     id: 5,
-    title: "Content Creation",
+    title: "Healthcare Analytics",
     description:
-      "High-quality content creation services that engage your audience, build authority, and drive conversions.",
-    icon: FaFileAlt,
-    color: "bg-rose-50 text-rose-600",
+      "Data-driven insights to improve clinical outcomes, operational efficiency, and financial performance.",
+    icon: FaChartBar,
+    color: "bg-primary/10 text-primary",
     features: [
-      "Blog Writing & Management",
-      "Copywriting for Websites & Ads",
-      "Video Production",
-      "Graphic Design",
+      "Clinical Outcomes Analysis",
+      "Population Health Management",
+      "Financial Performance Metrics",
+      "Customized Reporting Dashboards",
     ],
   },
   {
     id: 6,
-    title: "Analytics & Reporting",
+    title: "Medical Compliance",
     description:
-      "Data-driven insights and reporting to measure performance and inform strategic business decisions.",
-    icon: FaChartBar,
-    color: "bg-cyan-50 text-cyan-600",
+      "Expert guidance and solutions to ensure your practice meets all regulatory requirements and industry standards.",
+    icon: FaBriefcaseMedical,
+    color: "bg-secondary/10 text-secondary",
     features: [
-      "Performance Tracking",
-      "Custom Dashboard Development",
-      "Conversion Rate Optimization",
-      "ROI Analysis",
+      "HIPAA Compliance Audits",
+      "Policy & Procedure Development",
+      "Staff Compliance Training",
+      "Risk Assessment & Management",
     ],
   },
 ];
@@ -108,34 +123,35 @@ const services = [
 // FAQ data
 const faqItems = [
   {
-    question: "How do you price your services?",
+    question: "How do you ensure patient data security with your solutions?",
     answer:
-      "We offer customized pricing based on your specific needs and the scope of your project. We'll provide a detailed quote after our initial consultation.",
+      "We implement multiple layers of security including encryption, access controls, and regular security audits. All our solutions are fully HIPAA-compliant and we conduct regular risk assessments to ensure ongoing protection of sensitive patient information.",
   },
   {
-    question: "How long does it typically take to see results?",
+    question:
+      "How long does implementation of your healthcare solutions typically take?",
     answer:
-      "While some services can show immediate results, most strategic initiatives take 3-6 months to demonstrate significant impact. We'll set clear expectations during our planning phase.",
+      "Implementation timelines vary based on the specific solution and the size of your practice. EHR implementations typically take 3-6 months, while telehealth platforms can be deployed in 4-8 weeks. We provide detailed timelines during our initial consultation.",
   },
   {
-    question: "Do you work with businesses in specific industries?",
+    question: "Do you work with specific medical specialties?",
     answer:
-      "We work with small businesses across various industries. Our diverse experience allows us to apply best practices while tailoring our approach to your specific industry needs.",
+      "We serve healthcare providers across various specialties including primary care, cardiology, orthopedics, pediatrics, and many others. Our solutions are customizable to address the unique workflows and requirements of different medical specialties.",
   },
   {
-    question: "What makes your services different from other agencies?",
+    question: "What makes your healthcare solutions different from others?",
     answer:
-      "We combine enterprise-level expertise with personalized service and affordable pricing specifically for small businesses. We focus on measurable results and long-term partnerships.",
+      "Our solutions are developed with direct input from practicing clinicians, ensuring they address real-world healthcare challenges. We focus on intuitive design, seamless integration with existing systems, and ongoing support to ensure long-term success.",
   },
   {
-    question: "Do you offer ongoing support after project completion?",
+    question: "Do you provide training for our medical staff?",
     answer:
-      "Yes, we offer various maintenance and support packages to ensure your business continues to thrive. We believe in building long-term relationships with our clients.",
+      "Yes, comprehensive training is included with all our implementations. We offer both in-person and virtual training options, role-specific education, and ongoing support resources to ensure your entire team can effectively utilize our solutions.",
   },
   {
-    question: "Can you work with my existing team or systems?",
+    question: "Can your solutions integrate with our existing medical systems?",
     answer:
-      "Absolutely! We're flexible and can collaborate with your in-house team or integrate with your existing systems. We'll adapt our approach to complement your current operations.",
+      "Absolutely! We prioritize interoperability and can integrate with most major EHR systems, laboratory information systems, radiology information systems, and other healthcare platforms. We'll conduct a thorough assessment of your current technology ecosystem during our initial consultation.",
   },
 ];
 
@@ -144,36 +160,40 @@ export default function ServicesPage() {
     <main className="container mx-auto px-4 py-16">
       {/* Hero Section */}
       <section className="mb-16 text-center">
-        <h1 className="mb-4 text-4xl font-bold md:text-5xl">Our Services</h1>
-        <div className="mx-auto mb-8 h-1 w-24 bg-blue-600"></div>
-        <p className="mx-auto max-w-3xl text-lg text-gray-700">
-          We offer a comprehensive range of services designed to help your small
-          business grow and succeed in today's competitive marketplace. Each
-          service is tailored to meet your specific needs and goals.
+        <h1 className="mb-4 text-4xl font-bold md:text-5xl">
+          Healthcare Services
+        </h1>
+        <div className="mx-auto mb-8 h-1 w-24 bg-primary"></div>
+        <p className="mx-auto max-w-3xl text-lg text-foreground">
+          We offer a comprehensive range of healthcare technology and consulting
+          services designed to help medical practices enhance patient care,
+          improve operational efficiency, and navigate the complex healthcare
+          landscape. Each service is tailored to meet the specific needs of your
+          healthcare organization.
         </p>
       </section>
 
-      {/* Services Grid with Alternating Layout */}
+      {/* Services Grid with Cards */}
       <section className="mb-20">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {services.map((service) => (
-            <div
+            <Card
               key={service.id}
-              className="group overflow-hidden rounded-xl bg-white shadow-md transition-all duration-300"
+              className="overflow-hidden transition-all duration-300"
             >
-              <div className={`p-6 ${service.color}`}>
+              <CardHeader className={`${service.color}`}>
                 <div className="flex items-center justify-between">
                   <service.icon className="h-10 w-10" />
-                  <span className="rounded-full bg-white bg-opacity-30 px-3 py-1 text-xs font-semibold">
-                    Service {service.id}
-                  </span>
+                  <Badge variant="outline" className="bg-white/30">
+                    Medical Service
+                  </Badge>
                 </div>
-                <h3 className="mt-4 text-2xl font-bold">{service.title}</h3>
-              </div>
+                <CardTitle className="mt-4 text-2xl">{service.title}</CardTitle>
+              </CardHeader>
 
-              <div className="p-6">
-                <p className="mb-6 text-gray-700">{service.description}</p>
-                <h4 className="mb-3 font-semibold">What we offer:</h4>
+              <CardContent className="p-6">
+                <p className="mb-6 text-foreground">{service.description}</p>
+                <h4 className="mb-3 font-semibold">Key Features:</h4>
                 <ul className="space-y-2">
                   {service.features.map((feature, index) => (
                     <li key={index} className="flex items-start">
@@ -182,14 +202,19 @@ export default function ServicesPage() {
                       >
                         ✓
                       </span>
-                      <span className="text-gray-700">{feature}</span>
+                      <span className="text-foreground">{feature}</span>
                     </li>
                   ))}
                 </ul>
-                <div className="mt-6 text-right">
+              </CardContent>
+              <CardFooter className="justify-end p-6 pt-0">
+                <Button
+                  asChild
+                  variant="link"
+                  className={`${service.color.split(" ")[1]} p-0`}
+                >
                   <Link
                     href={`${ROUTES.SERVICES}/${service.title.toLowerCase().replace(/\s+/g, "-")}`}
-                    className={`inline-flex items-center font-medium ${service.color.split(" ")[1]} hover:underline`}
                   >
                     Learn more
                     <svg
@@ -207,20 +232,22 @@ export default function ServicesPage() {
                       ></path>
                     </svg>
                   </Link>
-                </div>
-              </div>
-            </div>
+                </Button>
+              </CardFooter>
+            </Card>
           ))}
         </div>
       </section>
 
       {/* Process Section */}
-      <section className="mb-20 rounded-2xl bg-gray-50 p-8 md:p-12">
+      <section className="mb-20 rounded-2xl bg-muted p-8 md:p-12">
         <div className="mb-12 text-center">
-          <h2 className="mb-4 text-3xl font-bold">Our Process</h2>
-          <p className="mx-auto max-w-2xl text-gray-700">
-            We follow a proven process to ensure we deliver the best results for
-            your business.
+          <h2 className="mb-4 text-3xl font-bold">
+            Our Healthcare Implementation Process
+          </h2>
+          <p className="mx-auto max-w-2xl text-foreground">
+            We follow a clinically-informed process to ensure seamless
+            integration of our solutions into your healthcare practice.
           </p>
         </div>
 
@@ -228,46 +255,54 @@ export default function ServicesPage() {
           {[
             {
               step: 1,
-              title: "Discovery",
+              title: "Clinical Assessment",
               description:
-                "We start by understanding your business, goals, and challenges.",
+                "We analyze your practice's unique workflows, challenges, and objectives.",
+              icon: FaStethoscope,
             },
             {
               step: 2,
-              title: "Strategy",
+              title: "Solution Design",
               description:
-                "We develop a tailored strategy based on your specific needs and objectives.",
+                "We develop a customized implementation plan tailored to your specific clinical needs.",
+              icon: FaUserMd,
             },
             {
               step: 3,
               title: "Implementation",
               description:
-                "We execute the strategy with precision and attention to detail.",
+                "We execute the plan with minimal disruption to your patient care operations.",
+              icon: FaHospital,
             },
             {
               step: 4,
-              title: "Optimization",
+              title: "Ongoing Support",
               description:
-                "We continuously monitor and optimize to ensure the best results.",
+                "We provide continuous optimization and support to ensure long-term success.",
+              icon: FaHandHoldingMedical,
             },
           ].map((item) => (
-            <div
-              key={item.step}
-              className="relative rounded-lg bg-white p-6 shadow-md"
-            >
-              <div className="absolute -top-4 left-6 flex h-8 w-8 items-center justify-center rounded-full bg-blue-600 text-white">
+            <Card key={item.step} className="relative">
+              <div className="absolute -top-4 left-6 flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground">
                 {item.step}
               </div>
-              <h3 className="mb-3 mt-4 text-xl font-semibold">{item.title}</h3>
-              <p className="text-gray-700">{item.description}</p>
-            </div>
+              <CardHeader className="pt-8">
+                <CardTitle className="flex items-center gap-2">
+                  <item.icon className="h-5 w-5 text-primary" />
+                  {item.title}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-foreground">{item.description}</p>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </section>
 
       {/* Testimonial */}
       <section className="mb-20">
-        <div className="rounded-2xl bg-blue-600 p-8 text-white md:p-12">
+        <div className="rounded-2xl bg-primary p-8 text-primary-foreground md:p-12">
           <div className="mx-auto max-w-4xl text-center">
             <svg
               className="mx-auto mb-4 h-12 w-12 opacity-50"
@@ -277,18 +312,25 @@ export default function ServicesPage() {
               <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
             </svg>
             <p className="mb-6 text-xl italic md:text-2xl">
-              "Working with this team has been transformative for our business.
-              They took the time to understand our unique challenges and created
-              solutions that perfectly fit our needs. Our online sales have more
-              than doubled!"
+              "Implementing their EHR solution has transformed our practice.
+              Patient wait times have decreased by 30%, documentation is more
+              efficient, and our providers can focus more on patient care rather
+              than paperwork. Their team understood our unique clinical
+              workflows and provided exceptional support throughout the
+              transition."
             </p>
             <div className="flex items-center justify-center">
-              <div className="mr-4 h-12 w-12 overflow-hidden rounded-full bg-white bg-opacity-20">
+              <div className="mr-4 h-12 w-12 overflow-hidden rounded-full bg-primary-foreground bg-opacity-20">
                 {/* Client image placeholder */}
+                <div className="flex h-full w-full items-center justify-center">
+                  <span className="text-lg">👩‍⚕️</span>
+                </div>
               </div>
               <div className="text-left">
-                <p className="font-semibold">Sarah Johnson</p>
-                <p className="text-sm opacity-75">CEO, Bloom Boutique</p>
+                <p className="font-semibold">Dr. Rebecca Chen</p>
+                <p className="text-sm opacity-75">
+                  Medical Director, Westside Family Practice
+                </p>
               </div>
             </div>
           </div>
@@ -298,11 +340,10 @@ export default function ServicesPage() {
       {/* FAQ Section with custom component */}
       <section className="mb-20">
         <div className="mb-12 text-center">
-          <h2 className="mb-4 text-3xl font-bold">
-            Frequently Asked Questions
-          </h2>
-          <p className="mx-auto max-w-2xl text-gray-700">
-            Find answers to common questions about our services.
+          <h2 className="mb-4 text-3xl font-bold">Healthcare FAQ</h2>
+          <p className="mx-auto max-w-2xl text-foreground">
+            Find answers to common questions about our healthcare technology
+            solutions.
           </p>
         </div>
 
@@ -310,27 +351,30 @@ export default function ServicesPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="rounded-2xl bg-gradient-to-r from-blue-600 to-blue-800 p-8 text-center text-white md:p-12">
+      <section className="rounded-2xl bg-gradient-to-r from-primary to-secondary p-8 text-center text-white md:p-12">
         <h2 className="mb-4 text-3xl font-bold">
-          Ready to take your business to the next level?
+          Ready to enhance your healthcare practice?
         </h2>
         <p className="mx-auto mb-8 max-w-2xl text-lg">
-          Contact us today to discuss how our services can help your business
-          grow and succeed.
+          Contact us today to discuss how our healthcare solutions can help
+          improve patient care and practice efficiency.
         </p>
         <div className="flex flex-col items-center justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
-          <Link
-            href={ROUTES.CONTACT}
-            className="rounded-md bg-white px-8 py-3 font-semibold text-blue-600 transition-colors hover:bg-gray-100"
+          <Button
+            asChild
+            size="lg"
+            className="bg-white text-primary hover:bg-accent hover:text-primary"
           >
-            Schedule a Consultation
-          </Link>
-          <Link
-            href={ROUTES.PORTFOLIO}
-            className="rounded-md border border-white bg-transparent px-8 py-3 font-semibold text-white transition-colors hover:bg-white hover:bg-opacity-10"
+            <Link href={ROUTES.CONTACT}>Schedule a Consultation</Link>
+          </Button>
+          <Button
+            asChild
+            variant="outline"
+            size="lg"
+            className="border-white bg-transparent text-white hover:bg-white/10"
           >
-            View Our Work
-          </Link>
+            <Link href={ROUTES.PORTFOLIO}>View Case Studies</Link>
+          </Button>
         </div>
       </section>
     </main>

@@ -27,6 +27,73 @@ export async function getBlogPosts<T>(
   params?: TableQueryParams<T>,
 ): Promise<TableQueryResult<BlogPost>> {
   try {
+    // Extract category filter if present
+    let categorySlug: string | undefined;
+    const regularFilters: Array<{
+      id: string;
+      value: string;
+      operator: "contains" | "equals" | "startsWith" | "endsWith" | "empty";
+    }> = [];
+
+    if (params?.filters?.length) {
+      params.filters.forEach((filter) => {
+        if (filter.id === "category" && filter.operator === "equals") {
+          categorySlug = filter.value;
+        } else {
+          regularFilters.push(filter);
+        }
+      });
+    }
+
+    // If we have a category filter, first get the category ID
+    let categoryId: string | undefined;
+    if (categorySlug && categorySlug !== "all") {
+      const category = await db.query.blogCategory.findFirst({
+        where: eq(blogCategory.slug, categorySlug),
+      });
+
+      if (category) {
+        categoryId = category.id;
+      } else {
+        // If category not found, return empty result
+        return {
+          data: {
+            records: [],
+            total: 0,
+            pageCount: 0,
+            pageSize: params?.limit || 10,
+            pageIndex: 0,
+          },
+          error: null,
+        };
+      }
+    }
+
+    // Get post IDs that belong to the category if category filter is applied
+    let filteredPostIds: string[] | undefined;
+    if (categoryId) {
+      const categoryPosts = await db
+        .select({ blogPostId: blogPostCategory.blogPostId })
+        .from(blogPostCategory)
+        .where(eq(blogPostCategory.categoryId, categoryId));
+
+      if (categoryPosts.length === 0) {
+        // No posts in this category
+        return {
+          data: {
+            records: [],
+            total: 0,
+            pageCount: 0,
+            pageSize: params?.limit || 10,
+            pageIndex: 0,
+          },
+          error: null,
+        };
+      }
+
+      filteredPostIds = categoryPosts.map((post) => post.blogPostId);
+    }
+
     // Initialize base queries
     const baseQueryBuilder = db
       .select({
@@ -62,8 +129,16 @@ export async function getBlogPosts<T>(
 
     // Build filter conditions
     let conditions = undefined;
-    if (params?.filters?.length) {
-      const filterConditions = params.filters
+    const filterConditions = [];
+
+    // Add post ID filter for category if needed
+    if (filteredPostIds) {
+      filterConditions.push(inArray(blogPost.id, filteredPostIds));
+    }
+
+    // Add other filters
+    if (regularFilters.length > 0) {
+      const otherConditions = regularFilters
         .map((filter) => {
           const column = blogPost[filter.id as keyof typeof blogPost];
           if (!column) return undefined;
@@ -85,9 +160,11 @@ export async function getBlogPosts<T>(
         })
         .filter(Boolean);
 
-      if (filterConditions.length) {
-        conditions = and(...filterConditions);
-      }
+      filterConditions.push(...otherConditions);
+    }
+
+    if (filterConditions.length > 0) {
+      conditions = and(...filterConditions);
     }
 
     // Get total count with filters
@@ -220,4 +297,13 @@ export async function getBlogPosts<T>(
         error instanceof Error ? error.message : "Failed to fetch blog posts",
     };
   }
+}
+
+export async function getLatestThreeBlogs() {
+  const blogs = await db.query.blogPost.findMany({
+    orderBy: desc(blogPost.publishedAt),
+    limit: 3,
+  });
+
+  return blogs;
 }

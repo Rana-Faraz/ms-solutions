@@ -4,167 +4,221 @@ import { ContactForm } from "@/components/ContactForm";
 import { ContactFaq } from "@/components/ContactFaq";
 import Link from "next/link";
 import { ROUTES } from "@/lib/routes";
-import { FaHeadset, FaRegClock } from "react-icons/fa";
+import {
+  FaHeadset,
+  FaRegClock,
+  FaStethoscope,
+  FaUserMd,
+  FaHospital,
+  FaClinicMedical,
+  FaCalendarAlt,
+  FaPhoneAlt,
+  FaEnvelope,
+  FaMapMarkerAlt,
+  FaLaptopMedical,
+  FaHeartbeat,
+} from "react-icons/fa";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { CONSTANTS } from "@/static/Constants";
 
 export const metadata = {
-  title: "Contact Us | Your Business Name",
+  title: "Contact Us | Healthcare Solutions Provider",
   description:
-    "Get in touch with our team to discuss how we can help your small business grow.",
+    "Get in touch with our healthcare team to discuss how we can help improve your medical practice with our innovative solutions.",
 };
 
 export default function ContactPage() {
   return (
     <main className="overflow-hidden">
       {/* Hero Section with Gradient Background */}
-      <section className="relative bg-gradient-to-r from-blue-600 to-blue-800 py-16 text-white">
+      <section className="relative bg-gradient-to-r from-primary to-secondary py-16 text-white">
         <div className="absolute inset-0 opacity-10">
           <div className="h-full w-full bg-[url('/grid-pattern.svg')] bg-center"></div>
         </div>
         <div className="container relative mx-auto px-4">
           <div className="mx-auto max-w-3xl text-center">
-            <h1 className="mb-6 text-4xl font-bold md:text-5xl">Contact Us</h1>
+            <h1 className="mb-6 text-4xl font-bold md:text-5xl">
+              Contact Our Healthcare Team
+            </h1>
             <div className="mx-auto mb-8 h-1 w-24 bg-white"></div>
             <p className="mb-8 text-lg md:text-xl">
-              We're excited to hear from you! Whether you have a question about
-              our services, want to discuss a project, or just want to say
-              hello, we're here to help.
+              We're here to support your healthcare organization. Whether you
+              have questions about our medical solutions, want to schedule a
+              consultation, or need technical support, our team is ready to
+              assist.
             </p>
           </div>
         </div>
       </section>
 
       <div className="container mx-auto px-4 py-16">
-        {/* Contact Cards with Improved Design */}
-
         {/* Main Content with Form and Info */}
         <div className="grid grid-cols-1 items-start gap-12 md:grid-cols-2">
           {/* Contact Form Section */}
-          <div className="rounded-xl bg-white p-8 ">
-            <div className="mb-6 flex items-center">
-              <FaHeadset className="mr-3 h-6 w-6 text-blue-600" />
-              <h2 className="text-2xl font-semibold">Send Us a Message</h2>
-            </div>
-            <div className="mb-6 h-1 w-20 bg-blue-600"></div>
-            <ContactForm />
-          </div>
+          <Card className="border-primary/20">
+            <CardHeader className="bg-primary/5 pb-2">
+              <div className="mb-4 flex items-center">
+                <FaStethoscope className="mr-3 h-6 w-6 text-primary" />
+                <CardTitle className="text-2xl font-semibold">
+                  Request a Healthcare Consultation
+                </CardTitle>
+              </div>
+              <div className="mb-2 h-1 w-20 bg-primary"></div>
+            </CardHeader>
+            <CardContent className="p-6">
+              <ContactForm />
+            </CardContent>
+          </Card>
 
           {/* Right Side Information */}
           <div className="space-y-8">
             {/* Office Hours Card */}
-            <div className=" p-8 ">
-              <div className="mb-4 flex items-center">
-                <FaRegClock className="mr-3 h-6 w-6 text-blue-600" />
-                <h3 className="text-xl font-semibold">Our Office Hours</h3>
-              </div>
-              <div className="mb-6 h-1 w-16 bg-blue-600"></div>
+            <Card className="border-secondary/20">
+              <CardHeader className="bg-secondary/5 pb-2">
+                <div className="mb-4 flex items-center">
+                  <FaRegClock className="mr-3 h-6 w-6 text-secondary" />
+                  <CardTitle className="text-xl font-semibold">
+                    Healthcare Support Hours
+                  </CardTitle>
+                </div>
+                <div className="mb-2 h-1 w-16 bg-secondary"></div>
+              </CardHeader>
+              <CardContent className="p-6">
+                <ul className="space-y-4">
+                  <li className="flex justify-between rounded-lg bg-muted p-3">
+                    <span className="font-medium text-foreground">
+                      Monday - Friday
+                    </span>
+                    <span className="font-semibold text-primary">
+                      8:00 AM - 6:00 PM
+                    </span>
+                  </li>
+                  <li className="flex justify-between rounded-lg bg-muted p-3">
+                    <span className="font-medium text-foreground">
+                      Saturday
+                    </span>
+                    <span className="font-semibold text-primary">
+                      9:00 AM - 1:00 PM
+                    </span>
+                  </li>
+                  <li className="flex justify-between rounded-lg bg-muted p-3">
+                    <span className="font-medium text-foreground">Sunday</span>
+                    <span className="font-semibold text-primary">Closed</span>
+                  </li>
+                </ul>
 
-              <ul className="space-y-4">
-                <li className="flex justify-between rounded-lg bg-gray-50 p-3">
-                  <span className="font-medium text-gray-700">
-                    Monday - Friday
-                  </span>
-                  <span className="font-semibold text-blue-600">
-                    9:00 AM - 5:00 PM
-                  </span>
-                </li>
-                <li className="flex justify-between rounded-lg bg-gray-50 p-3">
-                  <span className="font-medium text-gray-700">Saturday</span>
-                  <span className="font-semibold text-blue-600">
-                    10:00 AM - 2:00 PM
-                  </span>
-                </li>
-                <li className="flex justify-between rounded-lg bg-gray-50 p-3">
-                  <span className="font-medium text-gray-700">Sunday</span>
-                  <span className="font-semibold text-blue-600">Closed</span>
-                </li>
-              </ul>
-
-              <div className="mt-6 rounded-lg bg-blue-50 p-4">
-                <p className="text-gray-700">
-                  Need urgent assistance? Email us at{" "}
-                  <a
-                    href={`mailto:${process.env.NEXT_PUBLIC_EMAIL}`}
-                    className="font-medium text-blue-600 hover:underline"
-                  >
-                    {process.env.NEXT_PUBLIC_EMAIL ||
-                      "contact@yourbusiness.com"}
-                  </a>{" "}
-                  and we'll get back to you as soon as possible.
-                </p>
-              </div>
-            </div>
+                <div className="mt-6 rounded-lg bg-accent p-4">
+                  <p className="text-foreground">
+                    <span className="font-semibold">
+                      24/7 Technical Support:
+                    </span>{" "}
+                    For urgent healthcare system issues, email us at{" "}
+                    <a
+                      href={`mailto:${CONSTANTS.EMAIL}`}
+                      className="font-medium text-primary hover:underline"
+                    >
+                      {CONSTANTS.EMAIL}
+                    </a>{" "}
+                    with "URGENT" in the subject line.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
           </div>
+
           <div className="col-span-1 mb-16 grid grid-cols-1 gap-8 md:col-span-2 md:grid-cols-3">
-            <div className="group rounded-lg bg-white p-6 text-center shadow-md transition-all duration-300 hover:shadow-xl">
-              <div className="mb-4 flex justify-center">
-                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-blue-100 text-blue-600 transition-all duration-300 group-hover:bg-blue-600 group-hover:text-white">
-                  <Phone className="h-8 w-8" />
+            <Card className="group border-primary/20">
+              <CardContent className="p-6 text-center">
+                <div className="mb-4 flex justify-center">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-primary-foreground">
+                    <FaPhoneAlt className="h-7 w-7" />
+                  </div>
                 </div>
-              </div>
-              <h3 className="mb-2 text-xl font-semibold">Call Us</h3>
-              <p className="mb-4 text-gray-700">
-                We're available Monday-Friday, 9am-5pm
-              </p>
-              <a
-                href={`tel:${process.env.NEXT_PUBLIC_PHONE}`}
-                className="font-medium text-blue-600 hover:underline"
-              >
-                {process.env.NEXT_PUBLIC_PHONE || "(123) 456-7890"}
-              </a>
-            </div>
+                <h3 className="mb-2 text-xl font-semibold">
+                  Call Our Medical Team
+                </h3>
+                <p className="mb-4 text-foreground">
+                  Healthcare consultants available during business hours
+                </p>
+                <a
+                  href={`tel:${CONSTANTS.PHONE}`}
+                  className="font-medium text-primary hover:underline"
+                >
+                  {CONSTANTS.PHONE}
+                </a>
+              </CardContent>
+            </Card>
 
-            <div className="group rounded-lg bg-white p-6 text-center shadow-md transition-all duration-300 hover:shadow-xl">
-              <div className="mb-4 flex justify-center">
-                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-blue-100 text-blue-600 transition-all duration-300 group-hover:bg-blue-600 group-hover:text-white">
-                  <Mail className="h-8 w-8" />
+            <Card className="group border-secondary/20">
+              <CardContent className="p-6 text-center">
+                <div className="mb-4 flex justify-center">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-secondary/10 text-secondary transition-all duration-300 group-hover:bg-secondary group-hover:text-secondary-foreground">
+                    <FaEnvelope className="h-7 w-7" />
+                  </div>
                 </div>
-              </div>
-              <h3 className="mb-2 text-xl font-semibold">Email Us</h3>
-              <p className="mb-4 text-gray-700">
-                We'll respond as quickly as possible
-              </p>
-              <a
-                href={`mailto:${process.env.NEXT_PUBLIC_EMAIL}`}
-                className="font-medium text-blue-600 hover:underline"
-              >
-                {process.env.NEXT_PUBLIC_EMAIL || "contact@yourbusiness.com"}
-              </a>
-            </div>
+                <h3 className="mb-2 text-xl font-semibold">
+                  Email Our Healthcare Team
+                </h3>
+                <p className="mb-4 text-foreground">
+                  We respond to all inquiries within 24 hours
+                </p>
+                <a
+                  href={`mailto:${CONSTANTS.EMAIL}`}
+                  className="font-medium text-secondary hover:underline"
+                >
+                  {CONSTANTS.EMAIL}
+                </a>
+              </CardContent>
+            </Card>
 
-            <div className="group rounded-lg bg-white p-6 text-center shadow-md transition-all duration-300 hover:shadow-xl">
-              <div className="mb-4 flex justify-center">
-                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-blue-100 text-blue-600 transition-all duration-300 group-hover:bg-blue-600 group-hover:text-white">
-                  <MapPin className="h-8 w-8" />
+            <Card className="group border-primary/20">
+              <CardContent className="p-6 text-center">
+                <div className="mb-4 flex justify-center">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-primary-foreground">
+                    <FaMapMarkerAlt className="h-7 w-7" />
+                  </div>
                 </div>
-              </div>
-              <h3 className="mb-2 text-xl font-semibold">Visit Us</h3>
-              <p className="mb-4 text-gray-700">Come say hello at our office</p>
-              <address className="font-medium not-italic text-blue-600">
-                123 Business St.
-                <br />
-                City, State 12345
-              </address>
-            </div>
+                <h3 className="mb-2 text-xl font-semibold">
+                  Visit Our Medical Office
+                </h3>
+                <p className="mb-4 text-foreground">
+                  Schedule an in-person healthcare consultation
+                </p>
+                <address className="font-medium not-italic text-primary">
+                  {CONSTANTS.ADDRESS}
+                </address>
+              </CardContent>
+            </Card>
           </div>
+
           {/* FAQ Section */}
-          <ContactFaq />
+          <div className="col-span-1 md:col-span-2">
+            <div className="mb-8 flex items-center justify-center">
+              <FaHeartbeat className="mr-3 h-8 w-8 text-primary" />
+              <h2 className="text-3xl font-bold">Healthcare FAQ</h2>
+            </div>
+            <ContactFaq />
+          </div>
         </div>
 
         {/* CTA Section */}
-        <section className="mt-20 rounded-2xl bg-gradient-to-r from-blue-600 to-blue-800 p-8 text-center text-white md:p-12">
+        <section className="mt-20 rounded-2xl bg-gradient-to-r from-primary to-secondary p-8 text-center text-white md:p-12">
           <h2 className="mb-4 text-2xl font-bold md:text-3xl">
-            Ready to Work With Us?
+            Ready to Transform Your Healthcare Practice?
           </h2>
           <p className="mx-auto mb-8 max-w-2xl text-lg">
-            We're excited to learn about your business and discuss how we can
-            help you achieve your goals.
+            Our healthcare technology experts are ready to discuss your specific
+            needs and how our solutions can improve patient care and practice
+            efficiency.
           </p>
-          <Link
-            href={ROUTES.SERVICES}
-            className="inline-block rounded-md bg-white px-8 py-3 font-semibold text-blue-600 transition-colors hover:bg-blue-50"
+          <Button
+            asChild
+            size="lg"
+            className="bg-white text-primary hover:bg-accent hover:text-primary"
           >
-            Explore Our Services
-          </Link>
+            <Link href={ROUTES.SERVICES}>Explore Our Healthcare Services</Link>
+          </Button>
         </section>
       </div>
     </main>

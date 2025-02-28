@@ -1,11 +1,10 @@
-import { Check, CheckCircle, CheckCircle2 } from "lucide-react";
-import React from "react";
+import { Check } from "lucide-react";
 
 export default function CheckmarkPoint({ point }: { point: string }) {
   return (
-    <span className="grid grid-cols-[40px_1fr] items-center gap-2">
-      <Check className="h-10 w-10 rounded-full bg-secondary p-1 text-white" />
-      <p className="font-degular text-lg font-medium">{point}</p>
+    <span className="flex items-center gap-2">
+      <Check className="size-4 rounded-full bg-secondary p-1 text-white" />
+      <p className="text-sm font-medium">{point}</p>
     </span>
   );
 }

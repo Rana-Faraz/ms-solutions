@@ -1,26 +1,26 @@
 [
   {
     "id": 1,
-    "name": "Call centre",
-    "description": "Welcome to our Contact Center Services, where technology meets skill to deliver exceptional customer care. Our contact center is powered by advanced call distribution systems, modern infrastructure, and real-time reporting capabilities, ensuring seamless assistance from confident, qualified, and experienced virtual assistants. With a focus on maximizing resource utilization and implementing regular fraud prevention checks, we guarantee trusted and comfortable support for your business needs. <br /><br />Experience the difference with our professional and managed call agents who not only provide exemplary customer care but also deliver outcomes performance tailored to your requirements.",
+    "name": "Electronic Health Records",
+    "description": "Our comprehensive Electronic Health Records (EHR) system streamlines clinical workflows and enhances patient care. Built with healthcare providers in mind, our EHR solution offers intuitive documentation tools, secure patient data management, and seamless integration with existing healthcare systems. With features like customizable templates, automated coding assistance, and real-time clinical decision support, our EHR helps medical practices improve efficiency while maintaining the highest standards of patient care. <br /><br />Experience the difference with our HIPAA-compliant platform that adapts to your specific medical specialty and practice size, ensuring you have the tools you need to deliver exceptional healthcare.",
     "link": "#"
   },
   {
     "id": 2,
-    "name": "Customer Support",
-    "description": "In today's fast-paced business environment, having qualified assistance is paramount for efficiently managing daily tasks and avoiding energy drain on non-productive activities. Thanks to technological advancements, managers and directors can now easily hire virtual assistants from anywhere in the world. <br /><br />At our company, customer support encompasses a range of services aimed at helping you maximize the value of our products and resolving any issues that may arise. From assisting with onboarding and troubleshooting to facilitating upgrades to new products or services, our dedicated team is here to support you every step of the way.",
+    "name": "Telehealth Solutions",
+    "description": "In today's evolving healthcare landscape, providing accessible care through virtual channels is essential for modern medical practices. Our telehealth platform enables healthcare providers to conduct secure video consultations, remote patient monitoring, and virtual care coordination from anywhere in the world. <br /><br />Our telehealth solutions include features such as integrated scheduling, secure messaging, digital intake forms, and automated follow-up protocols. From primary care to specialized consultations, our platform helps you extend your practice beyond physical boundaries while maintaining the personal connection that's vital to quality healthcare delivery.",
     "link": "#"
   },
   {
     "id": 3,
-    "name": "Virtual assistance",
-    "description": "Our virtual assistants are reliable and adaptable professionals ready to bolster your team's productivity remotely. They excel in organizing data, handling phone inquiries, and supporting the creation of presentations and sales materials. Partnering with our Call Center Services ensures access to skilled virtual assistants proficient in utilizing platforms like Skype and Zoom, all while upholding stringent professional standards.",
+    "name": "Medical Practice Management",
+    "description": "Our Medical Practice Management solution combines powerful administrative tools with clinical workflows to optimize your healthcare organization's operations. From appointment scheduling and insurance verification to billing and revenue cycle management, our system streamlines the business side of medicine so you can focus on patient care. Our solution includes features like automated appointment reminders, insurance eligibility checks, claims management, and comprehensive financial reporting, all designed specifically for healthcare providers.",
     "link": "#"
   },
   {
     "id": 4,
-    "name": "Live chat support",
-    "description": "Effective live chat support requires patience and adaptability, as customers reach out with various emotions and concerns. Our adept customer service representatives handle interactions with joy, anger, confusion, frustration, and curiosity calmly and courteously, ensuring customer satisfaction in every situation. Delegating tasks to capable assistants allows you to prioritize core responsibilities, while our live chat support assures customers that their issues will be promptly addressed and resolved.",
+    "name": "Healthcare Analytics",
+    "description": "Transform your clinical and operational data into actionable insights with our Healthcare Analytics platform. Our solution helps medical practices identify trends, measure outcomes, and make data-driven decisions to improve both patient care and business performance. With customizable dashboards, population health management tools, and predictive analytics capabilities, our platform enables healthcare providers to track key performance indicators, monitor quality measures, and identify opportunities for improvement across all aspects of their practice.",
     "link": "#"
   }
 ]

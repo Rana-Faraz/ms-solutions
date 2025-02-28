@@ -10,6 +10,8 @@ export const ROUTES = {
   BLOGS: "/blogs",
   PORTFOLIO: "/portfolio",
   MISSION: "/mission",
+  PRIVACY_POLICY: "/privacy-policy",
+  TERMS_OF_SERVICE: "/terms-of-service",
 };
 
 // For anchor links on the home page

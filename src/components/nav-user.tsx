@@ -18,7 +18,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { CaretSortIcon, ComponentPlaceholderIcon } from "@radix-ui/react-icons";
+import { CaretSortIcon } from "@radix-ui/react-icons";
 import { signOut, useSession } from "@/lib/auth-client";
 
 export function NavUser() {

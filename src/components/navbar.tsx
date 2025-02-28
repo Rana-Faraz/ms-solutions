@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -23,6 +21,9 @@ import {
   SheetHeader,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { getLatestThreeBlogs } from "@/lib/actions/blog";
+import { format } from "date-fns";
+import { CONSTANTS } from "@/static/Constants";
 
 // Sample recent blog posts - in a real app, these would come from your CMS or API
 const recentBlogPosts = [
@@ -72,20 +73,18 @@ const Sidebar = () => (
       <div className="border-b py-4">
         <div className="space-y-3 px-1">
           <a
-            href={`tel:${process.env.NEXT_PUBLIC_PHONE}`}
+            href={`tel:${CONSTANTS.PHONE}`}
             className="flex items-center text-sm text-gray-600 hover:text-blue-600"
           >
             <Phone className="mr-3 h-4 w-4 text-blue-600" />
-            <span>{process.env.NEXT_PUBLIC_PHONE || "+01 2235 666 78"}</span>
+            <span>{CONSTANTS.PHONE}</span>
           </a>
           <a
-            href={`mailto:${process.env.NEXT_PUBLIC_EMAIL}`}
+            href={`mailto:${CONSTANTS.EMAIL}`}
             className="flex items-center text-sm text-gray-600 hover:text-blue-600"
           >
             <Mail className="mr-3 h-4 w-4 text-blue-600" />
-            <span>
-              {process.env.NEXT_PUBLIC_EMAIL || "support@contixs.com"}
-            </span>
+            <span>{CONSTANTS.EMAIL}</span>
           </a>
         </div>
       </div>
@@ -193,7 +192,9 @@ const BlogPostItem = React.forwardRef<
           {...props}
         >
           <div className="mb-1 text-sm font-medium leading-none">{title}</div>
-          <p className="text-xs text-muted-foreground">{date}</p>
+          <p className="text-xs text-muted-foreground">
+            {format(new Date(date), "MMM d, yyyy")}
+          </p>
         </a>
       </NavigationMenuLink>
     </li>
@@ -201,7 +202,8 @@ const BlogPostItem = React.forwardRef<
 });
 BlogPostItem.displayName = "BlogPostItem";
 
-export default function Navbar() {
+export default async function Navbar() {
+  const latestBlogs = await getLatestThreeBlogs();
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white">
       {/* Top bar with contact info */}
@@ -209,21 +211,19 @@ export default function Navbar() {
         <div className="container mx-auto flex items-center justify-end px-4">
           <div className="flex items-center space-x-4">
             <a
-              href={`tel:${process.env.NEXT_PUBLIC_PHONE}`}
+              href={`tel:${CONSTANTS.PHONE}`}
               className="flex items-center text-sm text-gray-600 hover:text-blue-600"
             >
               <Phone className="mr-2 h-4 w-4" />
-              <span>{process.env.NEXT_PUBLIC_PHONE || "+01 2235 666 78"}</span>
+              <span>{CONSTANTS.PHONE}</span>
             </a>
             <div className="h-4 w-px bg-gray-300"></div>
             <a
-              href={`mailto:${process.env.NEXT_PUBLIC_EMAIL}`}
+              href={`mailto:${CONSTANTS.EMAIL}`}
               className="flex items-center text-sm text-gray-600 hover:text-blue-600"
             >
               <Mail className="mr-2 h-4 w-4" />
-              <span>
-                {process.env.NEXT_PUBLIC_EMAIL || "support@contixs.com"}
-              </span>
+              <span>{CONSTANTS.EMAIL}</span>
             </a>
           </div>
         </div>
@@ -294,7 +294,11 @@ export default function Navbar() {
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger>Blogs</NavigationMenuTrigger>
+                  <NavigationMenuTrigger>
+                    <Link href={ROUTES.BLOGS} legacyBehavior passHref>
+                      Blogs
+                    </Link>
+                  </NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <ul className="grid w-[400px] gap-3 p-4">
                       <div className="mb-2 flex items-center justify-between">
@@ -306,12 +310,12 @@ export default function Navbar() {
                           View All
                         </Link>
                       </div>
-                      {recentBlogPosts.map((post) => (
+                      {latestBlogs.map((post) => (
                         <BlogPostItem
-                          key={post.href}
+                          key={post.id}
                           title={post.title}
-                          date={post.date}
-                          href={post.href}
+                          date={post.publishedAt?.toISOString() || ""}
+                          href={`${ROUTES.BLOGS}/${post.slug}`}
                         />
                       ))}
                     </ul>

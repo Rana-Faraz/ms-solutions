@@ -6,6 +6,7 @@ import {
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import Stars from "./ui/stars";
+import { FaQuoteRight } from "react-icons/fa";
 
 type TestimonialProps = {
   reviews: {
@@ -26,38 +27,39 @@ export default function Testimonial({ reviews }: TestimonialProps) {
       plugins={[
         Autoplay({
           playOnInit: true,
-          startDelay: 0,
-          delay: 2000,
+          delay: 3500,
           stopOnMouseEnter: true,
           stopOnInteraction: false,
         }),
       ]}
+      className="w-full"
     >
       <CarouselContent>
         {[...reviews, ...reviews].map((item, index) => {
           const { name, content, stars } = item;
-          const getFirstLetters = (name: string) =>
-            name
-              .split(" ")
-              .map((word) => word.charAt(0))
-              .join("");
-
           return (
             <CarouselItem
               key={index}
-              className="my-8 whitespace-nowrap px-4 md:basis-1/3"
+              className="my-4 px-4 md:basis-1/2 lg:basis-1/3"
             >
-              <div className="flex cursor-grab flex-col items-center space-y-4 rounded-lg bg-zinc-300 p-8 shadow-md">
-                <div className="flex flex-col items-center justify-center space-x-2">
-                  <span className="font-degular mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-slate-500 text-center text-3xl font-thin text-white">
-                    {getFirstLetters(name)}
-                  </span>
-                  <span className="font-poppins text-xl">{name}</span>
-                  <Stars stars={stars} />
+              <div className="h-full overflow-hidden rounded-xl border border-border/40 bg-gradient-to-b from-background to-background/95 p-6 shadow-md transition-all duration-300 hover:border-primary/20 hover:shadow-lg md:p-8">
+                <div className="mb-6 flex justify-end">
+                  <FaQuoteRight className="h-8 w-8 text-primary/20" />
                 </div>
-                <p className="font-poppins whitespace-normal text-pretty text-center text-sm md:text-lg">
-                  {content}
+
+                <p className="mb-6 text-pretty text-base leading-relaxed text-muted-foreground">
+                  "{content}"
                 </p>
+
+                <div className="mt-auto flex items-center gap-4">
+                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-primary/10 text-center text-lg font-medium text-primary">
+                    {name.charAt(0)}
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="font-medium text-foreground">{name}</span>
+                    <Stars stars={stars} className="mt-1" />
+                  </div>
+                </div>
               </div>
             </CarouselItem>
           );

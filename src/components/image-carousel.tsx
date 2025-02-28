@@ -23,7 +23,6 @@ export default function ImageCarousel({
       plugins={[
         Autoplay({
           playOnInit: true,
-          startDelay: 0,
           delay: 2000,
           stopOnMouseEnter: true,
           stopOnInteraction: false,

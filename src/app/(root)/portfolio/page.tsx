@@ -2,142 +2,157 @@ import React from "react";
 import Link from "next/link";
 import { ROUTES } from "@/lib/routes";
 import {
-  FaStore,
-  FaLaptopCode,
-  FaPaintBrush,
-  FaBullhorn,
-  FaDumbbell,
-  FaBalanceScale,
+  FaHospital,
+  FaLaptopMedical,
+  FaHeartbeat,
+  FaUserMd,
+  FaClinicMedical,
+  FaHandHoldingMedical,
   FaQuoteRight,
-  FaBriefcase,
+  FaBriefcaseMedical,
   FaUsers,
   FaAward,
   FaChartLine,
+  FaFileMedical,
+  FaStethoscope,
+  FaHospitalUser,
+  FaTablets,
+  FaFlask,
 } from "react-icons/fa";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 export const metadata = {
-  title: "Our Work | Your Business Name",
+  title: "Case Studies | Healthcare Solutions Provider",
   description:
-    "Explore our portfolio of successful projects and see how we help small businesses grow.",
+    "Explore our portfolio of successful healthcare implementations and see how we help medical practices improve patient care and operational efficiency.",
 };
 
 // Enhanced portfolio data with icons and colors
 const portfolioItems = [
   {
     id: 1,
-    title: "Bloom Boutique",
-    category: "E-commerce",
+    title: "Westside Family Practice",
+    category: "Electronic Health Records",
     description:
-      "A complete e-commerce solution for a local flower shop, including website design, online ordering system, and digital marketing strategy.",
+      "Complete EHR implementation for a multi-provider family practice, including data migration, workflow optimization, and staff training.",
     results: [
-      "200% increase in online sales",
-      "35% increase in customer retention",
-      "Expanded market reach to neighboring cities",
+      "30% reduction in documentation time",
+      "40% decrease in patient wait times",
+      "Improved clinical data reporting capabilities",
     ],
-    slug: "bloom-boutique",
-    icon: FaStore,
-    color: "bg-pink-50 text-pink-600",
+    slug: "westside-family-practice",
+    icon: FaFileMedical,
+    color: "bg-primary/10 text-primary",
   },
   {
     id: 2,
-    title: "Tech Solutions Inc.",
-    category: "Web Development",
+    title: "Metro Cardiology Associates",
+    category: "Telehealth",
     description:
-      "A modern, responsive website redesign for an IT consulting firm, focusing on improved user experience and lead generation.",
+      "Comprehensive telehealth platform implementation enabling remote patient monitoring and virtual consultations for a cardiology specialty practice.",
     results: [
-      "150% increase in lead generation",
-      "40% reduction in bounce rate",
-      "Improved search engine rankings for key terms",
+      "35% increase in patient appointment adherence",
+      "Expanded patient base to rural areas",
+      "Reduced no-show rate by 45%",
     ],
-    slug: "tech-solutions",
-    icon: FaLaptopCode,
-    color: "bg-blue-50 text-blue-600",
+    slug: "metro-cardiology",
+    icon: FaLaptopMedical,
+    color: "bg-secondary/10 text-secondary",
   },
   {
     id: 3,
-    title: "Green Earth Landscaping",
-    category: "Branding & Marketing",
+    title: "Oakridge Pediatrics",
+    category: "Practice Management",
     description:
-      "Complete brand refresh and marketing strategy for a sustainable landscaping company, including logo design, website, and social media campaigns.",
+      "End-to-end practice management solution including scheduling optimization, billing workflow redesign, and patient communication tools.",
     results: [
-      "75% increase in qualified leads",
-      "Successfully entered high-end residential market",
-      "Featured in local business magazine",
+      "25% increase in revenue collection",
+      "50% reduction in billing errors",
+      "Improved patient satisfaction scores",
     ],
-    slug: "green-earth",
-    icon: FaPaintBrush,
-    color: "bg-green-50 text-green-600",
+    slug: "oakridge-pediatrics",
+    icon: FaClinicMedical,
+    color: "bg-primary/10 text-primary",
   },
   {
     id: 4,
-    title: "Sunrise Cafe",
-    category: "Digital Marketing",
+    title: "Riverside Medical Group",
+    category: "Patient Engagement",
     description:
-      "Comprehensive digital marketing campaign for a family-owned cafe, including social media management, email marketing, and local SEO.",
+      "Patient engagement platform implementation with portal, automated reminders, and educational resources for a large multi-specialty practice.",
     results: [
-      "45% increase in foot traffic",
-      "30% growth in catering orders",
-      "Built an engaged social media community of over 5,000 followers",
+      "60% patient portal adoption within 3 months",
+      "28% increase in preventive care compliance",
+      "Significant reduction in phone call volume",
     ],
-    slug: "sunrise-cafe",
-    icon: FaBullhorn,
-    color: "bg-amber-50 text-amber-600",
+    slug: "riverside-medical",
+    icon: FaHospitalUser,
+    color: "bg-secondary/10 text-secondary",
   },
   {
     id: 5,
-    title: "Elite Fitness",
-    category: "Web Development",
+    title: "Valley Orthopedic Center",
+    category: "Healthcare Analytics",
     description:
-      "Custom website with integrated booking system, membership management, and virtual class platform for a boutique fitness studio.",
+      "Custom analytics solution providing clinical outcomes tracking, operational metrics, and financial performance dashboards.",
     results: [
-      "60% of new members now sign up online",
-      "Successful pivot to hybrid in-person/virtual model",
-      "Streamlined administrative processes",
+      "Identified 3 key areas for clinical protocol improvement",
+      "15% reduction in operational costs",
+      "Data-driven expansion of high-performing service lines",
     ],
-    slug: "elite-fitness",
-    icon: FaDumbbell,
-    color: "bg-purple-50 text-purple-600",
+    slug: "valley-orthopedic",
+    icon: FaChartLine,
+    color: "bg-primary/10 text-primary",
   },
   {
     id: 6,
-    title: "Coastal Law Group",
-    category: "Branding & Web Development",
+    title: "Bayside Mental Health",
+    category: "Compliance & Security",
     description:
-      "Professional brand identity and website for a new law firm, focusing on establishing credibility and generating client inquiries.",
+      "Comprehensive HIPAA compliance program and security infrastructure for a behavioral health practice with multiple locations.",
     results: [
-      "Established strong market position within 6 months",
-      "Website converts 25% of visitors to inquiries",
-      "Recognized as a top new business in the region",
+      "Achieved 100% HIPAA compliance score",
+      "Implemented secure telehealth for sensitive patient sessions",
+      "Established ongoing compliance monitoring system",
     ],
-    slug: "coastal-law",
-    icon: FaBalanceScale,
-    color: "bg-cyan-50 text-cyan-600",
+    slug: "bayside-mental-health",
+    icon: FaHandHoldingMedical,
+    color: "bg-secondary/10 text-secondary",
   },
 ];
 
 // Client testimonials with enhanced structure
 const testimonials = [
   {
-    name: "Sarah Johnson",
-    position: "Owner, Bloom Boutique",
+    name: "Dr. Rebecca Chen",
+    position: "Medical Director, Westside Family Practice",
     quote:
-      "Working with this team has been transformative for our business. They took the time to understand our unique challenges and created solutions that perfectly fit our needs. Our online sales have more than doubled, and we're reaching customers we never could before.",
+      "Implementing their EHR solution has transformed our practice. Patient wait times have decreased by 30%, documentation is more efficient, and our providers can focus more on patient care rather than paperwork. Their team understood our unique clinical workflows and provided exceptional support throughout the transition.",
   },
   {
-    name: "Michael Rodriguez",
-    position: "Founder, Tech Solutions Inc.",
+    name: "Dr. James Wilson",
+    position: "Cardiologist, Metro Cardiology Associates",
     quote:
-      "The website redesign exceeded our expectations. Not only does it look fantastic, but it's also delivering real business results. The team was professional, responsive, and truly invested in our success. I highly recommend their services.",
+      "The telehealth platform has revolutionized how we deliver care. We're now able to monitor high-risk patients remotely and intervene earlier when issues arise. The implementation was smooth, and the ongoing support has been outstanding. I highly recommend their services to any medical practice looking to expand their care delivery options.",
   },
 ];
 
 // Project categories for filter buttons
 const categories = [
-  "All Projects",
-  "E-commerce",
-  "Web Development",
-  "Branding",
-  "Digital Marketing",
+  "All Case Studies",
+  "Electronic Health Records",
+  "Telehealth",
+  "Practice Management",
+  "Patient Engagement",
+  "Healthcare Analytics",
 ];
 
 export default function PortfolioPage() {
@@ -145,54 +160,52 @@ export default function PortfolioPage() {
     <main className="container mx-auto px-4 py-16">
       {/* Hero Section */}
       <section className="mb-16 text-center">
-        <h1 className="mb-4 text-4xl font-bold md:text-5xl">Our Work</h1>
-        <div className="mx-auto mb-8 h-1 w-24 bg-blue-600"></div>
-        <p className="mx-auto max-w-3xl text-lg text-gray-700">
-          Explore our portfolio of successful projects and see how we've helped
-          small businesses across various industries grow and thrive.
+        <h1 className="mb-4 text-4xl font-bold md:text-5xl">
+          Healthcare Case Studies
+        </h1>
+        <div className="mx-auto mb-8 h-1 w-24 bg-primary"></div>
+        <p className="mx-auto max-w-3xl text-lg text-foreground">
+          Explore our portfolio of successful healthcare implementations and see
+          how we've helped medical practices of all sizes improve patient care,
+          streamline operations, and enhance their technology infrastructure.
         </p>
       </section>
 
       {/* Categories */}
       <div className="mb-12 flex flex-wrap justify-center gap-3">
         {categories.map((category, index) => (
-          <button
+          <Button
             key={index}
-            className={`rounded-full px-4 py-2 text-sm font-medium ${
-              index === 0
-                ? "bg-blue-600 text-white"
-                : "bg-gray-100 text-gray-800"
-            }`}
+            variant={index === 0 ? "default" : "outline"}
+            className="rounded-full"
+            size="sm"
           >
             {category}
-          </button>
+          </Button>
         ))}
       </div>
 
       {/* Portfolio Grid */}
       <section className="mb-20">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {portfolioItems.map((item) => (
-            <div
-              key={item.id}
-              className="overflow-hidden rounded-xl border border-gray-100 bg-white"
-            >
-              <div className={`p-6 ${item.color}`}>
+            <Card key={item.id} className="overflow-hidden">
+              <CardHeader className={`${item.color}`}>
                 <div className="flex items-center justify-between">
                   <item.icon className="h-10 w-10" />
-                  <span className="rounded-full bg-white bg-opacity-30 px-3 py-1 text-xs font-semibold">
-                    Project {item.id}
-                  </span>
+                  <Badge variant="outline" className="bg-white/30">
+                    Case Study
+                  </Badge>
                 </div>
-                <h3 className="mt-4 text-2xl font-bold">{item.title}</h3>
-              </div>
+                <CardTitle className="mt-4 text-2xl">{item.title}</CardTitle>
+              </CardHeader>
 
-              <div className="p-6">
-                <div className="mb-3 inline-block rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-800">
+              <CardContent className="p-6">
+                <Badge className="mb-3 bg-muted text-foreground hover:bg-muted">
                   {item.category}
-                </div>
-                <p className="mb-6 text-gray-700">{item.description}</p>
-                <h4 className="mb-3 font-semibold">Results:</h4>
+                </Badge>
+                <p className="mb-6 text-foreground">{item.description}</p>
+                <h4 className="mb-3 font-semibold">Outcomes:</h4>
                 <ul className="space-y-2">
                   {item.results.map((result, index) => (
                     <li key={index} className="flex items-start">
@@ -201,16 +214,19 @@ export default function PortfolioPage() {
                       >
                         ✓
                       </span>
-                      <span className="text-gray-700">{result}</span>
+                      <span className="text-foreground">{result}</span>
                     </li>
                   ))}
                 </ul>
-                <div className="mt-6 text-right">
-                  <Link
-                    href={`${ROUTES.PORTFOLIO}/${item.slug}`}
-                    className={`inline-flex items-center font-medium ${item.color.split(" ")[1]}`}
-                  >
-                    View Case Study
+              </CardContent>
+              <CardFooter className="justify-end p-6 pt-0">
+                <Button
+                  asChild
+                  variant="link"
+                  className={`${item.color.split(" ")[1]} p-0`}
+                >
+                  <Link href={`${ROUTES.PORTFOLIO}/${item.slug}`}>
+                    View Full Case Study
                     <svg
                       className="ml-1 h-4 w-4"
                       fill="none"
@@ -226,44 +242,59 @@ export default function PortfolioPage() {
                       ></path>
                     </svg>
                   </Link>
-                </div>
-              </div>
-            </div>
+                </Button>
+              </CardFooter>
+            </Card>
           ))}
         </div>
       </section>
 
       {/* Stats Section */}
-      <section className="mb-20 rounded-2xl bg-gray-50 p-8 md:p-12">
+      <section className="mb-20 rounded-2xl bg-muted p-8 md:p-12">
         <div className="mb-12 text-center">
-          <h2 className="mb-4 text-3xl font-bold">Our Impact</h2>
-          <p className="mx-auto max-w-2xl text-gray-700">
-            We're proud of the results we've achieved for our clients across
-            various industries.
+          <h2 className="mb-4 text-3xl font-bold">Our Healthcare Impact</h2>
+          <p className="mx-auto max-w-2xl text-foreground">
+            We're proud of the results we've achieved for healthcare providers
+            across various specialties.
           </p>
         </div>
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           {[
-            { number: "50+", label: "Completed Projects", icon: FaBriefcase },
-            { number: "100+", label: "Happy Clients", icon: FaUsers },
-            { number: "15+", label: "Industry Awards", icon: FaAward },
-            { number: "85%", label: "Growth Rate", icon: FaChartLine },
+            {
+              number: "100+",
+              label: "Healthcare Implementations",
+              icon: FaHospital,
+            },
+            {
+              number: "500+",
+              label: "Medical Providers Served",
+              icon: FaUserMd,
+            },
+            {
+              number: "12+",
+              label: "Healthcare Innovation Awards",
+              icon: FaAward,
+            },
+            {
+              number: "98%",
+              label: "Client Satisfaction Rate",
+              icon: FaHeartbeat,
+            },
           ].map((stat, index) => (
-            <div
-              key={index}
-              className="rounded-lg border border-gray-100 bg-white p-6 text-center"
-            >
-              <div className="mb-4 flex justify-center">
-                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-blue-50">
-                  <stat.icon className="h-8 w-8 text-blue-600" />
+            <Card key={index} className="text-center">
+              <CardContent className="pt-6">
+                <div className="mb-4 flex justify-center">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
+                    <stat.icon className="h-8 w-8 text-primary" />
+                  </div>
                 </div>
-              </div>
-              <div className="text-3xl font-bold text-gray-900">
-                {stat.number}
-              </div>
-              <div className="text-gray-600">{stat.label}</div>
-            </div>
+                <div className="text-3xl font-bold text-foreground">
+                  {stat.number}
+                </div>
+                <div className="text-muted-foreground">{stat.label}</div>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </section>
@@ -271,63 +302,68 @@ export default function PortfolioPage() {
       {/* Testimonials */}
       <section className="mb-20">
         <div className="mb-12 text-center">
-          <h2 className="mb-4 text-3xl font-bold">What Our Clients Say</h2>
-          <p className="mx-auto max-w-2xl text-gray-700">
-            Don't just take our word for it - hear from the businesses we've
-            helped.
+          <h2 className="mb-4 text-3xl font-bold">
+            What Healthcare Providers Say
+          </h2>
+          <p className="mx-auto max-w-2xl text-foreground">
+            Hear from the medical practices we've helped transform their
+            operations and patient care.
           </p>
         </div>
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
           {testimonials.map((testimonial, index) => (
-            <div
-              key={index}
-              className="rounded-xl border border-blue-100 bg-blue-50 p-8"
-            >
-              <div className="mb-6 flex justify-center">
-                <FaQuoteRight className="h-10 w-10 text-blue-200" />
-              </div>
-              <p className="mb-6 text-center italic text-gray-700">
-                "{testimonial.quote}"
-              </p>
-              <div className="flex items-center justify-center">
-                <div className="mr-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 text-blue-600">
-                  {testimonial.name.charAt(0)}
+            <Card key={index} className="border-primary/20 bg-accent">
+              <CardContent className="p-8">
+                <div className="mb-6 flex justify-center">
+                  <FaQuoteRight className="h-10 w-10 text-primary/30" />
                 </div>
-                <div>
-                  <h3 className="font-semibold">{testimonial.name}</h3>
-                  <p className="text-sm text-gray-600">
-                    {testimonial.position}
-                  </p>
+                <p className="mb-6 text-center italic text-foreground">
+                  "{testimonial.quote}"
+                </p>
+                <div className="flex items-center justify-center">
+                  <div className="mr-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+                    <span className="text-lg">👨‍⚕️</span>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold">{testimonial.name}</h3>
+                    <p className="text-sm text-muted-foreground">
+                      {testimonial.position}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </div>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="rounded-2xl bg-gradient-to-r from-blue-600 to-blue-800 p-8 text-center text-white md:p-12">
+      <section className="rounded-2xl bg-gradient-to-r from-primary to-secondary p-8 text-center text-white md:p-12">
         <h2 className="mb-4 text-3xl font-bold">
-          Ready to Grow Your Business?
+          Ready to Transform Your Healthcare Practice?
         </h2>
         <p className="mx-auto mb-8 max-w-2xl text-lg">
-          Let's discuss how we can help your small business reach the next level
-          with tailored strategies and solutions.
+          Let's discuss how our healthcare technology solutions can help your
+          practice improve patient care, streamline operations, and achieve your
+          goals.
         </p>
         <div className="flex flex-col items-center justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
-          <Link
-            href={ROUTES.CONTACT}
-            className="rounded-md bg-white px-8 py-3 font-semibold text-blue-600"
+          <Button
+            asChild
+            size="lg"
+            className="bg-white text-primary hover:bg-accent hover:text-primary"
           >
-            Start Your Project
-          </Link>
-          <Link
-            href={ROUTES.SERVICES}
-            className="rounded-md border border-white bg-transparent px-8 py-3 font-semibold text-white"
+            <Link href={ROUTES.CONTACT}>Schedule a Consultation</Link>
+          </Button>
+          <Button
+            asChild
+            variant="outline"
+            size="lg"
+            className="border-white bg-transparent text-white hover:bg-white/10"
           >
-            Explore Our Services
-          </Link>
+            <Link href={ROUTES.SERVICES}>Explore Our Healthcare Services</Link>
+          </Button>
         </div>
       </section>
     </main>

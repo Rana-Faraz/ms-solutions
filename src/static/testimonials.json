@@ -1,17 +1,22 @@
 [
   {
-    "name": "John Doe",
-    "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-    "stars": 4
-  },
-  {
-    "name": "Jane Doe",
-    "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+    "name": "Dr. Sarah Johnson",
+    "content": "Implementing the EHR system from Medical Solutions has transformed our practice. Documentation time has decreased by 30%, and our patient satisfaction scores have improved significantly due to the streamlined workflows.",
     "stars": 5
   },
   {
-    "name": "John Smith",
-    "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-    "stars": 3
+    "name": "Dr. Michael Chen",
+    "content": "The telehealth platform has been a game-changer for our multi-specialty clinic. We've been able to extend care to rural patients who previously had limited access to specialists. The integration with our existing systems was seamless.",
+    "stars": 5
+  },
+  {
+    "name": "Amanda Rodriguez, Practice Manager",
+    "content": "Their practice management solution has simplified our administrative processes and improved our revenue cycle. Claims are processed faster with fewer rejections, and the reporting tools give us valuable insights into our practice performance.",
+    "stars": 4
+  },
+  {
+    "name": "Dr. Robert Williams",
+    "content": "The healthcare analytics platform has helped us identify trends we never would have noticed otherwise. We've used these insights to improve our clinical protocols and patient outcomes, particularly for our chronic disease management programs.",
+    "stars": 5
   }
 ]

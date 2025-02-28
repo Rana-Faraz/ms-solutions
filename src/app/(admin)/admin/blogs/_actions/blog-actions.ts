@@ -17,7 +17,6 @@ import {
   generateSlug,
 } from "@/components/rich-text-editor/utils";
 import { eq, ExtractTablesWithRelations } from "drizzle-orm";
-import { asc } from "drizzle-orm";
 import { NodePgQueryResultHKT } from "drizzle-orm/node-postgres/session";
 import { PgTransaction } from "drizzle-orm/pg-core";
 import * as schema from "@/lib/db/schema";
@@ -392,11 +391,6 @@ async function fetchCategoriesAndTags(blogPostId: string) {
 
 export async function getBlogPostById(id: string) {
   try {
-    // Verify user is authenticated
-    const session = await verifyAuthentication(
-      "Unauthorized. Please log in to view blog posts.",
-    );
-
     // Get the blog post
     const post = await db.query.blogPost.findFirst({
       where: (post, { eq }) => eq(post.id, id),
@@ -436,6 +430,57 @@ export async function getBlogPostById(id: string) {
         error instanceof Error ? error.message : "Failed to fetch blog post",
     };
   }
+}
+
+export async function getBlogPostBySlug(slug: string) {
+  try {
+    const post = await db.query.blogPost.findFirst({
+      where: (post, { eq }) => eq(post.slug, slug),
+    });
+
+    if (!post) {
+      return { error: "Blog post not found." };
+    }
+
+    // Get the author
+    const author = await db.query.user.findFirst({
+      where: (user, { eq }) => eq(user.id, post.authorId),
+      columns: {
+        name: true,
+        email: true,
+        image: true,
+      },
+    });
+
+    // Get categories and tags
+    const { categories, tags } = await fetchCategoriesAndTags(post.id);
+
+    // Combine the data
+    const enrichedPost = {
+      ...post,
+      author,
+      categories,
+      tags,
+    };
+
+    return { success: true, post: enrichedPost, error: null };
+  } catch (error) {
+    console.error("Error fetching blog post:", error);
+    return {
+      success: false,
+      error:
+        error instanceof Error ? error.message : "Failed to fetch blog post",
+    };
+  }
+}
+
+export async function getBlogSlugs() {
+  const slugs = await db.query.blogPost.findMany({
+    columns: {
+      slug: true,
+    },
+  });
+  return slugs.map((slug) => slug.slug);
 }
 
 export async function updateBlogPublishStatus(

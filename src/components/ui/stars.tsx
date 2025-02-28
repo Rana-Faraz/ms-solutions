@@ -1,10 +1,12 @@
 import { FC } from "react";
+import { cn } from "@/lib/utils";
 
 interface StarsProps {
   stars: number;
+  className?: string;
 }
 
-const Stars: FC<StarsProps> = ({ stars }) => {
+const Stars: FC<StarsProps> = ({ stars, className }) => {
   const renderStars = () => {
     const starElements = [];
     for (let i = 0; i < 5; i++) {
@@ -25,7 +27,7 @@ const Stars: FC<StarsProps> = ({ stars }) => {
     return starElements;
   };
 
-  return <div>{renderStars()}</div>;
+  return <div className={cn(className)}>{renderStars()}</div>;
 };
 
 export default Stars;
