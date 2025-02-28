@@ -6,7 +6,7 @@ import * as schema from "@/lib/db/schema";
 
 const pool = new Pool({
   host: env.DATABASE_HOST,
-  port: parseInt(env.DATABASE_PORT as string),
+  port: parseInt(env.DATABASE_PORT || "5432"),
   user: env.DATABASE_USER,
   password: env.DATABASE_PASSWORD,
   database: env.DATABASE_NAME,
