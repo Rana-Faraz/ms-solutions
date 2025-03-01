@@ -27,7 +27,7 @@ export default async function NewTeamPage() {
         </p>
       </div>
 
-      <NewTeamForm userId={session.user.id} />
+      <NewTeamForm />
     </div>
   );
 }
