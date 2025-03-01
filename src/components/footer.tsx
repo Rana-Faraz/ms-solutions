@@ -6,7 +6,9 @@ import {
   Phone,
   Twitter,
 } from "lucide-react";
-import Logo from "../../public/images/logo.svg";
+// import Logo from "../../public/images/logo.svg";
+import Logo from "../../public/images/stardom-logo-footer.webp";
+
 import Image from "next/image";
 import Services from "@/static/services.json";
 import { ROUTES } from "@/lib/routes";
@@ -18,12 +20,16 @@ const Footer = () => {
     <footer className="bg-gradient-to-b from-background to-background/95 pt-12">
       <div className="container mx-auto px-4">
         {/* Top section with logo and social links */}
-        <div className="mb-10 flex flex-col items-center justify-between gap-8 border-b border-border/40 pb-10 md:flex-row">
+        <div className="mb-8 flex flex-col items-center justify-between gap-8 border-b border-border/40 pb-8 md:flex-row">
           <Link
             href={ROUTES.HOME}
             className="transition-opacity hover:opacity-90"
           >
-            <Image src={Logo} alt="Logo" className="h-12 w-auto" />
+            <Image
+              src={Logo}
+              alt="Logo"
+              className="h-24 w-auto invert filter"
+            />
           </Link>
 
           <div className="flex items-center gap-4">

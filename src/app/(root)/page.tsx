@@ -1,40 +1,29 @@
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import Hero from "~/public/images/hero.png";
-import About from "~/public/images/section-about.png";
-import Plane from "~/public/images/floating-plane.svg";
-import Rings from "~/public/images/floating-rings.svg";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ROUTES } from "@/lib/routes";
 import { CONSTANTS } from "@/static/Constants";
-import Services from "@/static/services.json";
-import DeatilServices from "@/static/service-details.json";
-import CompanyHistory from "@/static/history.json";
-import Marquee from "@/components/marquee";
-import Card from "@/components/card";
-import History from "@/components/history";
+import Image from "next/image";
+import Link from "next/link";
+import {
+  FaBriefcaseMedical,
+  FaChartBar,
+  FaClinicMedical,
+  FaEnvelope,
+  FaFileMedical,
+  FaHeartbeat,
+  FaHospital,
+  FaHospitalUser,
+  FaLaptopMedical,
+  FaPhoneAlt,
+  FaStethoscope,
+} from "react-icons/fa";
+import Hero from "~/public/images/hero.png";
 import Portfolio1 from "~/public/images/portfolio-1.png";
 import Portfolio2 from "~/public/images/portfolio-2.png";
 import Portfolio3 from "~/public/images/portfolio-3.png";
 import Portfolio4 from "~/public/images/portfolio-4.png";
-import ImageCarousel from "@/components/image-carousel";
-import Testimonial from "@/components/testimonial";
-import Testimonials from "@/static/testimonials.json";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import ContactImage from "~/public/images/contact-image.png";
-import CheckmarkPoint from "@/components/checkmark-point";
-import ServicePoints from "@/static/service-points.json";
-import WhyUsPoints from "@/static/why-us-points.json";
-import Link from "next/link";
-import {
-  FaStethoscope,
-  FaHeartbeat,
-  FaHospital,
-  FaUserMd,
-  FaLaptopMedical,
-  FaFileMedical,
-  FaClinicMedical,
-} from "react-icons/fa";
-import { ROUTES } from "@/lib/routes";
+import About from "~/public/images/section-about.png";
 
 export const metadata = {
   title:
@@ -43,351 +32,472 @@ export const metadata = {
     "Innovative healthcare technology solutions designed to improve patient care, streamline clinical workflows, and optimize medical practice operations.",
 };
 
-export default function Home() {
-  const Portfolio = [Portfolio1, Portfolio2, Portfolio3, Portfolio4];
+// Service data with icons
+const services = [
+  {
+    id: 1,
+    title: "Electronic Health Records",
+    description:
+      "Streamlined EHR solutions that improve clinical documentation, enhance patient care, and ensure regulatory compliance.",
+    icon: FaFileMedical,
+    color: "bg-primary/10 text-primary",
+    features: [
+      "Customized EHR Implementation",
+      "Legacy System Migration",
+      "Interoperability Solutions",
+      "Regulatory Compliance (HIPAA, MACRA)",
+    ],
+  },
+  {
+    id: 2,
+    title: "Telehealth Services",
+    description:
+      "Secure, user-friendly telehealth platforms that expand your practice's reach and improve patient access to care.",
+    icon: FaLaptopMedical,
+    color: "bg-secondary/10 text-secondary",
+    features: [
+      "Virtual Visit Platform",
+      "Remote Patient Monitoring",
+      "Secure Messaging Systems",
+      "Mobile Health Applications",
+    ],
+  },
+  {
+    id: 3,
+    title: "Practice Management",
+    description:
+      "Comprehensive practice management solutions to optimize workflows, improve efficiency, and enhance the patient experience.",
+    icon: FaClinicMedical,
+    color: "bg-primary/10 text-primary",
+    features: [
+      "Scheduling Optimization",
+      "Revenue Cycle Management",
+      "Staff Training & Development",
+      "Operational Efficiency Analysis",
+    ],
+  },
+  {
+    id: 4,
+    title: "Patient Engagement",
+    description:
+      "Tools and strategies to enhance patient communication, satisfaction, and involvement in their healthcare journey.",
+    icon: FaHospitalUser,
+    color: "bg-secondary/10 text-secondary",
+    features: [
+      "Patient Portal Implementation",
+      "Automated Appointment Reminders",
+      "Patient Education Resources",
+      "Satisfaction Survey Systems",
+    ],
+  },
+  {
+    id: 5,
+    title: "Healthcare Analytics",
+    description:
+      "Data-driven insights to improve clinical outcomes, operational efficiency, and financial performance.",
+    icon: FaChartBar,
+    color: "bg-primary/10 text-primary",
+    features: [
+      "Clinical Outcomes Analysis",
+      "Population Health Management",
+      "Financial Performance Metrics",
+      "Customized Reporting Dashboards",
+    ],
+  },
+  {
+    id: 6,
+    title: "Medical Compliance",
+    description:
+      "Expert guidance and solutions to ensure your practice meets all regulatory requirements and industry standards.",
+    icon: FaBriefcaseMedical,
+    color: "bg-secondary/10 text-secondary",
+    features: [
+      "HIPAA Compliance Audits",
+      "Policy & Procedure Development",
+      "Staff Compliance Training",
+      "Risk Assessment & Management",
+    ],
+  },
+];
 
+// Testimonials
+const testimonials = [
+  {
+    quote:
+      "Implementing their EHR solution has transformed our practice. Patient wait times have decreased by 30%, documentation is more efficient, and our providers can focus more on patient care rather than paperwork.",
+    author: "Dr. Rebecca Chen",
+    position: "Medical Director, Westside Family Practice",
+  },
+  {
+    quote:
+      "The telehealth platform has allowed us to expand our reach and provide care to patients who previously had difficulty accessing our services. The implementation was smooth and the ongoing support is exceptional.",
+    author: "Dr. Michael Johnson",
+    position: "Chief of Cardiology, Metro Heart Center",
+  },
+];
+
+export default function Home() {
   return (
-    <main className="snap-start scroll-smooth">
-      {/* Hero Section */}
-      <section
-        id="landing"
-        className="relative overflow-hidden bg-gradient-to-b from-background to-background/95 py-16 md:py-24"
-      >
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-12 lg:gap-16">
-            <div className="relative flex flex-col justify-center space-y-6">
-              <h1 className="font-degular text-4xl font-bold leading-tight text-primary sm:text-5xl md:text-6xl xl:text-7xl">
-                Healthcare,
-                <br />
-                <span className="text-secondary">Innovation</span>
-                <br />& Technology
-              </h1>
-              <p className="max-w-lg text-xl text-muted-foreground md:text-2xl">
-                For Modern Medicine.
-              </p>
-              <div className="flex flex-col gap-4 sm:flex-row sm:gap-6">
-                <Link href="#contact" className="w-full sm:w-auto">
-                  <Button
-                    size="lg"
-                    className="w-full text-base font-medium shadow-sm"
-                  >
-                    Schedule A Consultation
-                  </Button>
-                </Link>
-                <Link href="#services" className="w-full sm:w-auto">
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    className="w-full text-base font-medium shadow-sm"
-                  >
-                    Explore Solutions
-                  </Button>
-                </Link>
+    <main className="overflow-hidden">
+      {/* Full-width Hero Section with Image Background */}
+      <section className="relative max-h-[55vh] min-h-[55vh] w-full">
+        <div className="absolute inset-0 z-10 bg-gradient-to-r from-primary/90 to-secondary/90 mix-blend-multiply"></div>
+        <div className="absolute inset-0 z-0">
+          <Image
+            src={Hero}
+            alt="Healthcare Technology"
+            fill
+            className="object-cover"
+            priority
+            quality={100}
+          />
+        </div>
+        <div className="container relative z-10 mx-auto flex max-h-[55vh] min-h-[55vh] flex-col items-center justify-center px-4 py-12 text-white">
+          <div className="mx-auto max-w-3xl text-center">
+            <Badge className="mb-4 bg-white/20 px-4 py-1 text-sm font-medium text-white backdrop-blur-sm">
+              HEALTHCARE TECHNOLOGY SOLUTIONS
+            </Badge>
+            <h1 className="mb-4 text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
+              Innovative Healthcare Solutions for Modern Medical Practices
+            </h1>
+            <p className="mb-6 text-lg md:text-xl">
+              Empowering healthcare providers with technology that enhances
+              patient care, streamlines clinical workflows, and optimizes
+              medical practice operations.
+            </p>
+            <div className="flex flex-col items-center justify-center space-y-4 sm:flex-row sm:space-x-6 sm:space-y-0">
+              <Button
+                asChild
+                size="lg"
+                className="w-full bg-white text-primary hover:bg-accent hover:text-primary sm:w-auto"
+              >
+                <Link href={ROUTES.CONTACT}>Schedule a Consultation</Link>
+              </Button>
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="w-full border-white bg-transparent text-white hover:bg-white/10 sm:w-auto"
+              >
+                <Link href={ROUTES.SERVICES}>Explore Our Services</Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        {/* Floating Stats */}
+      </section>
+      <div className="container mx-auto p-6">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+          <Card className="border-primary/20 bg-white/95 backdrop-blur-sm">
+            <CardContent className="flex items-center p-4 md:p-6">
+              <div className="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary md:h-12 md:w-12">
+                <FaHeartbeat className="h-5 w-5 md:h-6 md:w-6" />
               </div>
-            </div>
-            <div className="relative flex items-center justify-center">
-              <Image
-                src={Hero}
-                alt="Healthcare Technology"
-                placeholder="blur"
-              />
-            </div>
+              <div>
+                <p className="text-xl font-bold text-primary md:text-2xl">
+                  98%
+                </p>
+                <p className="text-xs text-muted-foreground md:text-sm">
+                  Patient Satisfaction
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="border-secondary/20 bg-white/95 backdrop-blur-sm">
+            <CardContent className="flex items-center p-4 md:p-6">
+              <div className="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-secondary/10 text-secondary md:h-12 md:w-12">
+                <FaStethoscope className="h-5 w-5 md:h-6 md:w-6" />
+              </div>
+              <div>
+                <p className="text-xl font-bold text-secondary md:text-2xl">
+                  500+
+                </p>
+                <p className="text-xs text-muted-foreground md:text-sm">
+                  Healthcare Providers
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="border-primary/20 bg-white/95 backdrop-blur-sm sm:col-span-2 md:col-span-1">
+            <CardContent className="flex items-center p-4 md:p-6">
+              <div className="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary md:h-12 md:w-12">
+                <FaHospital className="h-5 w-5 md:h-6 md:w-6" />
+              </div>
+              <div>
+                <p className="text-xl font-bold text-primary md:text-2xl">
+                  15+
+                </p>
+                <p className="text-xs text-muted-foreground md:text-sm">
+                  Years of Experience
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+
+      {/* Services Section with Cards */}
+      <section id="services" className="py-4 ">
+        <div className="container mx-auto px-4">
+          <div className="mb-10 text-center md:mb-16">
+            <Badge className="mb-3 bg-primary/10 px-4 py-1 text-xs font-medium text-primary">
+              OUR HEALTHCARE SERVICES
+            </Badge>
+            <h2 className="mb-4 text-3xl font-bold md:text-4xl">
+              Comprehensive Medical Technology Solutions
+            </h2>
+            <p className="mx-auto max-w-2xl text-base text-muted-foreground md:text-lg">
+              We offer a range of healthcare technology solutions designed to
+              help medical practices enhance patient care and improve
+              operational efficiency.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {services.map((service) => (
+              <Card
+                key={service.id}
+                className="overflow-hidden transition-all duration-300"
+              >
+                <CardHeader
+                  className={`${service.color} flex flex-col items-center p-5`}
+                >
+                  <service.icon className="h-8 w-8" />
+                  <CardTitle className="mt-3 text-xl">
+                    {service.title}
+                  </CardTitle>
+                </CardHeader>
+
+                <CardContent className="p-5 text-center text-sm text-muted-foreground md:text-base">
+                  {service.description}
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          <div className="mt-10 text-center">
+            <Button asChild size="lg">
+              <Link href={ROUTES.SERVICES}>View All Healthcare Services</Link>
+            </Button>
           </div>
         </div>
       </section>
 
-      {/* Marquee Sections */}
-      <div className="py-2">
-        <Marquee direction="forward" content={Services} />
-        <Marquee direction="backward" content={Services} variant="secondary" />
-      </div>
-
-      {/* About Section */}
-      <section
-        id="about"
-        className="bg-gradient-to-b from-background to-background/95 py-16 md:py-24"
-      >
+      {/* About Section with Image */}
+      <section id="about" className="bg-muted py-16 md:py-24">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-12 lg:gap-16">
-            <div className="relative order-2 flex items-center justify-center md:order-1">
-              <Image
-                src={About}
-                alt="Healthcare Solutions"
-                placeholder="blur"
-              />
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-12">
+            <div className="relative order-2 md:order-1">
+              <div className="relative h-[400px] overflow-hidden rounded-xl md:h-[450px]">
+                <Image
+                  src={About}
+                  alt="Healthcare Solutions"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="absolute -bottom-4 -right-4 h-24 w-24 rounded-full bg-primary md:-bottom-6 md:-right-6 md:h-32 md:w-32"></div>
+              <div className="absolute -left-4 -top-4 h-16 w-16 rounded-full bg-secondary md:-left-6 md:-top-6 md:h-24 md:w-24"></div>
             </div>
-            <div className="order-1 space-y-6 md:order-2">
-              <span className="inline-block rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary">
+
+            <div className="order-1 flex flex-col justify-center md:order-2">
+              <Badge className="mb-3 w-fit bg-primary/10 px-4 py-1 text-xs font-medium text-primary">
                 ABOUT OUR HEALTHCARE SOLUTIONS
-              </span>
-              <h2 className="font-degular text-3xl font-bold leading-tight md:text-4xl lg:text-5xl">
-                Transforming Healthcare Through Innovative Technology Solutions
+              </Badge>
+              <h2 className="mb-4 text-2xl font-bold md:text-3xl lg:text-4xl">
+                Transforming Healthcare Through Innovative Technology
               </h2>
-              <div className="space-y-4 text-muted-foreground">
-                <p className="text-base leading-relaxed md:text-lg">
+              <div className="space-y-3 text-muted-foreground">
+                <p className="text-base md:text-lg">
                   At our core, we're dedicated to revolutionizing healthcare
                   delivery through technological excellence. We understand that
                   effective healthcare technology is the foundation of modern
-                  medical practice, enabling the seamless execution of vital
-                  clinical and administrative workflows.
+                  medical practice.
                 </p>
-                <blockquote className="border-l-4 border-primary/30 bg-primary/5 p-4 text-center italic">
-                  "Advancing Patient Care Through Digital Innovation"
-                </blockquote>
-                <p className="text-base leading-relaxed md:text-lg">
-                  Benefit from the guidance of our healthcare technology experts
-                  who bring years of clinical and technical experience to every
-                  solution. Whether you're a small practice or a large hospital
-                  system, our tailored healthcare platforms are designed to meet
-                  your unique needs and enhance patient outcomes.
+                <div className="rounded-lg bg-white p-4 shadow-sm">
+                  <p className="text-center text-base font-medium italic text-primary md:text-lg">
+                    "Advancing Patient Care Through Digital Innovation"
+                  </p>
+                </div>
+                <p className="text-base md:text-lg">
+                  Our healthcare technology experts bring years of clinical and
+                  technical experience to every solution, designed to meet your
+                  unique needs and enhance patient outcomes.
                 </p>
-                <blockquote className="border-l-4 border-secondary/30 bg-secondary/5 p-4 text-center italic">
-                  "Empowering Healthcare Providers with Intelligent Solutions"
-                </blockquote>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Services Section */}
-      <section id="services" className="py-16 md:py-24">
-        <div className="container mx-auto px-4">
-          <div className="mb-12 rounded-xl bg-gradient-to-r from-primary/5 to-secondary/5 p-6 text-center">
-            <p className="text-lg font-medium md:text-xl">
-              Contact Our Healthcare Team or Email Us at{" "}
-              <a
-                href={`mailto:${CONSTANTS.EMAIL}`}
-                className="font-semibold text-secondary transition-colors hover:text-secondary/80 hover:underline"
-              >
-                {CONSTANTS.EMAIL}
-              </a>
-            </p>
-          </div>
-
-          <div className="flex flex-col items-center justify-center space-y-8">
-            <span className="inline-block rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary">
-              HEALTHCARE SOLUTIONS
-            </span>
-            <h2 className="max-w-3xl text-center font-degular text-3xl font-bold leading-tight md:text-4xl lg:text-5xl">
-              We're a healthcare technology provider connecting medical
-              professionals to patients
-            </h2>
-            <p className="max-w-3xl text-center text-base leading-relaxed text-muted-foreground md:text-lg">
-              Our suite of healthcare solutions encompasses comprehensive
-              medical technology systems designed to help healthcare providers
-              deliver exceptional patient care with efficiency and precision.
-              Our expertise spans across various domains including electronic
-              health records, telehealth platforms, practice management systems,
-              healthcare analytics, and patient engagement solutions.
-            </p>
-            <div className="mt-8 grid w-full grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8">
-              {DeatilServices.map((service) => (
-                <Card key={service.id} service={service} />
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Company History */}
-      <div className="bg-gradient-to-r from-primary/10 to-secondary/10 py-16">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16">
-            {CompanyHistory.map((history) => (
-              <History key={history.title} history={history} />
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Portfolio Section */}
-      <section
-        id="portfolio"
-        className="relative overflow-hidden bg-squiggly-pattern bg-contain bg-center bg-no-repeat py-16 md:py-24"
-      >
-        <div className="absolute inset-0 bg-background/80"></div>
-        <div className="container relative mx-auto px-4">
-          <div className="mb-12 flex flex-col items-center space-y-4 text-center">
-            <span className="inline-block rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary">
-              CASE STUDIES
-            </span>
-            <h2 className="font-degular text-3xl font-bold leading-tight md:text-4xl lg:text-5xl">
-              Healthcare Success Stories
-            </h2>
-          </div>
-          <ImageCarousel content={Portfolio} />
-        </div>
-      </section>
-
-      {/* Marquee Sections */}
-      <div className="py-2">
-        <Marquee direction="forward" content={Services} />
-        <Marquee direction="backward" content={Services} variant="secondary" />
-      </div>
-
-      {/* Mission Section */}
-      <section
-        id="misson"
-        className="bg-gradient-to-b from-background to-background/95 py-16 md:py-24"
-      >
-        <div className="container mx-auto px-4">
-          <div className="mx-auto max-w-4xl">
-            <div className="mb-8 flex flex-col items-center space-y-4 text-center">
-              <span className="inline-block rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary">
-                MISSION AND VISION
-              </span>
-              <h2 className="font-degular text-3xl font-bold leading-tight md:text-4xl lg:text-5xl">
-                Empowering Healthcare Excellence with Medical Solutions
-              </h2>
-            </div>
-
-            <div className="space-y-6 text-muted-foreground">
-              <p className="text-base leading-relaxed md:text-lg">
-                At Medical Solutions, we are dedicated to revolutionizing
-                healthcare delivery through our innovative technology platforms
-                and solutions. Our mission is to provide tailored healthcare
-                technology to medical practices, helping them enhance patient
-                care in the digital age.
-              </p>
-              <p className="text-base leading-relaxed md:text-lg">
-                We envision a healthcare ecosystem where technology seamlessly
-                supports clinical workflows, where our dedicated solutions not
-                only improve efficiency but also enhance the quality of care
-                delivered to patients. Through advanced technologies such as
-                secure data exchange, interoperability, and intelligent
-                analytics, coupled with personalized implementation, we ensure
-                compliance, reliability, and clinical success.
-              </p>
-              <p className="text-base leading-relaxed md:text-lg">
-                Join us on this journey as we pave the way for healthcare
-                excellence with Medical Solutions.
-              </p>
-            </div>
-
-            <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6">
-              {ServicePoints.map((point) => (
-                <CheckmarkPoint key={point} point={point} />
-              ))}
+              <div className="mt-6">
+                <Button
+                  asChild
+                  className="bg-secondary text-white hover:bg-secondary/90"
+                >
+                  <Link href={ROUTES.ABOUT}>Learn More About Us</Link>
+                </Button>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Testimonial Section */}
-      <section
-        id="testimonial"
-        className="bg-gradient-to-r from-primary/5 to-secondary/5 py-16 md:py-24"
-      >
+      <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
-          <div className="mb-12 flex flex-col items-center space-y-4 text-center">
-            <div className="flex items-center justify-center gap-2">
-              <FaStethoscope className="h-5 w-5 text-primary" />
-              <span className="text-sm font-medium text-primary">
-                HEALTHCARE TESTIMONIALS
-              </span>
-            </div>
-            <h2 className="font-degular text-3xl font-bold leading-tight md:text-4xl lg:text-5xl">
-              What Medical Professionals Say
+          <div className="mb-10 text-center">
+            <Badge className="mb-3 bg-secondary/10 px-4 py-1 text-xs font-medium text-secondary">
+              CLIENT TESTIMONIALS
+            </Badge>
+            <h2 className="mb-4 text-2xl font-bold md:text-3xl lg:text-4xl">
+              What Healthcare Providers Say
             </h2>
           </div>
-          <Testimonial reviews={Testimonials} />
+
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            {testimonials.map((testimonial, index) => (
+              <Card key={index} className="border-primary/20 bg-primary/5">
+                <CardContent className="p-6">
+                  <div className="mb-4 flex justify-center">
+                    <FaStethoscope className="h-10 w-10 text-primary" />
+                  </div>
+                  <p className="mb-4 text-center text-base italic text-foreground md:text-lg">
+                    "{testimonial.quote}"
+                  </p>
+                  <div className="text-center">
+                    <p className="font-semibold">{testimonial.author}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {testimonial.position}
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Why Us Section */}
-      <section id="why-us" className="py-16 md:py-24">
+      {/* Featured Case Studies */}
+      <section className="bg-gradient-to-r from-primary to-secondary py-16 text-white md:py-24">
         <div className="container mx-auto px-4">
-          <div className="mb-12 flex flex-col items-center space-y-4 text-center">
-            <div className="flex items-center justify-center gap-2">
-              <FaHeartbeat className="h-5 w-5 text-primary" />
-              <span className="text-sm font-medium text-primary">
-                WHY CHOOSE US
-              </span>
-            </div>
-            <h2 className="font-degular text-3xl font-bold leading-tight md:text-4xl lg:text-5xl">
-              Why Choose Medical Solutions?
+          <div className="mb-10 text-center">
+            <Badge className="mb-3 bg-white/20 px-4 py-1 text-xs font-medium text-white">
+              CASE STUDIES
+            </Badge>
+            <h2 className="mb-4 text-2xl font-bold md:text-3xl lg:text-4xl">
+              Healthcare Success Stories
             </h2>
-            <p className="mx-auto max-w-3xl text-base leading-relaxed text-muted-foreground md:text-lg">
-              At Medical Solutions, we're committed to providing unparalleled
-              healthcare technology and support, making us a trusted partner for
-              medical practices of all sizes. Here's why healthcare providers
-              choose our solutions:
+            <p className="mx-auto max-w-2xl text-base md:text-lg">
+              See how our healthcare technology solutions have helped medical
+              practices improve patient care and operational efficiency.
             </p>
           </div>
 
-          <div className="mx-auto max-w-4xl">
-            <ul className="space-y-4">
-              {WhyUsPoints.map((point, index) => {
-                const trueIndex = index + 1;
-                return (
-                  <li
-                    key={index}
-                    className="rounded-lg bg-gradient-to-r from-primary/5 to-secondary/5 p-5 shadow-sm transition-all hover:shadow-md"
-                  >
-                    <div className="flex items-start gap-3">
-                      <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-primary text-xs font-bold text-white">
-                        {trueIndex}
-                      </span>
-                      <div>
-                        <h3 className="font-bold text-primary">
-                          {point.title}
-                        </h3>
-                        <p className="mt-1 text-muted-foreground">
-                          {point.content}
-                        </p>
-                      </div>
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {[Portfolio1, Portfolio2, Portfolio3, Portfolio4].map(
+              (image, index) => (
+                <div
+                  key={index}
+                  className="group relative overflow-hidden rounded-lg"
+                >
+                  <div className="relative h-56 w-full overflow-hidden md:h-64">
+                    <Image
+                      src={image}
+                      alt={`Healthcare Case Study ${index + 1}`}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                  </div>
+                  <div className="absolute bottom-0 left-0 right-0 p-4">
+                    <h3 className="mb-1 text-base font-semibold md:text-lg">
+                      Case Study {index + 1}
+                    </h3>
+                    <p className="text-xs text-white/80 md:text-sm">
+                      Healthcare Technology Implementation
+                    </p>
+                  </div>
+                </div>
+              ),
+            )}
+          </div>
+
+          <div className="mt-8 text-center md:mt-10">
+            <Button
+              asChild
+              size="lg"
+              className="bg-white text-primary hover:bg-accent hover:text-primary"
+            >
+              <Link href={ROUTES.PORTFOLIO}>View All Case Studies</Link>
+            </Button>
           </div>
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section id="contact" className="py-16 md:py-24">
+      {/* Contact CTA Section */}
+      <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
-          <div className="overflow-hidden rounded-2xl bg-contact-pattern bg-cover bg-center bg-no-repeat shadow-lg">
-            <div className="grid grid-cols-1 gap-8 bg-background/90 p-6 backdrop-blur-sm md:grid-cols-2 md:gap-12 md:p-8 lg:p-12">
-              <div className="flex flex-col gap-6">
-                <div className="flex items-center gap-2">
-                  <FaUserMd className="h-5 w-5 text-primary" />
-                  <span className="text-sm font-medium text-primary">
-                    CONTACT OUR HEALTHCARE TEAM
-                  </span>
-                </div>
-                <h2 className="font-degular text-3xl font-bold leading-tight md:text-4xl lg:text-5xl">
-                  Let's Discuss Your Healthcare Technology Needs
+          <div className="rounded-2xl bg-gradient-to-r from-primary/10 to-secondary/10 p-6 md:p-10">
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+              <div>
+                <Badge className="mb-3 bg-primary/20 px-4 py-1 text-xs font-medium text-primary">
+                  GET IN TOUCH
+                </Badge>
+                <h2 className="mb-4 text-2xl font-bold md:text-3xl lg:text-4xl">
+                  Ready to Transform Your Healthcare Practice?
                 </h2>
-                <div className="flex flex-col gap-4">
-                  <Input
-                    type="text"
-                    placeholder="Name"
-                    className="h-12 rounded-lg border-border/60 bg-background/80 text-base backdrop-blur-sm focus:border-primary"
-                  />
-                  <Input
-                    type="email"
-                    placeholder="Email"
-                    className="h-12 rounded-lg border-border/60 bg-background/80 text-base backdrop-blur-sm focus:border-primary"
-                  />
-                  <Textarea
-                    placeholder="Tell us about your healthcare practice and technology needs"
-                    className="min-h-[120px] rounded-lg border-border/60 bg-background/80 text-base backdrop-blur-sm focus:border-primary"
-                  />
-                  <Button size="lg" className="mt-2 text-base font-medium">
-                    Request Healthcare Consultation
+                <p className="mb-6 text-base text-muted-foreground md:text-lg">
+                  Contact our healthcare technology experts today to discuss how
+                  our solutions can help improve patient care and practice
+                  efficiency.
+                </p>
+
+                <div className="space-y-3">
+                  <div className="flex items-center">
+                    <div className="mr-3 flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary md:h-10 md:w-10">
+                      <FaPhoneAlt className="h-3 w-3 md:h-4 md:w-4" />
+                    </div>
+                    <a
+                      href={`tel:${CONSTANTS.PHONE}`}
+                      className="text-base font-medium hover:text-primary md:text-lg"
+                    >
+                      {CONSTANTS.PHONE}
+                    </a>
+                  </div>
+
+                  <div className="flex items-center">
+                    <div className="mr-3 flex h-8 w-8 items-center justify-center rounded-full bg-secondary/10 text-secondary md:h-10 md:w-10">
+                      <FaEnvelope className="h-3 w-3 md:h-4 md:w-4" />
+                    </div>
+                    <a
+                      href={`mailto:${CONSTANTS.EMAIL}`}
+                      className="text-base font-medium hover:text-secondary md:text-lg"
+                    >
+                      {CONSTANTS.EMAIL}
+                    </a>
+                  </div>
+                </div>
+
+                <div className="mt-6 md:mt-8">
+                  <Button
+                    asChild
+                    size="lg"
+                    className="bg-primary text-white hover:bg-primary/90"
+                  >
+                    <Link href={ROUTES.CONTACT}>Schedule a Consultation</Link>
                   </Button>
                 </div>
               </div>
-              <div className="hidden md:flex md:items-center md:justify-center">
-                <Image
-                  src={ContactImage}
-                  alt="Healthcare Consultation"
-                  placeholder="blur"
-                  className="max-h-[500px] w-auto object-contain"
-                />
+
+              <div className="flex items-center justify-center">
+                <div className="border-6 relative h-56 w-56 overflow-hidden rounded-full border-white md:h-64 md:w-64 lg:h-72 lg:w-72">
+                  <Image
+                    src={Hero}
+                    alt="Healthcare Consultation"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
               </div>
             </div>
           </div>

@@ -2,7 +2,8 @@ import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Phone, Mail } from "lucide-react";
-import Logo from "../../public/images/logo.svg";
+// import Logo from "../../public/images/stardom-logo-footer.webp";
+import Logo from "../../public/images/download.png";
 import { ROUTES } from "@/lib/routes";
 import { Button } from "./ui/button";
 import {
@@ -24,129 +25,113 @@ import {
 import { getLatestThreeBlogs } from "@/lib/actions/blog";
 import { format } from "date-fns";
 import { CONSTANTS } from "@/static/Constants";
+import { BlogPost } from "@/types/blog";
 
-// Sample recent blog posts - in a real app, these would come from your CMS or API
-const recentBlogPosts = [
-  {
-    title: "10 Digital Marketing Strategies for Small Businesses in 2023",
-    href: `${ROUTES.BLOGS}/digital-marketing-strategies-2023`,
-    date: "June 15, 2023",
-  },
-  {
-    title: "How to Build a Strong Brand Identity for Your Small Business",
-    href: `${ROUTES.BLOGS}/build-strong-brand-identity`,
-    date: "May 28, 2023",
-  },
-  {
-    title: "The Ultimate Guide to E-commerce Success for Small Retailers",
-    href: `${ROUTES.BLOGS}/ecommerce-success-guide`,
-    date: "May 12, 2023",
-  },
-];
+const Sidebar = ({ latestBlogs }: { latestBlogs: BlogPost[] }) => {
+  return (
+    <Sheet>
+      <SheetTrigger aria-label="Open menu">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-6 w-6 text-gray-700"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M4 6h16M4 12h16m-7 6h7"
+          />
+        </svg>
+      </SheetTrigger>
+      <SheetContent className="flex w-[300px] flex-col">
+        <SheetHeader className="border-b pb-4">
+          <div className="flex items-center justify-center py-4">
+            <Image src={Logo} alt="Logo" className="h-8 w-auto" />
+          </div>
+        </SheetHeader>
 
-const Sidebar = () => (
-  <Sheet>
-    <SheetTrigger aria-label="Open menu">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-6 w-6 text-gray-700"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M4 6h16M4 12h16m-7 6h7"
-        />
-      </svg>
-    </SheetTrigger>
-    <SheetContent className="flex w-[300px] flex-col">
-      <SheetHeader className="border-b pb-4">
-        <div className="flex items-center justify-center py-4">
-          <Image src={Logo} alt="Logo" className="h-8 w-auto" />
+        {/* Contact Info */}
+        <div className="border-b py-4">
+          <div className="space-y-3 px-1">
+            <a
+              href={`tel:${CONSTANTS.PHONE}`}
+              className="flex items-center text-sm text-gray-600 hover:text-blue-600"
+            >
+              <Phone className="mr-3 h-4 w-4 text-blue-600" />
+              <span>{CONSTANTS.PHONE}</span>
+            </a>
+            <a
+              href={`mailto:${CONSTANTS.EMAIL}`}
+              className="flex items-center text-sm text-gray-600 hover:text-blue-600"
+            >
+              <Mail className="mr-3 h-4 w-4 text-blue-600" />
+              <span>{CONSTANTS.EMAIL}</span>
+            </a>
+          </div>
         </div>
-      </SheetHeader>
 
-      {/* Contact Info */}
-      <div className="border-b py-4">
-        <div className="space-y-3 px-1">
-          <a
-            href={`tel:${CONSTANTS.PHONE}`}
-            className="flex items-center text-sm text-gray-600 hover:text-blue-600"
-          >
-            <Phone className="mr-3 h-4 w-4 text-blue-600" />
-            <span>{CONSTANTS.PHONE}</span>
-          </a>
-          <a
-            href={`mailto:${CONSTANTS.EMAIL}`}
-            className="flex items-center text-sm text-gray-600 hover:text-blue-600"
-          >
-            <Mail className="mr-3 h-4 w-4 text-blue-600" />
-            <span>{CONSTANTS.EMAIL}</span>
-          </a>
+        {/* Navigation Links */}
+        <nav className="flex-1 overflow-auto py-6">
+          <ul className="space-y-4 px-1">
+            {[
+              { href: ROUTES.HOME, label: "Home" },
+              { href: ROUTES.ABOUT, label: "About Us" },
+              { href: ROUTES.SERVICES, label: "Services" },
+              { href: ROUTES.PORTFOLIO, label: "Work" },
+              { href: ROUTES.MISSION, label: "Mission" },
+              { href: ROUTES.CONTACT, label: "Contact Us" },
+              { href: ROUTES.BLOGS, label: "Blogs" },
+            ].map((item) => (
+              <li key={item.href}>
+                <SheetTrigger asChild>
+                  <Link
+                    href={item.href}
+                    className="flex w-full items-center rounded-md py-2 text-base font-medium text-gray-700 transition-colors hover:bg-gray-100 hover:text-blue-600"
+                  >
+                    {item.label}
+                  </Link>
+                </SheetTrigger>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        {/* Recent Blog Posts */}
+        <div className="border-b border-t py-4">
+          <h3 className="mb-3 px-1 text-sm font-semibold text-gray-500">
+            RECENT POSTS
+          </h3>
+          <ul className="space-y-3 px-1">
+            {latestBlogs.map((post) => (
+              <li key={post.id}>
+                <SheetTrigger asChild>
+                  <Link
+                    href={`${ROUTES.BLOGS}/${post.slug}`}
+                    className="block rounded-md py-1 text-sm text-gray-700 transition-colors hover:text-blue-600"
+                  >
+                    {post.title}
+                  </Link>
+                </SheetTrigger>
+              </li>
+            ))}
+          </ul>
         </div>
-      </div>
 
-      {/* Navigation Links */}
-      <nav className="flex-1 overflow-auto py-6">
-        <ul className="space-y-4 px-1">
-          {[
-            { href: ROUTES.HOME, label: "Home" },
-            { href: ROUTES.ABOUT, label: "About Us" },
-            { href: ROUTES.SERVICES, label: "Services" },
-            { href: ROUTES.PORTFOLIO, label: "Work" },
-            { href: ROUTES.MISSION, label: "Mission" },
-            { href: ROUTES.CONTACT, label: "Contact Us" },
-            { href: ROUTES.BLOGS, label: "Blogs" },
-          ].map((item) => (
-            <li key={item.href}>
-              <SheetTrigger asChild>
-                <Link
-                  href={item.href}
-                  className="flex w-full items-center rounded-md py-2 text-base font-medium text-gray-700 transition-colors hover:bg-gray-100 hover:text-blue-600"
-                >
-                  {item.label}
-                </Link>
-              </SheetTrigger>
-            </li>
-          ))}
-        </ul>
-      </nav>
-
-      {/* Recent Blog Posts */}
-      <div className="border-b border-t py-4">
-        <h3 className="mb-3 px-1 text-sm font-semibold text-gray-500">
-          RECENT POSTS
-        </h3>
-        <ul className="space-y-3 px-1">
-          {recentBlogPosts.map((post) => (
-            <li key={post.href}>
-              <SheetTrigger asChild>
-                <Link
-                  href={post.href}
-                  className="block rounded-md py-1 text-sm text-gray-700 transition-colors hover:text-blue-600"
-                >
-                  {post.title}
-                </Link>
-              </SheetTrigger>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {/* CTA Button */}
-      <div className="py-6">
-        <SheetTrigger asChild>
-          <Link href={ROUTES.CONTACT} className="block w-full">
-            <Button className="w-full">Schedule A Call</Button>
-          </Link>
-        </SheetTrigger>
-      </div>
-    </SheetContent>
-  </Sheet>
-);
+        {/* CTA Button */}
+        <div className="py-6">
+          <SheetTrigger asChild>
+            <Link href={ROUTES.CONTACT} className="block w-full">
+              <Button className="w-full">Schedule A Call</Button>
+            </Link>
+          </SheetTrigger>
+        </div>
+      </SheetContent>
+    </Sheet>
+  );
+};
 
 // Custom ListItem component for navigation menu
 const ListItem = React.forwardRef<
@@ -235,7 +220,11 @@ export default async function Navbar() {
           {/* Logo/Branding (Left Section) */}
           <div className="flex items-center">
             <Link href={ROUTES.HOME} className="flex items-center">
-              <Image src={Logo} alt="Logo" className="h-8 w-auto" />
+              <Image
+                src={Logo}
+                alt="Logo"
+                className="h-8 w-auto invert filter"
+              />
             </Link>
           </div>
 
@@ -343,7 +332,7 @@ export default async function Navbar() {
               </Link>
             </div>
             <div className="md:hidden">
-              <Sidebar />
+              <Sidebar latestBlogs={latestBlogs as BlogPost[]} />
             </div>
           </div>
         </div>
