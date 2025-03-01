@@ -1,24 +1,6 @@
-import React from "react";
-import Link from "next/link";
-import { ROUTES } from "@/lib/routes";
-import {
-  FaHospital,
-  FaLaptopMedical,
-  FaHeartbeat,
-  FaUserMd,
-  FaClinicMedical,
-  FaHandHoldingMedical,
-  FaQuoteRight,
-  FaBriefcaseMedical,
-  FaUsers,
-  FaAward,
-  FaChartLine,
-  FaFileMedical,
-  FaStethoscope,
-  FaHospitalUser,
-  FaTablets,
-  FaFlask,
-} from "react-icons/fa";
+import { CaseStudyCard } from "@/components/case-study-card";
+import { TestimonialCard } from "@/components/testimonial-card";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -27,7 +9,21 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { ROUTES } from "@/lib/routes";
+import Link from "next/link";
+import {
+  FaAward,
+  FaChartLine,
+  FaClinicMedical,
+  FaFileMedical,
+  FaHandHoldingMedical,
+  FaHeartbeat,
+  FaHospital,
+  FaHospitalUser,
+  FaLaptopMedical,
+  FaQuoteRight,
+  FaUserMd,
+} from "react-icons/fa";
 
 export const metadata = {
   title: "Case Studies | Healthcare Solutions Provider",
@@ -189,62 +185,7 @@ export default function PortfolioPage() {
       <section className="mb-20">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {portfolioItems.map((item) => (
-            <Card key={item.id} className="overflow-hidden">
-              <CardHeader className={`${item.color}`}>
-                <div className="flex items-center justify-between">
-                  <item.icon className="h-10 w-10" />
-                  <Badge variant="outline" className="bg-white/30">
-                    Case Study
-                  </Badge>
-                </div>
-                <CardTitle className="mt-4 text-2xl">{item.title}</CardTitle>
-              </CardHeader>
-
-              <CardContent className="p-6">
-                <Badge className="mb-3 bg-muted text-foreground hover:bg-muted">
-                  {item.category}
-                </Badge>
-                <p className="mb-6 text-foreground">{item.description}</p>
-                <h4 className="mb-3 font-semibold">Outcomes:</h4>
-                <ul className="space-y-2">
-                  {item.results.map((result, index) => (
-                    <li key={index} className="flex items-start">
-                      <span
-                        className={`mr-2 mt-1 flex h-4 w-4 items-center justify-center rounded-full ${item.color.split(" ")[1]} text-xs`}
-                      >
-                        ✓
-                      </span>
-                      <span className="text-foreground">{result}</span>
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-              <CardFooter className="justify-end p-6 pt-0">
-                <Button
-                  asChild
-                  variant="link"
-                  className={`${item.color.split(" ")[1]} p-0`}
-                >
-                  <Link href={`${ROUTES.PORTFOLIO}/${item.slug}`}>
-                    View Full Case Study
-                    <svg
-                      className="ml-1 h-4 w-4"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M9 5l7 7-7 7"
-                      ></path>
-                    </svg>
-                  </Link>
-                </Button>
-              </CardFooter>
-            </Card>
+            <CaseStudyCard key={item.id} item={item} showResults />
           ))}
         </div>
       </section>
@@ -313,27 +254,7 @@ export default function PortfolioPage() {
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
           {testimonials.map((testimonial, index) => (
-            <Card key={index} className="border-primary/20 bg-accent">
-              <CardContent className="p-8">
-                <div className="mb-6 flex justify-center">
-                  <FaQuoteRight className="h-10 w-10 text-primary/30" />
-                </div>
-                <p className="mb-6 text-center italic text-foreground">
-                  "{testimonial.quote}"
-                </p>
-                <div className="flex items-center justify-center">
-                  <div className="mr-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
-                    <span className="text-lg">👨‍⚕️</span>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold">{testimonial.name}</h3>
-                    <p className="text-sm text-muted-foreground">
-                      {testimonial.position}
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+            <TestimonialCard key={index} testimonial={testimonial} />
           ))}
         </div>
       </section>

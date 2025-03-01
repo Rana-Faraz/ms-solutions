@@ -14,7 +14,8 @@
     "db:pull": "drizzle-kit introspect",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
-    "db:check": "drizzle-kit check"
+    "db:check": "drizzle-kit check",
+    "db:run-migrations": "tsx src/lib/db/migrations/run-migrations.ts"
   },
   "dependencies": {
     "@better-fetch/fetch": "^1.1.15",
@@ -42,6 +43,7 @@
     "@radix-ui/react-toggle-group": "^1.1.2",
     "@radix-ui/react-tooltip": "^1.1.8",
     "@tanstack/react-table": "^8.21.2",
+    "@tanstack/react-virtual": "^3.13.2",
     "@tiptap/extension-code-block-lowlight": "^2.11.5",
     "@tiptap/extension-color": "^2.11.5",
     "@tiptap/extension-font-family": "^2.11.5",
@@ -102,6 +104,7 @@
     "prettier-plugin-tailwindcss": "^0.5.14",
     "tailwindcss": "^3.4.1",
     "tailwindcss-view-transitions": "^0.1.1",
+    "tsx": "^4.19.3",
     "typescript": "^5"
   },
   "pnpm": {

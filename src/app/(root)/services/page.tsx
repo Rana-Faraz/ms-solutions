@@ -25,100 +25,14 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import ServicesCard from "@/components/services-card";
+import { getPublicServices } from "@/app/(admin)/admin/services/_actions/service-actions";
 
 export const metadata = {
   title: "Medical Services | Healthcare Solutions Provider",
   description:
     "Explore our comprehensive range of healthcare services designed to help medical practices improve patient care and operational efficiency.",
 };
-
-// Service data with icons
-const services = [
-  {
-    id: 1,
-    title: "Electronic Health Records",
-    description:
-      "Streamlined EHR solutions that improve clinical documentation, enhance patient care, and ensure regulatory compliance.",
-    icon: FaFileMedical,
-    color: "bg-primary/10 text-primary",
-    features: [
-      "Customized EHR Implementation",
-      "Legacy System Migration",
-      "Interoperability Solutions",
-      "Regulatory Compliance (HIPAA, MACRA)",
-    ],
-  },
-  {
-    id: 2,
-    title: "Telehealth Services",
-    description:
-      "Secure, user-friendly telehealth platforms that expand your practice's reach and improve patient access to care.",
-    icon: FaLaptopMedical,
-    color: "bg-secondary/10 text-secondary",
-    features: [
-      "Virtual Visit Platform",
-      "Remote Patient Monitoring",
-      "Secure Messaging Systems",
-      "Mobile Health Applications",
-    ],
-  },
-  {
-    id: 3,
-    title: "Practice Management",
-    description:
-      "Comprehensive practice management solutions to optimize workflows, improve efficiency, and enhance the patient experience.",
-    icon: FaClinicMedical,
-    color: "bg-primary/10 text-primary",
-    features: [
-      "Scheduling Optimization",
-      "Revenue Cycle Management",
-      "Staff Training & Development",
-      "Operational Efficiency Analysis",
-    ],
-  },
-  {
-    id: 4,
-    title: "Patient Engagement",
-    description:
-      "Tools and strategies to enhance patient communication, satisfaction, and involvement in their healthcare journey.",
-    icon: FaHospitalUser,
-    color: "bg-secondary/10 text-secondary",
-    features: [
-      "Patient Portal Implementation",
-      "Automated Appointment Reminders",
-      "Patient Education Resources",
-      "Satisfaction Survey Systems",
-    ],
-  },
-  {
-    id: 5,
-    title: "Healthcare Analytics",
-    description:
-      "Data-driven insights to improve clinical outcomes, operational efficiency, and financial performance.",
-    icon: FaChartBar,
-    color: "bg-primary/10 text-primary",
-    features: [
-      "Clinical Outcomes Analysis",
-      "Population Health Management",
-      "Financial Performance Metrics",
-      "Customized Reporting Dashboards",
-    ],
-  },
-  {
-    id: 6,
-    title: "Medical Compliance",
-    description:
-      "Expert guidance and solutions to ensure your practice meets all regulatory requirements and industry standards.",
-    icon: FaBriefcaseMedical,
-    color: "bg-secondary/10 text-secondary",
-    features: [
-      "HIPAA Compliance Audits",
-      "Policy & Procedure Development",
-      "Staff Compliance Training",
-      "Risk Assessment & Management",
-    ],
-  },
-];
 
 // FAQ data
 const faqItems = [
@@ -155,7 +69,25 @@ const faqItems = [
   },
 ];
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const { services, error } = await getPublicServices();
+
+  if (error || !services) {
+    console.error("Error loading services:", error);
+    return (
+      <div className="container py-12">
+        <div className="text-center">
+          <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+            Our Services
+          </h1>
+          <p className="mt-4 text-xl text-muted-foreground">
+            We're currently updating our services. Please check back soon.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <main className="container mx-auto px-4 py-16">
       {/* Hero Section */}
@@ -176,65 +108,8 @@ export default function ServicesPage() {
       {/* Services Grid with Cards */}
       <section className="mb-20">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {services.map((service) => (
-            <Card
-              key={service.id}
-              className="overflow-hidden transition-all duration-300"
-            >
-              <CardHeader className={`${service.color}`}>
-                <div className="flex items-center justify-between">
-                  <service.icon className="h-10 w-10" />
-                  <Badge variant="outline" className="bg-white/30">
-                    Medical Service
-                  </Badge>
-                </div>
-                <CardTitle className="mt-4 text-2xl">{service.title}</CardTitle>
-              </CardHeader>
-
-              <CardContent className="p-6">
-                <p className="mb-6 text-foreground">{service.description}</p>
-                <h4 className="mb-3 font-semibold">Key Features:</h4>
-                <ul className="space-y-2">
-                  {service.features.map((feature, index) => (
-                    <li key={index} className="flex items-start">
-                      <span
-                        className={`mr-2 mt-1 flex h-4 w-4 items-center justify-center rounded-full ${service.color.split(" ")[1]} text-xs`}
-                      >
-                        ✓
-                      </span>
-                      <span className="text-foreground">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-              <CardFooter className="justify-end p-6 pt-0">
-                <Button
-                  asChild
-                  variant="link"
-                  className={`${service.color.split(" ")[1]} p-0`}
-                >
-                  <Link
-                    href={`${ROUTES.SERVICES}/${service.title.toLowerCase().replace(/\s+/g, "-")}`}
-                  >
-                    Learn more
-                    <svg
-                      className="ml-1 h-4 w-4"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M9 5l7 7-7 7"
-                      ></path>
-                    </svg>
-                  </Link>
-                </Button>
-              </CardFooter>
-            </Card>
+          {services.map((service, index) => (
+            <ServicesCard key={service.id} service={service} index={index} />
           ))}
         </div>
       </section>

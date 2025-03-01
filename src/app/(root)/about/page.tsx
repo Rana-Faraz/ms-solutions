@@ -1,92 +1,30 @@
-import React from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { ROUTES } from "@/lib/routes";
-import {
-  FaUsers,
-  FaLightbulb,
-  FaHandshake,
-  FaLeaf,
-  FaRocket,
-  FaChartLine,
-  FaBuilding,
-  FaHistory,
-  FaAward,
-  FaHeart,
-  FaCalendarAlt,
-  FaMapMarkerAlt,
-  FaStethoscope,
-  FaHospital,
-  FaUserMd,
-  FaClinicMedical,
-  FaHeartbeat,
-  FaBriefcaseMedical,
-  FaFlask,
-  FaMicroscope,
-  FaHandHoldingMedical,
-  FaShieldAlt,
-  FaQuoteLeft,
-} from "react-icons/fa";
-import { MdEmail, MdPhone, MdLocationOn } from "react-icons/md";
+import { getTeamMembers } from "@/app/(admin)/admin/team/_actions/team-actions";
+import { StatsSection } from "@/components/stats-section";
+import { TeamMemberCard } from "@/components/team-member-card";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ROUTES } from "@/lib/routes";
+import { CONSTANTS, MILESTONES } from "@/static/Constants";
+import Link from "next/link";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { CONSTANTS } from "@/static/Constants";
+  FaChartLine,
+  FaHandHoldingMedical,
+  FaHandshake,
+  FaHeart,
+  FaHeartbeat,
+  FaHospital,
+  FaQuoteLeft,
+  FaShieldAlt,
+  FaStethoscope,
+  FaUserMd,
+} from "react-icons/fa";
+import { MdEmail, MdLocationOn, MdPhone } from "react-icons/md";
 
 export const metadata = {
   title: "About Us | Medical Solutions Provider",
   description:
     "Learn about our healthcare team, our mission, and how we help medical practices and healthcare providers deliver better patient care.",
 };
-
-// Team members data
-const teamMembers = [
-  {
-    name: "Dr. Jane Smith",
-    position: "Chief Medical Officer",
-    bio: "Board-certified physician with 15+ years of experience in healthcare management and clinical excellence.",
-    image: "/placeholder.jpg",
-    social: {
-      linkedin: "#",
-      twitter: "#",
-    },
-  },
-  {
-    name: "Dr. Michael Chen",
-    position: "Medical Director",
-    bio: "Specialist in healthcare systems optimization with a focus on improving patient outcomes and clinical workflows.",
-    image: "/placeholder.jpg",
-    social: {
-      linkedin: "#",
-      twitter: "#",
-    },
-  },
-  {
-    name: "Sarah Johnson",
-    position: "Healthcare IT Specialist",
-    bio: "Expert in medical software implementation and electronic health record systems for modern practices.",
-    image: "/placeholder.jpg",
-    social: {
-      linkedin: "#",
-      github: "#",
-    },
-  },
-  {
-    name: "Robert Williams",
-    position: "Patient Experience Consultant",
-    bio: "Dedicated to enhancing patient satisfaction and streamlining healthcare delivery processes.",
-    image: "/placeholder.jpg",
-    social: {
-      linkedin: "#",
-    },
-  },
-];
 
 // Company values data
 const values = [
@@ -134,48 +72,21 @@ const values = [
   },
 ];
 
-// Company milestones
-const milestones = [
-  {
-    year: "2015",
-    title: "Founded",
-    description:
-      "Established with a mission to improve healthcare delivery through innovative solutions.",
-  },
-  {
-    year: "2017",
-    title: "EHR Integration",
-    description:
-      "Developed our first electronic health record integration system for small practices.",
-  },
-  {
-    year: "2019",
-    title: "Telehealth Platform",
-    description:
-      "Launched our telehealth platform to help providers reach patients remotely.",
-  },
-  {
-    year: "2021",
-    title: "100th Healthcare Client",
-    description:
-      "Celebrated helping our 100th healthcare provider improve patient care.",
-  },
-  {
-    year: "2023",
-    title: "Healthcare Innovation Award",
-    description:
-      "Recognized for excellence in healthcare technology solutions.",
-  },
-];
+export default async function AboutPage() {
+  const { data: teamMembers, error } = await getTeamMembers({
+    limit: 8,
+    offset: 0,
+    sort: "createdAt.desc",
+  });
 
-export default function AboutPage() {
+  if (error) {
+    console.error(error);
+  }
+
   return (
     <main className="overflow-hidden">
       {/* Hero Section with Gradient Background */}
       <section className="relative bg-gradient-to-r from-primary to-secondary py-20 text-white">
-        <div className="absolute inset-0 opacity-10">
-          <div className="h-full w-full bg-[url('/grid-pattern.svg')] bg-center"></div>
-        </div>
         <div className="container relative mx-auto px-4">
           <div className="mx-auto max-w-3xl text-center">
             <h1 className="mb-6 text-4xl font-bold md:text-5xl">
@@ -249,7 +160,7 @@ export default function AboutPage() {
               </p>
 
               <div className="mt-8 flex flex-wrap gap-4">
-                {milestones.map((milestone, index) => (
+                {MILESTONES.map((milestone, index) => (
                   <div key={index} className="flex items-start">
                     <div className="mr-2 rounded-full bg-primary/10 px-3 py-1 text-sm font-bold text-primary">
                       {milestone.year}
@@ -325,77 +236,14 @@ export default function AboutPage() {
           </div>
 
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {teamMembers.map((member, index) => (
-              <Card key={index} className="overflow-hidden">
-                <div className="aspect-square overflow-hidden bg-muted">
-                  {/* Replace with actual team member image */}
-                  <div className="flex h-full w-full items-center justify-center text-muted-foreground">
-                    <span className="text-6xl">👨‍⚕️</span>
-                  </div>
-                </div>
-                <CardHeader>
-                  <CardTitle className="text-xl">{member.name}</CardTitle>
-                  <CardDescription className="text-primary">
-                    {member.position}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-foreground">{member.bio}</p>
-                </CardContent>
-                <CardFooter>
-                  <div className="flex space-x-3">
-                    {Object.entries(member.social).map(
-                      ([platform, url], idx) => (
-                        <a
-                          key={idx}
-                          href={url}
-                          className="rounded-full bg-primary/10 p-2 text-primary"
-                          aria-label={`${member.name}'s ${platform}`}
-                        >
-                          <span className="text-xs font-medium capitalize">
-                            {platform}
-                          </span>
-                        </a>
-                      ),
-                    )}
-                  </div>
-                </CardFooter>
-              </Card>
+            {teamMembers?.records.map((member, index) => (
+              <TeamMemberCard key={index} member={member} />
             ))}
           </div>
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section
-        className="bg-primary py-16 text-white"
-        aria-labelledby="our-impact"
-      >
-        <div className="container mx-auto px-4">
-          <h2 id="our-impact" className="sr-only">
-            Our Healthcare Impact
-          </h2>
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4">
-            {[
-              { number: "500+", label: "Healthcare Providers", icon: FaUserMd },
-              { number: "8+", label: "Years in Healthcare", icon: FaAward },
-              {
-                number: "30+",
-                label: "Medical Specialties",
-                icon: FaBriefcaseMedical,
-              },
-              { number: "98%", label: "Client Satisfaction", icon: FaHeart },
-            ].map((stat, index) => (
-              <div key={index} className="text-center">
-                <stat.icon className="mx-auto mb-4 h-10 w-10 text-primary-foreground/80" />
-                <div className="text-4xl font-bold">{stat.number}</div>
-                <div className="text-primary-foreground/80">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
+      <StatsSection />
       {/* Testimonials Section */}
       <section className="bg-accent/50 py-20" aria-labelledby="testimonials">
         <div className="container mx-auto px-4">

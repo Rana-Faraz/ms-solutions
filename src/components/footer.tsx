@@ -8,7 +8,6 @@ import {
 } from "lucide-react";
 // import Logo from "../../public/images/logo.svg";
 import Logo from "../../public/images/stardom-logo-footer.webp";
-
 import Image from "next/image";
 import Services from "@/static/services.json";
 import { ROUTES } from "@/lib/routes";

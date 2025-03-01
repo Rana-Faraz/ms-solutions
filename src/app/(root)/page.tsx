@@ -1,3 +1,5 @@
+import { StatsSection } from "@/components/stats-section";
+import { TestimonialCard } from "@/components/testimonial-card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -125,13 +127,13 @@ const testimonials = [
   {
     quote:
       "Implementing their EHR solution has transformed our practice. Patient wait times have decreased by 30%, documentation is more efficient, and our providers can focus more on patient care rather than paperwork.",
-    author: "Dr. Rebecca Chen",
+    name: "Dr. Rebecca Chen",
     position: "Medical Director, Westside Family Practice",
   },
   {
     quote:
       "The telehealth platform has allowed us to expand our reach and provide care to patients who previously had difficulty accessing our services. The implementation was smooth and the ongoing support is exceptional.",
-    author: "Dr. Michael Johnson",
+    name: "Dr. Michael Johnson",
     position: "Chief of Cardiology, Metro Heart Center",
   },
 ];
@@ -177,7 +179,7 @@ export default function Home() {
                 asChild
                 variant="outline"
                 size="lg"
-                className="w-full border-white bg-transparent text-white hover:bg-white/10 sm:w-auto"
+                className="w-full sm:w-auto"
               >
                 <Link href={ROUTES.SERVICES}>Explore Our Services</Link>
               </Button>
@@ -187,60 +189,11 @@ export default function Home() {
 
         {/* Floating Stats */}
       </section>
-      <div className="container mx-auto p-6">
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-          <Card className="border-primary/20 bg-white/95 backdrop-blur-sm">
-            <CardContent className="flex items-center p-4 md:p-6">
-              <div className="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary md:h-12 md:w-12">
-                <FaHeartbeat className="h-5 w-5 md:h-6 md:w-6" />
-              </div>
-              <div>
-                <p className="text-xl font-bold text-primary md:text-2xl">
-                  98%
-                </p>
-                <p className="text-xs text-muted-foreground md:text-sm">
-                  Patient Satisfaction
-                </p>
-              </div>
-            </CardContent>
-          </Card>
 
-          <Card className="border-secondary/20 bg-white/95 backdrop-blur-sm">
-            <CardContent className="flex items-center p-4 md:p-6">
-              <div className="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-secondary/10 text-secondary md:h-12 md:w-12">
-                <FaStethoscope className="h-5 w-5 md:h-6 md:w-6" />
-              </div>
-              <div>
-                <p className="text-xl font-bold text-secondary md:text-2xl">
-                  500+
-                </p>
-                <p className="text-xs text-muted-foreground md:text-sm">
-                  Healthcare Providers
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-primary/20 bg-white/95 backdrop-blur-sm sm:col-span-2 md:col-span-1">
-            <CardContent className="flex items-center p-4 md:p-6">
-              <div className="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary md:h-12 md:w-12">
-                <FaHospital className="h-5 w-5 md:h-6 md:w-6" />
-              </div>
-              <div>
-                <p className="text-xl font-bold text-primary md:text-2xl">
-                  15+
-                </p>
-                <p className="text-xs text-muted-foreground md:text-sm">
-                  Years of Experience
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
+      <StatsSection />
 
       {/* Services Section with Cards */}
-      <section id="services" className="py-4 ">
+      <section id="services" className="py-16 ">
         <div className="container mx-auto px-4">
           <div className="mb-10 text-center md:mb-16">
             <Badge className="mb-3 bg-primary/10 px-4 py-1 text-xs font-medium text-primary">
@@ -356,22 +309,7 @@ export default function Home() {
 
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {testimonials.map((testimonial, index) => (
-              <Card key={index} className="border-primary/20 bg-primary/5">
-                <CardContent className="p-6">
-                  <div className="mb-4 flex justify-center">
-                    <FaStethoscope className="h-10 w-10 text-primary" />
-                  </div>
-                  <p className="mb-4 text-center text-base italic text-foreground md:text-lg">
-                    "{testimonial.quote}"
-                  </p>
-                  <div className="text-center">
-                    <p className="font-semibold">{testimonial.author}</p>
-                    <p className="text-sm text-muted-foreground">
-                      {testimonial.position}
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
+              <TestimonialCard key={index} testimonial={testimonial} />
             ))}
           </div>
         </div>

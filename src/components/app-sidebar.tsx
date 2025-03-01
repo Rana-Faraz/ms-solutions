@@ -1,6 +1,6 @@
 "use client";
 
-import { SquareTerminal } from "lucide-react";
+import { SquareTerminal, Users, Plus } from "lucide-react";
 import * as React from "react";
 
 import { NavMain } from "@/components/nav-main";
@@ -19,6 +19,16 @@ const data = {
       title: "Blogs",
       url: "/admin/blogs",
       icon: SquareTerminal,
+    },
+    {
+      title: "Team",
+      url: "/admin/team",
+      icon: Users,
+    },
+    {
+      title: "Services",
+      url: "/admin/services",
+      icon: Plus,
     },
   ],
 };
