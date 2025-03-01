@@ -37,7 +37,7 @@ export function ContactFaq() {
   return (
     <div className="col-span-1 p-6 md:col-span-2">
       <div className="mb-6 flex items-center">
-        <FaQuestionCircle className="mr-3 h-6 w-6 text-blue-600" />
+        <FaQuestionCircle className="mr-3 h-6 w-6 text-primary" />
         <h3 className="text-xl font-semibold">Frequently Asked Questions</h3>
       </div>
 

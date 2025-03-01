@@ -77,7 +77,7 @@ export function ContactForm() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="flex items-center gap-2">
-                  <FaUser className="text-blue-600" /> Your Name
+                  Your Name
                 </FormLabel>
                 <FormControl>
                   <Input placeholder="John Doe" {...field} />
@@ -94,7 +94,7 @@ export function ContactForm() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="flex items-center gap-2">
-                  <FaEnvelope className="text-blue-600" /> Your Email
+                  Your Email
                 </FormLabel>
                 <FormControl>
                   <Input placeholder="john@example.com" {...field} />
@@ -111,9 +111,7 @@ export function ContactForm() {
           name="subject"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="flex items-center gap-2">
-                <FaTag className="text-blue-600" /> Subject
-              </FormLabel>
+              <FormLabel className="flex items-center gap-2">Subject</FormLabel>
               <FormControl>
                 <Input placeholder="How can we help you?" {...field} />
               </FormControl>
@@ -128,9 +126,7 @@ export function ContactForm() {
           name="message"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="flex items-center gap-2">
-                <FaComment className="text-blue-600" /> Message
-              </FormLabel>
+              <FormLabel className="flex items-center gap-2">Message</FormLabel>
               <FormControl>
                 <Textarea
                   placeholder="Tell us about your project or inquiry..."
@@ -149,7 +145,6 @@ export function ContactForm() {
           disabled={form.formState.isSubmitting}
         >
           <span>Send Message</span>
-          <FaPaperPlane className="transition-transform group-hover:translate-x-1" />
           {form.formState.isSubmitting && (
             <span className="ml-2 inline-block h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent"></span>
           )}

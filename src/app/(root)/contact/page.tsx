@@ -1,26 +1,18 @@
-import React from "react";
-import { Mail, Phone, MapPin } from "lucide-react";
-import { ContactForm } from "@/components/ContactForm";
 import { ContactFaq } from "@/components/ContactFaq";
-import Link from "next/link";
-import { ROUTES } from "@/lib/routes";
-import {
-  FaHeadset,
-  FaRegClock,
-  FaStethoscope,
-  FaUserMd,
-  FaHospital,
-  FaClinicMedical,
-  FaCalendarAlt,
-  FaPhoneAlt,
-  FaEnvelope,
-  FaMapMarkerAlt,
-  FaLaptopMedical,
-  FaHeartbeat,
-} from "react-icons/fa";
+import { ContactForm } from "@/components/ContactForm";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ROUTES } from "@/lib/routes";
 import { CONSTANTS } from "@/static/Constants";
+import Link from "next/link";
+import {
+  FaEnvelope,
+  FaHeartbeat,
+  FaMapMarkerAlt,
+  FaPhoneAlt,
+  FaRegClock,
+  FaStethoscope,
+} from "react-icons/fa";
 
 export const metadata = {
   title: "Contact Us | Healthcare Solutions Provider",
