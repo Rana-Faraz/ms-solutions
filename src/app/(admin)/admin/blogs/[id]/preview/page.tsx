@@ -1,12 +1,11 @@
-import { auth } from "@/auth";
-import { headers } from "next/headers";
-import { redirect, notFound } from "next/navigation";
-import { BlogPreviewActions } from "../../_components/blog-preview-actions";
-import { BlogPreviewContent } from "../../_components/blog-preview-content";
-import { getBlogPostById } from "../../_actions/blog-actions";
 import { Separator } from "@/components/ui/separator";
+import { getBlogPosts } from "@/lib/actions/blog";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
+import { notFound } from "next/navigation";
+import { getBlogPostById } from "../../_actions/blog-actions";
+import { BlogPreviewActions } from "../../_components/blog-preview-actions";
+import { BlogPreviewContent } from "../../_components/blog-preview-content";
 
 interface BlogPreviewPageProps {
   params: Promise<{
@@ -23,16 +22,6 @@ export default async function BlogPreviewPage({
   params,
 }: BlogPreviewPageProps) {
   const { id } = await params;
-
-  // Verify user is authenticated
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-
-  // Redirect if not authenticated
-  if (!session?.user) {
-    redirect("/login?callbackUrl=/admin/blogs");
-  }
 
   // Fetch the blog post
   const { post, error } = await getBlogPostById(id);
@@ -83,3 +72,19 @@ export default async function BlogPreviewPage({
     </div>
   );
 }
+
+export async function generateStaticParams() {
+  const blogs = await getBlogPosts({
+    limit: 100,
+    offset: 0,
+  });
+
+  if (blogs.error || !blogs.data) {
+    return [];
+  }
+  return blogs.data.records.map((blog) => ({
+    id: blog.id,
+  }));
+}
+
+export const dynamicParams = true;

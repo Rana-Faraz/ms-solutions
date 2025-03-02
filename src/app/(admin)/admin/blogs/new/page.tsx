@@ -27,7 +27,7 @@ export default async function NewBlogPage() {
         </p>
       </div>
 
-      <NewBlogForm userId={session.user.id} />
+      <NewBlogForm />
     </div>
   );
 }

@@ -1,12 +1,10 @@
-import { Metadata } from "next";
-import { getServiceById } from "../../_actions/service-actions";
-import { auth } from "@/auth";
-import { headers } from "next/headers";
-import { notFound } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { ArrowLeftIcon } from "@radix-ui/react-icons";
 import ServiceDetailPage from "@/app/(root)/services/[slug]/page";
+import { Button } from "@/components/ui/button";
+import { ArrowLeftIcon } from "@radix-ui/react-icons";
+import { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { getServiceById, getServices } from "../../_actions/service-actions";
 
 export const metadata: Metadata = {
   title: "Service Preview",
@@ -21,20 +19,6 @@ export default async function ServicePreviewPage({
   params,
 }: ServicePreviewPageProps) {
   const { id } = await params;
-  // Verify authentication
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-
-  if (!session?.user) {
-    return (
-      <div className="flex h-[50vh] w-full flex-col items-center justify-center space-y-2">
-        <div className="text-center text-lg font-medium">
-          You need to be logged in to access this page.
-        </div>
-      </div>
-    );
-  }
 
   // Get service data
   const { service, error } = await getServiceById(id);
@@ -71,3 +55,18 @@ export default async function ServicePreviewPage({
     </div>
   );
 }
+
+export async function generateStaticParams() {
+  const services = await getServices({
+    limit: 100,
+    offset: 0,
+  });
+  if (services.error || !services.data) {
+    return [];
+  }
+  return services.data.records.map((service) => ({
+    id: service.id,
+  }));
+}
+
+export const dynamicParams = true;

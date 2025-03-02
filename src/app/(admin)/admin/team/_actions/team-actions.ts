@@ -131,9 +131,6 @@ export async function deleteTeamMember(id: string) {
  */
 export async function getTeamMemberById(id: string) {
   try {
-    // Verify authentication
-    await verifyAuthentication();
-
     // Get the team member
     const result = await db
       .select()

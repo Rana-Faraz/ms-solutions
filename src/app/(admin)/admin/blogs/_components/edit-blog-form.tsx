@@ -8,10 +8,9 @@ import { updateBlogPost } from "../_actions/blog-actions";
 
 interface EditBlogFormProps {
   blog: BlogPost;
-  userId: string;
 }
 
-export function EditBlogForm({ blog, userId }: EditBlogFormProps) {
+export function EditBlogForm({ blog }: EditBlogFormProps) {
   const router = useRouter();
 
   const defaultValues = {
@@ -55,7 +54,6 @@ export function EditBlogForm({ blog, userId }: EditBlogFormProps) {
 
   return (
     <NewBlogForm
-      userId={userId}
       defaultValues={defaultValues}
       onSubmit={handleSubmit}
       submitLabel="Update Post"

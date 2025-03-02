@@ -1,6 +1,6 @@
 "use client";
 
-import { SquareTerminal, Users, Plus } from "lucide-react";
+import { SquareTerminal, Users, Plus, Home } from "lucide-react";
 import * as React from "react";
 
 import { NavMain } from "@/components/nav-main";
@@ -15,6 +15,11 @@ import {
 // This is sample data.
 const data = {
   navMain: [
+    {
+      title: "Dashboard",
+      url: "/admin",
+      icon: Home,
+    },
     {
       title: "Blogs",
       url: "/admin/blogs",

@@ -152,7 +152,7 @@ export const BlogColumns: ColumnDef<BlogPost>[] = [
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
-              <Link href={`/blog/${post.slug}`} target="_blank">
+              <Link href={`/blogs/${post.slug}`} target="_blank">
                 <ExternalLink className="mr-2 h-4 w-4" />
                 View Live
               </Link>

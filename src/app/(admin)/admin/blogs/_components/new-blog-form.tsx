@@ -109,7 +109,6 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 export interface NewBlogFormProps {
-  userId: string;
   defaultValues?: {
     title: string;
     slug: string;
@@ -129,7 +128,6 @@ export interface NewBlogFormProps {
 }
 
 export function NewBlogForm({
-  userId,
   defaultValues,
   onSubmit: customSubmit,
   submitLabel = "Create Post",
@@ -184,7 +182,6 @@ export function NewBlogForm({
 
       const result = await createBlogPost({
         ...values,
-        authorId: userId,
         content: JSON.stringify(values.content),
       });
 

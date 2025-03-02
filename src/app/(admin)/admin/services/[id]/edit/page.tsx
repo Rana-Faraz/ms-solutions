@@ -1,9 +1,7 @@
 import { Metadata } from "next";
-import { ServiceForm } from "../../_components/service-form";
-import { getServiceById } from "../../_actions/service-actions";
-import { auth } from "@/auth";
-import { headers } from "next/headers";
 import { notFound } from "next/navigation";
+import { getServiceById, getServices } from "../../_actions/service-actions";
+import { ServiceForm } from "../../_components/service-form";
 
 export const metadata: Metadata = {
   title: "Edit Service",
@@ -18,20 +16,6 @@ export default async function EditServicePage({
   params,
 }: EditServicePageProps) {
   const { id } = await params;
-  // Verify authentication
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-
-  if (!session?.user) {
-    return (
-      <div className="flex h-[50vh] w-full flex-col items-center justify-center space-y-2">
-        <div className="text-center text-lg font-medium">
-          You need to be logged in to access this page.
-        </div>
-      </div>
-    );
-  }
 
   // Get service data
   const { service, error } = await getServiceById(id);
@@ -55,3 +39,18 @@ export default async function EditServicePage({
     </div>
   );
 }
+
+export async function generateStaticParams() {
+  const services = await getServices({
+    limit: 100,
+    offset: 0,
+  });
+  if (services.error || !services.data) {
+    return [];
+  }
+  return services.data.records.map((service) => ({
+    id: service.id,
+  }));
+}
+
+export const dynamicParams = true;
