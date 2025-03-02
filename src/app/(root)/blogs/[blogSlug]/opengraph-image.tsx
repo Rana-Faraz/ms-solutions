@@ -1,7 +1,6 @@
 import { getBlogPostById } from "@/app/(admin)/admin/blogs/_actions/blog-actions";
 import { ImageResponse } from "next/og";
 
-export const runtime = "edge";
 export const alt = "Blog Post Preview";
 export const size = {
   width: 1200,
@@ -9,7 +8,7 @@ export const size = {
 };
 export const contentType = "image/png";
 
-export async function GET({
+export default async function Image({
   params,
 }: {
   params: Promise<{ blogSlug: string }>;
