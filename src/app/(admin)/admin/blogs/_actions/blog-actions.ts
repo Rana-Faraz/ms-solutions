@@ -34,7 +34,6 @@ interface CreateBlogPostParams {
   readTime?: number;
   isPublished: boolean;
   allowIndexing: boolean;
-  authorId: string;
   categories: string[];
   tags: string[];
 }
@@ -237,11 +236,6 @@ export async function createBlogPost(params: CreateBlogPostParams) {
       "Unauthorized. Please log in to create a blog post.",
     );
 
-    // Check if the user is the same as the authorId
-    if (session.user.id !== params.authorId) {
-      return { error: "You can only create posts as yourself." };
-    }
-
     // Check if slug already exists
     const existingPost = await db.query.blogPost.findFirst({
       where: (post, { eq }) => eq(post.slug, params.slug),
@@ -285,7 +279,7 @@ export async function createBlogPost(params: CreateBlogPostParams) {
           publishedAt: params.isPublished ? now : null,
           createdAt: now,
           updatedAt: now,
-          authorId: params.authorId,
+          authorId: session.user.id,
         })
         .returning();
 

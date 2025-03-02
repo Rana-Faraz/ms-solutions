@@ -1,10 +1,9 @@
-import { auth } from "@/auth";
-import { headers } from "next/headers";
-import { redirect, notFound } from "next/navigation";
-import { EditBlogForm } from "../../_components/edit-blog-form";
-import { getBlogPostById } from "../../_actions/blog-actions";
+import { getBlogPosts } from "@/lib/actions/blog";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
+import { notFound } from "next/navigation";
+import { getBlogPostById } from "../../_actions/blog-actions";
+import { EditBlogForm } from "../../_components/edit-blog-form";
 
 interface EditBlogPageProps {
   params: Promise<{
@@ -19,16 +18,6 @@ export const metadata = {
 
 export default async function EditBlogPage({ params }: EditBlogPageProps) {
   const { id } = await params;
-
-  // Verify user is authenticated
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-
-  // Redirect if not authenticated
-  if (!session?.user) {
-    redirect("/login?callbackUrl=/admin/blogs");
-  }
 
   // Fetch the blog post
   const { post, error } = await getBlogPostById(id);
@@ -68,7 +57,24 @@ export default async function EditBlogPage({ params }: EditBlogPageProps) {
         </p>
       </div>
 
-      <EditBlogForm blog={post} userId={session.user.id} />
+      <EditBlogForm blog={post} />
     </div>
   );
 }
+
+export async function generateStaticParams() {
+  const blogs = await getBlogPosts({
+    limit: 100,
+    offset: 0,
+  });
+
+  if (blogs.error || !blogs.data) {
+    return [];
+  }
+
+  return blogs.data.records.map((blog) => ({
+    id: blog.id,
+  }));
+}
+
+export const dynamicParams = true;
