@@ -15,12 +15,14 @@ import {
   calculateReadingTime,
   extractTextFromContent,
   generateSlug,
+  processContent,
 } from "@/components/rich-text-editor/utils";
 import { eq, ExtractTablesWithRelations } from "drizzle-orm";
 import { NodePgQueryResultHKT } from "drizzle-orm/node-postgres/session";
 import { PgTransaction } from "drizzle-orm/pg-core";
 import * as schema from "@/lib/db/schema";
 import { JSONContent } from "@tiptap/react";
+
 interface CreateBlogPostParams {
   title: string;
   slug: string;
@@ -251,13 +253,15 @@ export async function createBlogPost(params: CreateBlogPostParams) {
       const categoryIds = await processCategories(tx, params.categories);
       const tagIds = await processTags(tx, params.tags);
 
-      const text = extractTextFromContent(
-        params.content as unknown as JSONContent,
-      );
+      // Parse content if it's a string
+      const contentJson =
+        typeof params.content === "string"
+          ? JSON.parse(params.content)
+          : params.content;
+
+      const text = extractTextFromContent(contentJson as JSONContent);
       const wordCount = text.trim().split(/\s+/).length;
-      const readTime = calculateReadingTime(
-        params.content as unknown as JSONContent,
-      );
+      const readTime = calculateReadingTime(contentJson as JSONContent);
 
       // Create the blog post
       const now = new Date();
@@ -584,13 +588,15 @@ export async function updateBlogPost(params: UpdateBlogPostParams) {
       const categoryIds = await processCategories(tx, params.categories);
       const tagIds = await processTags(tx, params.tags);
 
-      const text = extractTextFromContent(
-        params.content as unknown as JSONContent,
-      );
+      // Parse content if it's a string
+      const contentJson =
+        typeof params.content === "string"
+          ? JSON.parse(params.content)
+          : params.content;
+
+      const text = extractTextFromContent(contentJson as JSONContent);
       const wordCount = text.trim().split(/\s+/).length;
-      const readTime = calculateReadingTime(
-        params.content as unknown as JSONContent,
-      );
+      const readTime = calculateReadingTime(contentJson as JSONContent);
 
       // Update the blog post
       const [updatedPost] = await tx

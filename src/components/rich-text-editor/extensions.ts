@@ -15,8 +15,91 @@ import TableRow from "@tiptap/extension-table-row";
 import TableCell from "@tiptap/extension-table-cell";
 import TableHeader from "@tiptap/extension-table-header";
 import { common, createLowlight } from "lowlight";
+import { ImageUploadExtension } from "./image-upload-extension";
+import { ReactNodeViewRenderer } from "@tiptap/react";
+import { ImageNode } from "./image-node";
 
 const lowlight = createLowlight(common);
+
+// Extend the default Image extension to support captions and resizing
+const CustomImage = Image.extend({
+  addAttributes() {
+    return {
+      ...this.parent?.(),
+      caption: {
+        default: null,
+        parseHTML: (element) => element.getAttribute("data-caption"),
+        renderHTML: (attributes) => {
+          if (!attributes.caption) {
+            return {};
+          }
+          return {
+            "data-caption": attributes.caption,
+          };
+        },
+      },
+      width: {
+        default: null,
+        parseHTML: (element) => element.getAttribute("width"),
+        renderHTML: (attributes) => {
+          if (!attributes.width) {
+            return {};
+          }
+          return {
+            width: attributes.width,
+          };
+        },
+      },
+      alignment: {
+        default: "center",
+        parseHTML: (element) => element.getAttribute("data-alignment"),
+        renderHTML: (attributes) => {
+          if (!attributes.alignment) {
+            return {};
+          }
+          return {
+            "data-alignment": attributes.alignment,
+          };
+        },
+      },
+    };
+  },
+  addNodeView() {
+    return ReactNodeViewRenderer(ImageNode);
+  },
+  parseHTML() {
+    return [
+      {
+        tag: "figure.image-container",
+        getAttrs: (element) => {
+          const img = element.querySelector("img");
+          const figcaption = element.querySelector("figcaption");
+
+          if (!img) {
+            return false;
+          }
+
+          const caption = figcaption ? figcaption.textContent : null;
+          const className = element.getAttribute("class") || "";
+          const alignmentMatch = className.match(/align-(left|center|right)/);
+          const alignment = alignmentMatch ? alignmentMatch[1] : "center";
+
+          return {
+            src: img.getAttribute("src"),
+            alt: img.getAttribute("alt"),
+            title: img.getAttribute("title"),
+            width: img.getAttribute("width"),
+            caption,
+            alignment,
+          };
+        },
+      },
+      {
+        tag: "img",
+      },
+    ];
+  },
+});
 
 export const editorExtensions = (placeholder: string) => [
   StarterKit.configure({
@@ -35,12 +118,13 @@ export const editorExtensions = (placeholder: string) => [
       target: "_blank",
     },
   }),
-  Image.configure({
-    allowBase64: true,
+  CustomImage.configure({
+    allowBase64: false,
     HTMLAttributes: {
       class: "rounded-md max-w-full",
     },
   }),
+  ImageUploadExtension,
   Placeholder.configure({
     placeholder,
     emptyEditorClass:

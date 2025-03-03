@@ -31,6 +31,9 @@ export function extractTextFromContent(content: JSONContent): string {
 
   // Helper function to recursively extract text
   function traverse(node: JSONContent) {
+    // Skip processing if node is undefined
+    if (!node) return;
+
     // Add spacing between block-level elements
     if (lastNodeType && isBlockNode(node.type) && isBlockNode(lastNodeType)) {
       text += "\n\n";
@@ -133,4 +136,53 @@ export function isContentEmpty(content: JSONContent): boolean {
   }
 
   return false;
+}
+
+/**
+ * Processes Tiptap JSON content while preserving specific node types like images
+ * This is useful for storing content in a database while keeping important attributes
+ */
+export function processContent(content: JSONContent): JSONContent {
+  // If content is null or undefined, return an empty doc
+  if (!content) {
+    return { type: "doc", content: [] };
+  }
+
+  // Clone the content to avoid mutating the original
+  const result = { ...content };
+
+  // Process content array if it exists
+  if (result.content && Array.isArray(result.content)) {
+    // Filter out imageUpload nodes and process the rest
+    result.content = result.content
+      .filter((node) => node.type !== "imageUpload") // Remove imageUpload nodes
+      .map((node) => {
+        // Preserve image nodes with all their attributes
+        if (node.type === "image") {
+          return {
+            ...node,
+            attrs: {
+              ...node.attrs,
+              // Ensure these attributes are preserved
+              src: node.attrs?.src,
+              alt: node.attrs?.alt,
+              title: node.attrs?.title,
+              caption: node.attrs?.caption,
+              width: node.attrs?.width,
+              alignment: node.attrs?.alignment || "center",
+            },
+          };
+        }
+
+        // Recursively process other nodes with content
+        if (node.content) {
+          return processContent(node);
+        }
+
+        // Return other nodes as is
+        return node;
+      });
+  }
+
+  return result;
 }

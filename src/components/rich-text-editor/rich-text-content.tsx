@@ -19,6 +19,11 @@ export function RichTextContent({ content, className }: RichTextContentProps) {
     extensions: editorExtensions(""),
     content,
     editable: false,
+    editorProps: {
+      attributes: {
+        class: "readonly",
+      },
+    },
   });
 
   // Update content when it changes
@@ -44,7 +49,7 @@ export function RichTextContent({ content, className }: RichTextContentProps) {
   }
 
   return (
-    <div className={cn("rich-text-editor")}>
+    <div className={cn("rich-text-editor rich-text-content")}>
       <EditorContent
         editor={editor}
         className={cn(

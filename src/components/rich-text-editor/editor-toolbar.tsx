@@ -1,7 +1,7 @@
 "use client";
 
 import { type Editor } from "@tiptap/react";
-import { useState, useRef, useCallback } from "react";
+import { useState, useCallback } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Toggle } from "@/components/ui/toggle";
@@ -10,7 +10,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
@@ -51,9 +50,7 @@ interface EditorToolbarProps {
 export function EditorToolbar({ editor }: EditorToolbarProps) {
   const [linkUrl, setLinkUrl] = useState<string>("");
   const [isEditingLink, setIsEditingLink] = useState<boolean>(false);
-  const [imageUrl, setImageUrl] = useState<string>("");
   const [color, setColor] = useState<string>("#000000");
-  const imageInputRef = useRef<HTMLInputElement>(null);
 
   const handleLinkSubmit = useCallback(() => {
     if (linkUrl) {
@@ -69,29 +66,6 @@ export function EditorToolbar({ editor }: EditorToolbarProps) {
     setIsEditingLink(false);
     setLinkUrl("");
   }, [editor, linkUrl]);
-
-  const handleImageSubmit = useCallback(() => {
-    if (imageUrl) {
-      editor.chain().focus().setImage({ src: imageUrl }).run();
-      setImageUrl("");
-    }
-  }, [editor, imageUrl]);
-
-  const handleImageUpload = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const file = e.target.files?.[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = () => {
-          if (typeof reader.result === "string") {
-            editor.chain().focus().setImage({ src: reader.result }).run();
-          }
-        };
-        reader.readAsDataURL(file);
-      }
-    },
-    [editor],
-  );
 
   const insertTable = useCallback(() => {
     editor
@@ -319,49 +293,13 @@ export function EditorToolbar({ editor }: EditorToolbarProps) {
       </Popover>
 
       {/* Image */}
-      <Popover>
-        <PopoverTrigger asChild>
-          <Toggle size="sm" aria-label="Insert Image">
-            <ImageIcon className="h-4 w-4" />
-          </Toggle>
-        </PopoverTrigger>
-        <PopoverContent className="w-80 p-3">
-          <div className="flex flex-col gap-2">
-            <Tabs defaultValue="url">
-              <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="url">URL</TabsTrigger>
-                <TabsTrigger value="upload">Upload</TabsTrigger>
-              </TabsList>
-              <TabsContent value="url" className="mt-2">
-                <div className="flex items-center gap-2">
-                  <Input
-                    placeholder="https://example.com/image.jpg"
-                    value={imageUrl}
-                    onChange={(e) => setImageUrl(e.target.value)}
-                    className="flex-1"
-                  />
-                  <Button
-                    size="sm"
-                    onClick={handleImageSubmit}
-                    disabled={!imageUrl}
-                    className="px-2"
-                  >
-                    <Check className="h-4 w-4" />
-                  </Button>
-                </div>
-              </TabsContent>
-              <TabsContent value="upload" className="mt-2">
-                <Input
-                  ref={imageInputRef}
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageUpload}
-                />
-              </TabsContent>
-            </Tabs>
-          </div>
-        </PopoverContent>
-      </Popover>
+      <Toggle
+        size="sm"
+        onClick={() => editor.chain().focus().insertImageUpload().run()}
+        aria-label="Insert Image"
+      >
+        <ImageIcon className="h-4 w-4" />
+      </Toggle>
 
       {/* Table */}
       <Toggle size="sm" onClick={insertTable} aria-label="Insert Table">

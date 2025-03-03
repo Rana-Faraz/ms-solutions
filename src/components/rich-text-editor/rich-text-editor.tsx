@@ -36,6 +36,11 @@ export function RichTextEditor({
     content,
     editable,
     autofocus,
+    editorProps: {
+      attributes: {
+        class: cn(editable ? "editable" : "readonly"),
+      },
+    },
     onUpdate: ({ editor }) => {
       isInternalUpdate.current = true;
       onChange?.(editor.getJSON());
@@ -90,7 +95,7 @@ export function RichTextEditor({
 
   return (
     <div className={cn("rich-text-editor")}>
-      {editor && <EditorToolbar editor={editor} />}
+      {editor && editable && <EditorToolbar editor={editor} />}
       <div className={cn("rounded-md border", !editable && "bg-muted/50")}>
         <EditorContent
           editor={editor}

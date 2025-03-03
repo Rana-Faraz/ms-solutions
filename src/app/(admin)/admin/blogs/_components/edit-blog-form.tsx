@@ -5,6 +5,8 @@ import { toast } from "sonner";
 import { BlogPost } from "@/types/blog";
 import { NewBlogForm } from "./new-blog-form";
 import { updateBlogPost } from "../_actions/blog-actions";
+import { processContent } from "@/components/rich-text-editor";
+import { JSONContent } from "@tiptap/react";
 
 interface EditBlogFormProps {
   blog: BlogPost;
@@ -33,9 +35,18 @@ export function EditBlogForm({ blog }: EditBlogFormProps) {
 
   const handleSubmit = async (values: any) => {
     try {
+      // Process the content to ensure image attributes are preserved
+      const processedContent = processContent(values.content as JSONContent);
+
+      // Convert to string for server action
+      const contentString = JSON.stringify(processedContent);
+
+      console.log("Processed content:", contentString);
+
       const result = await updateBlogPost({
         id: blog.id,
         ...values,
+        content: contentString,
       });
 
       if (result.error) {

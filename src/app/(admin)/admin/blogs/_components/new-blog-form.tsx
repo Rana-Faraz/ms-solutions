@@ -30,6 +30,7 @@ import {
   isContentEmpty,
   calculateReadingTime,
   extractTextFromContent,
+  processContent,
 } from "@/components/rich-text-editor/utils";
 import { Separator } from "@/components/ui/separator";
 import { Combobox, ComboboxItem } from "@/components/ui/combobox";
@@ -180,9 +181,17 @@ export function NewBlogForm({
         return;
       }
 
+      // Process the content to ensure image attributes are preserved
+      const processedContent = processContent(values.content);
+
+      // Convert to string for server action
+      const contentString = JSON.stringify(processedContent);
+
+      console.log("Processed content:", contentString);
+
       const result = await createBlogPost({
         ...values,
-        content: JSON.stringify(values.content),
+        content: contentString,
       });
 
       if (result.error) {
