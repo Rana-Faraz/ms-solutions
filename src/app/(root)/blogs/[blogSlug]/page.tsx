@@ -6,11 +6,11 @@ import { notFound } from "next/navigation";
 import { format } from "date-fns";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
-import { RichTextContent } from "@/components/rich-text-editor";
-import { CalendarIcon, Clock, User, ChevronLeft } from "lucide-react";
 import Link from "next/link";
 import { Metadata } from "next";
 import ShareButtons from "./share-buttons";
+import { CalendarIcon, Clock, User, ChevronLeft } from "lucide-react";
+import { ServerRichText } from "@/components/server-rich-text";
 
 interface BlogPageProps {
   params: Promise<{ blogSlug: string }>;
@@ -143,7 +143,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
 
         {/* Content */}
         <div className="prose-container">
-          <RichTextContent
+          <ServerRichText
             content={contentJson}
             className="prose-lg prose dark:prose-invert prose-headings:font-semibold prose-a:text-primary prose-img:rounded-md md:prose-xl max-w-none"
           />
