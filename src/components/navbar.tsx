@@ -1,4 +1,4 @@
-import { Mail, Phone } from "lucide-react";
+import { ArrowRight, CalendarCheck, Mail, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -255,21 +255,10 @@ export default async function Navbar() {
                                 </h3>
                                 <Link
                                   href={ROUTES.BLOGS}
-                                  className="flex items-center text-sm font-medium text-blue-600 hover:text-blue-800"
+                                  className="flex items-center text-sm font-medium text-primary hover:text-primary/80"
                                 >
                                   View All
-                                  <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="ml-1 h-4 w-4"
-                                    viewBox="0 0 20 20"
-                                    fill="currentColor"
-                                  >
-                                    <path
-                                      fillRule="evenodd"
-                                      d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
-                                      clipRule="evenodd"
-                                    />
-                                  </svg>
+                                  <ArrowRight className="ml-1 h-3 w-3" />
                                 </Link>
                               </div>
 
@@ -282,13 +271,13 @@ export default async function Navbar() {
                                 {latestBlogs.map((post) => (
                                   <div
                                     key={post.id}
-                                    className="group relative overflow-hidden rounded-lg border border-gray-100 bg-white shadow-sm transition-all hover:shadow-md"
+                                    className="group relative overflow-hidden rounded-lg border border-gray-100 bg-white shadow-sm transition-all "
                                   >
                                     <Link
                                       href={`${ROUTES.BLOGS}/${post.slug}`}
                                       className="block p-3"
                                     >
-                                      <h4 className="mb-1 font-medium text-gray-900 transition-colors group-hover:text-blue-600">
+                                      <h4 className="mb-1 font-medium text-gray-900 transition-colors group-hover:text-primary/80">
                                         {post.title}
                                       </h4>
                                       {post.excerpt && (
@@ -297,20 +286,7 @@ export default async function Navbar() {
                                         </p>
                                       )}
                                       <div className="flex items-center text-xs text-gray-500">
-                                        <svg
-                                          xmlns="http://www.w3.org/2000/svg"
-                                          className="mr-1 h-3 w-3"
-                                          fill="none"
-                                          viewBox="0 0 24 24"
-                                          stroke="currentColor"
-                                        >
-                                          <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth={2}
-                                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                                          />
-                                        </svg>
+                                        <CalendarCheck className="mr-1 h-3 w-3" />
                                         {post.publishedAt
                                           ? format(
                                               new Date(post.publishedAt),
@@ -334,21 +310,10 @@ export default async function Navbar() {
                                 </h3>
                                 <Link
                                   href={ROUTES.SERVICES}
-                                  className="flex items-center text-sm font-medium text-blue-600 hover:text-blue-800"
+                                  className="flex items-center text-sm font-medium text-primary hover:text-primary/80"
                                 >
                                   View All
-                                  <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="ml-1 h-4 w-4"
-                                    viewBox="0 0 20 20"
-                                    fill="currentColor"
-                                  >
-                                    <path
-                                      fillRule="evenodd"
-                                      d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
-                                      clipRule="evenodd"
-                                    />
-                                  </svg>
+                                  <ArrowRight className="ml-1 h-3 w-3" />
                                 </Link>
                               </div>
 
@@ -391,21 +356,10 @@ export default async function Navbar() {
                               <div className="mt-4">
                                 <Link
                                   href={ROUTES.CONTACT}
-                                  className="flex w-full items-center justify-center rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700"
+                                  className="flex w-full items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary/80"
                                 >
                                   Request a Consultation
-                                  <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="ml-1 h-4 w-4"
-                                    viewBox="0 0 20 20"
-                                    fill="currentColor"
-                                  >
-                                    <path
-                                      fillRule="evenodd"
-                                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                      clipRule="evenodd"
-                                    />
-                                  </svg>
+                                  <ArrowRight className="ml-1 h-3 w-3" />
                                 </Link>
                               </div>
                             </div>
