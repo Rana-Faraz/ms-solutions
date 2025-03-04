@@ -1,5 +1,4 @@
 import { BlogCard } from "@/components/BlogCard";
-import { NoBlogsFound } from "@/components/NoBlogsFound";
 import { StatsSection } from "@/components/stats-section";
 import { TestimonialCard } from "@/components/testimonial-card";
 import { Badge } from "@/components/ui/badge";
@@ -10,24 +9,22 @@ import { ROUTES } from "@/lib/routes";
 import { CONSTANTS } from "@/static/Constants";
 import Image from "next/image";
 import Link from "next/link";
+import * as FaIcons from "react-icons/fa";
 import {
-  FaBriefcaseMedical,
-  FaChartBar,
+  FaArrowRight,
+  FaBookMedical,
   FaClinicMedical,
+  FaCommentMedical,
   FaEnvelope,
   FaFileMedical,
-  FaHospitalUser,
-  FaLaptopMedical,
-  FaPhoneAlt,
-  FaArrowRight,
-  FaLightbulb,
-  FaHeartbeat,
-  FaBookMedical,
-  FaCommentMedical,
   FaHandHoldingMedical,
+  FaHeartbeat,
+  FaLightbulb,
+  FaPhoneAlt,
 } from "react-icons/fa";
 import Hero from "~/public/images/hero.png";
 import About from "~/public/images/section-about.png";
+import { getPublicServices } from "../(admin)/admin/services/_actions/service-actions";
 
 export const metadata = {
   title:
@@ -35,94 +32,6 @@ export const metadata = {
   description:
     "Innovative healthcare technology solutions designed to improve patient care, streamline clinical workflows, and optimize medical practice operations.",
 };
-
-// Service data with icons
-const services = [
-  {
-    id: 1,
-    title: "Electronic Health Records",
-    description:
-      "Streamlined EHR solutions that improve clinical documentation, enhance patient care, and ensure regulatory compliance.",
-    icon: FaFileMedical,
-    color: "bg-primary/10 text-primary",
-    features: [
-      "Customized EHR Implementation",
-      "Legacy System Migration",
-      "Interoperability Solutions",
-      "Regulatory Compliance (HIPAA, MACRA)",
-    ],
-  },
-  {
-    id: 2,
-    title: "Telehealth Services",
-    description:
-      "Secure, user-friendly telehealth platforms that expand your practice's reach and improve patient access to care.",
-    icon: FaLaptopMedical,
-    color: "bg-secondary/10 text-secondary",
-    features: [
-      "Virtual Visit Platform",
-      "Remote Patient Monitoring",
-      "Secure Messaging Systems",
-      "Mobile Health Applications",
-    ],
-  },
-  {
-    id: 3,
-    title: "Practice Management",
-    description:
-      "Comprehensive practice management solutions to optimize workflows, improve efficiency, and enhance the patient experience.",
-    icon: FaClinicMedical,
-    color: "bg-primary/10 text-primary",
-    features: [
-      "Scheduling Optimization",
-      "Revenue Cycle Management",
-      "Staff Training & Development",
-      "Operational Efficiency Analysis",
-    ],
-  },
-  {
-    id: 4,
-    title: "Patient Engagement",
-    description:
-      "Tools and strategies to enhance patient communication, satisfaction, and involvement in their healthcare journey.",
-    icon: FaHospitalUser,
-    color: "bg-secondary/10 text-secondary",
-    features: [
-      "Patient Portal Implementation",
-      "Automated Appointment Reminders",
-      "Patient Education Resources",
-      "Satisfaction Survey Systems",
-    ],
-  },
-  {
-    id: 5,
-    title: "Healthcare Analytics",
-    description:
-      "Data-driven insights to improve clinical outcomes, operational efficiency, and financial performance.",
-    icon: FaChartBar,
-    color: "bg-primary/10 text-primary",
-    features: [
-      "Clinical Outcomes Analysis",
-      "Population Health Management",
-      "Financial Performance Metrics",
-      "Customized Reporting Dashboards",
-    ],
-  },
-  {
-    id: 6,
-    title: "Medical Compliance",
-    description:
-      "Expert guidance and solutions to ensure your practice meets all regulatory requirements and industry standards.",
-    icon: FaBriefcaseMedical,
-    color: "bg-secondary/10 text-secondary",
-    features: [
-      "HIPAA Compliance Audits",
-      "Policy & Procedure Development",
-      "Staff Compliance Training",
-      "Risk Assessment & Management",
-    ],
-  },
-];
 
 // Testimonials
 const testimonials = [
@@ -144,6 +53,8 @@ export default async function Home() {
   const recentBlogs = await getBlogPosts({
     limit: 4,
   });
+
+  const services = await getPublicServices();
   return (
     <main className="overflow-hidden">
       {/* Full-width Hero Section with Image Background */}
@@ -213,32 +124,40 @@ export default async function Home() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((service) => (
-              <Card
-                key={service.id}
-                className="overflow-hidden transition-all duration-300 hover:shadow-md"
-              >
-                <CardHeader
-                  className={`${service.color} flex flex-col items-center p-5`}
-                >
-                  <service.icon className="h-8 w-8" />
-                  <CardTitle className="mt-3 text-xl">
-                    {service.title}
-                  </CardTitle>
-                </CardHeader>
+          <div className="flex flex-wrap justify-center gap-4">
+            {services.services.map((service, index) => {
+              const Icon = FaIcons[service.icon as keyof typeof FaIcons];
+              const colorClass =
+                index % 2 === 0
+                  ? "bg-secondary/10 text-secondary"
+                  : "bg-primary/10 text-primary";
 
-                <CardContent className="p-5 text-center text-sm text-muted-foreground md:text-base">
-                  <p className="line-clamp-2">{service.description}</p>
-                  <Link
-                    href={ROUTES.SERVICES}
-                    className="mt-4 inline-flex items-center text-primary hover:underline"
+              return (
+                <Card
+                  key={service.id}
+                  className="w-full min-w-56 max-w-96 overflow-hidden transition-all duration-300 hover:shadow-md"
+                >
+                  <CardHeader
+                    className={`${colorClass} flex flex-col items-center p-5`}
                   >
-                    Learn more <FaArrowRight className="ml-1 h-3 w-3" />
-                  </Link>
-                </CardContent>
-              </Card>
-            ))}
+                    <Icon className="h-8 w-8" />
+                    <CardTitle className="mt-3 text-xl">
+                      {service.title}
+                    </CardTitle>
+                  </CardHeader>
+
+                  <CardContent className="p-5 text-center text-sm text-muted-foreground md:text-base">
+                    <p className="line-clamp-2">{service.description}</p>
+                    <Link
+                      href={ROUTES.SERVICES}
+                      className="mt-4 inline-flex items-center text-primary hover:underline"
+                    >
+                      Learn more <FaArrowRight className="ml-1 h-3 w-3" />
+                    </Link>
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
 
           <div className="mt-10 text-center">
@@ -435,7 +354,7 @@ export default async function Home() {
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
               <div>
                 <Badge className="mb-3 bg-primary/20 px-4 py-1 text-xs font-medium text-primary">
-                  <FaPhoneAlt className="mr-2 h-3 w-3" /> CONTACT US
+                  <FaIcons.FaPhoneAlt className="mr-2 h-3 w-3" /> CONTACT US
                 </Badge>
                 <h2 className="mb-4 text-2xl font-bold md:text-3xl lg:text-4xl">
                   Ready to Transform Your Practice?

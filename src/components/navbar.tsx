@@ -1,11 +1,6 @@
-import * as React from "react";
-import Link from "next/link";
+import { Mail, Phone } from "lucide-react";
 import Image from "next/image";
-import { Phone, Mail } from "lucide-react";
-// import Logo from "../../public/images/stardom-logo-footer.webp";
-import Logo from "../../public/images/download.png";
-import { ROUTES } from "@/lib/routes";
-import { Button } from "./ui/button";
+import Link from "next/link";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -15,7 +10,6 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { cn } from "@/lib/utils";
 import {
   Sheet,
   SheetContent,
@@ -23,9 +17,26 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { getLatestThreeBlogs } from "@/lib/actions/blog";
-import { format } from "date-fns";
+import { ROUTES } from "@/lib/routes";
+import { cn } from "@/lib/utils";
 import { CONSTANTS } from "@/static/Constants";
 import { BlogPost } from "@/types/blog";
+import { format } from "date-fns";
+import Logo from "../../public/images/download.png";
+import { Button } from "./ui/button";
+import { ComponentPropsWithoutRef } from "react";
+import { ElementRef } from "react";
+import { forwardRef } from "react";
+
+// Single source of truth for navigation items
+const NAV_ITEMS = [
+  { href: ROUTES.HOME, label: "Home", hasDropdown: false },
+  { href: ROUTES.ABOUT, label: "About Us", hasDropdown: false },
+  { href: ROUTES.SERVICES, label: "Services", hasDropdown: false },
+  { href: ROUTES.MISSION, label: "Mission", hasDropdown: false },
+  { href: ROUTES.BLOGS, label: "Blogs", hasDropdown: true },
+  { href: ROUTES.CONTACT, label: "Contact Us", hasDropdown: false },
+];
 
 const Sidebar = ({ latestBlogs }: { latestBlogs: BlogPost[] }) => {
   return (
@@ -76,15 +87,7 @@ const Sidebar = ({ latestBlogs }: { latestBlogs: BlogPost[] }) => {
         {/* Navigation Links */}
         <nav className="flex-1 overflow-auto py-6">
           <ul className="space-y-4 px-1">
-            {[
-              { href: ROUTES.HOME, label: "Home" },
-              { href: ROUTES.ABOUT, label: "About Us" },
-              { href: ROUTES.SERVICES, label: "Services" },
-              { href: ROUTES.PORTFOLIO, label: "Work" },
-              { href: ROUTES.MISSION, label: "Mission" },
-              { href: ROUTES.CONTACT, label: "Contact Us" },
-              { href: ROUTES.BLOGS, label: "Blogs" },
-            ].map((item) => (
+            {NAV_ITEMS.map((item) => (
               <li key={item.href}>
                 <SheetTrigger asChild>
                   <Link
@@ -134,36 +137,35 @@ const Sidebar = ({ latestBlogs }: { latestBlogs: BlogPost[] }) => {
 };
 
 // Custom ListItem component for navigation menu
-const ListItem = React.forwardRef<
-  React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a">
->(({ className, title, children, ...props }, ref) => {
-  return (
-    <li>
-      <NavigationMenuLink asChild>
-        <a
-          ref={ref}
-          className={cn(
-            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-            className,
-          )}
-          {...props}
-        >
-          <div className="text-sm font-medium leading-none">{title}</div>
-          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-            {children}
-          </p>
-        </a>
-      </NavigationMenuLink>
-    </li>
-  );
-});
+const ListItem = forwardRef<ElementRef<"a">, ComponentPropsWithoutRef<"a">>(
+  ({ className, title, children, ...props }, ref) => {
+    return (
+      <li>
+        <NavigationMenuLink asChild>
+          <a
+            ref={ref}
+            className={cn(
+              "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+              className,
+            )}
+            {...props}
+          >
+            <div className="text-sm font-medium leading-none">{title}</div>
+            <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+              {children}
+            </p>
+          </a>
+        </NavigationMenuLink>
+      </li>
+    );
+  },
+);
 ListItem.displayName = "ListItem";
 
 // Blog post item for the dropdown
-const BlogPostItem = React.forwardRef<
-  React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a"> & { date: string }
+const BlogPostItem = forwardRef<
+  ElementRef<"a">,
+  ComponentPropsWithoutRef<"a"> & { date: string }
 >(({ className, title, date, ...props }, ref) => {
   return (
     <li>
@@ -232,94 +234,50 @@ export default async function Navbar() {
           <div className="hidden md:block">
             <NavigationMenu>
               <NavigationMenuList>
-                <NavigationMenuItem>
-                  <Link href={ROUTES.HOME} legacyBehavior passHref>
-                    <NavigationMenuLink
-                      className={navigationMenuTriggerStyle()}
-                    >
-                      Home
-                    </NavigationMenuLink>
-                  </Link>
-                </NavigationMenuItem>
-
-                <NavigationMenuItem>
-                  <Link href={ROUTES.ABOUT} legacyBehavior passHref>
-                    <NavigationMenuLink
-                      className={navigationMenuTriggerStyle()}
-                    >
-                      About Us
-                    </NavigationMenuLink>
-                  </Link>
-                </NavigationMenuItem>
-
-                <NavigationMenuItem>
-                  <Link href={ROUTES.SERVICES} legacyBehavior passHref>
-                    <NavigationMenuLink
-                      className={navigationMenuTriggerStyle()}
-                    >
-                      Services
-                    </NavigationMenuLink>
-                  </Link>
-                </NavigationMenuItem>
-
-                <NavigationMenuItem>
-                  <Link href={ROUTES.PORTFOLIO} legacyBehavior passHref>
-                    <NavigationMenuLink
-                      className={navigationMenuTriggerStyle()}
-                    >
-                      Work
-                    </NavigationMenuLink>
-                  </Link>
-                </NavigationMenuItem>
-
-                <NavigationMenuItem>
-                  <Link href={ROUTES.MISSION} legacyBehavior passHref>
-                    <NavigationMenuLink
-                      className={navigationMenuTriggerStyle()}
-                    >
-                      Mission
-                    </NavigationMenuLink>
-                  </Link>
-                </NavigationMenuItem>
-
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger>
-                    <Link href={ROUTES.BLOGS} legacyBehavior passHref>
-                      Blogs
-                    </Link>
-                  </NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <ul className="grid w-[400px] gap-3 p-4">
-                      <div className="mb-2 flex items-center justify-between">
-                        <h4 className="font-medium">Recent Posts</h4>
-                        <Link
-                          href={ROUTES.BLOGS}
-                          className="text-xs text-blue-600 hover:underline"
+                {NAV_ITEMS.map((item) => (
+                  <NavigationMenuItem key={item.href}>
+                    {item.hasDropdown ? (
+                      <>
+                        <NavigationMenuTrigger>
+                          <Link href={item.href} legacyBehavior passHref>
+                            {item.label}
+                          </Link>
+                        </NavigationMenuTrigger>
+                        {item.href === ROUTES.BLOGS && (
+                          <NavigationMenuContent>
+                            <ul className="grid w-[400px] gap-3 p-4">
+                              <div className="mb-2 flex items-center justify-between">
+                                <h4 className="font-medium">Recent Posts</h4>
+                                <Link
+                                  href={ROUTES.BLOGS}
+                                  className="text-xs text-blue-600 hover:underline"
+                                >
+                                  View All
+                                </Link>
+                              </div>
+                              {latestBlogs.map((post) => (
+                                <BlogPostItem
+                                  key={post.id}
+                                  title={post.title}
+                                  date={post.publishedAt?.toISOString() || ""}
+                                  href={`${ROUTES.BLOGS}/${post.slug}`}
+                                />
+                              ))}
+                            </ul>
+                          </NavigationMenuContent>
+                        )}
+                      </>
+                    ) : (
+                      <Link href={item.href} legacyBehavior passHref>
+                        <NavigationMenuLink
+                          className={navigationMenuTriggerStyle()}
                         >
-                          View All
-                        </Link>
-                      </div>
-                      {latestBlogs.map((post) => (
-                        <BlogPostItem
-                          key={post.id}
-                          title={post.title}
-                          date={post.publishedAt?.toISOString() || ""}
-                          href={`${ROUTES.BLOGS}/${post.slug}`}
-                        />
-                      ))}
-                    </ul>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-
-                <NavigationMenuItem>
-                  <Link href={ROUTES.CONTACT} legacyBehavior passHref>
-                    <NavigationMenuLink
-                      className={navigationMenuTriggerStyle()}
-                    >
-                      Contact Us
-                    </NavigationMenuLink>
-                  </Link>
-                </NavigationMenuItem>
+                          {item.label}
+                        </NavigationMenuLink>
+                      </Link>
+                    )}
+                  </NavigationMenuItem>
+                ))}
               </NavigationMenuList>
             </NavigationMenu>
           </div>
