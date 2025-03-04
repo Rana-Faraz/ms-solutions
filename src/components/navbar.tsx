@@ -27,12 +27,14 @@ import { Button } from "./ui/button";
 import { ComponentPropsWithoutRef } from "react";
 import { ElementRef } from "react";
 import { forwardRef } from "react";
+import { getPublicServices } from "@/app/(admin)/admin/services/_actions/service-actions";
+import * as FaIcons from "react-icons/fa";
 
 // Single source of truth for navigation items
 const NAV_ITEMS = [
   { href: ROUTES.HOME, label: "Home", hasDropdown: false },
   { href: ROUTES.ABOUT, label: "About Us", hasDropdown: false },
-  { href: ROUTES.SERVICES, label: "Services", hasDropdown: false },
+  { href: ROUTES.SERVICES, label: "Services", hasDropdown: true },
   { href: ROUTES.MISSION, label: "Mission", hasDropdown: false },
   { href: ROUTES.BLOGS, label: "Blogs", hasDropdown: true },
   { href: ROUTES.CONTACT, label: "Contact Us", hasDropdown: false },
@@ -191,6 +193,7 @@ BlogPostItem.displayName = "BlogPostItem";
 
 export default async function Navbar() {
   const latestBlogs = await getLatestThreeBlogs();
+  const latestServices = await getPublicServices();
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white">
       {/* Top bar with contact info */}
@@ -245,25 +248,167 @@ export default async function Navbar() {
                         </NavigationMenuTrigger>
                         {item.href === ROUTES.BLOGS && (
                           <NavigationMenuContent>
-                            <ul className="grid w-[400px] gap-3 p-4">
-                              <div className="mb-2 flex items-center justify-between">
-                                <h4 className="font-medium">Recent Posts</h4>
+                            <div className="w-[450px] p-4">
+                              <div className="mb-4 flex items-center justify-between border-b pb-2">
+                                <h3 className="text-lg font-semibold text-gray-800">
+                                  Our Blog
+                                </h3>
                                 <Link
                                   href={ROUTES.BLOGS}
-                                  className="text-xs text-blue-600 hover:underline"
+                                  className="flex items-center text-sm font-medium text-blue-600 hover:text-blue-800"
                                 >
                                   View All
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="ml-1 h-4 w-4"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                  >
+                                    <path
+                                      fillRule="evenodd"
+                                      d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                                      clipRule="evenodd"
+                                    />
+                                  </svg>
                                 </Link>
                               </div>
-                              {latestBlogs.map((post) => (
-                                <BlogPostItem
-                                  key={post.id}
-                                  title={post.title}
-                                  date={post.publishedAt?.toISOString() || ""}
-                                  href={`${ROUTES.BLOGS}/${post.slug}`}
-                                />
-                              ))}
-                            </ul>
+
+                              <p className="mb-3 text-sm text-gray-600">
+                                Stay updated with our latest insights and
+                                industry trends
+                              </p>
+
+                              <div className="grid gap-4">
+                                {latestBlogs.map((post) => (
+                                  <div
+                                    key={post.id}
+                                    className="group relative overflow-hidden rounded-lg border border-gray-100 bg-white shadow-sm transition-all hover:shadow-md"
+                                  >
+                                    <Link
+                                      href={`${ROUTES.BLOGS}/${post.slug}`}
+                                      className="block p-3"
+                                    >
+                                      <h4 className="mb-1 font-medium text-gray-900 transition-colors group-hover:text-blue-600">
+                                        {post.title}
+                                      </h4>
+                                      {post.excerpt && (
+                                        <p className="mb-2 line-clamp-2 text-xs text-gray-600">
+                                          {post.excerpt}
+                                        </p>
+                                      )}
+                                      <div className="flex items-center text-xs text-gray-500">
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          className="mr-1 h-3 w-3"
+                                          fill="none"
+                                          viewBox="0 0 24 24"
+                                          stroke="currentColor"
+                                        >
+                                          <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={2}
+                                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                          />
+                                        </svg>
+                                        {post.publishedAt
+                                          ? format(
+                                              new Date(post.publishedAt),
+                                              "MMM d, yyyy",
+                                            )
+                                          : ""}
+                                      </div>
+                                    </Link>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          </NavigationMenuContent>
+                        )}
+                        {item.href === ROUTES.SERVICES && (
+                          <NavigationMenuContent>
+                            <div className="w-[450px] p-4">
+                              <div className="mb-4 flex items-center justify-between border-b pb-2">
+                                <h3 className="text-lg font-semibold text-gray-800">
+                                  Our Services
+                                </h3>
+                                <Link
+                                  href={ROUTES.SERVICES}
+                                  className="flex items-center text-sm font-medium text-blue-600 hover:text-blue-800"
+                                >
+                                  View All
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="ml-1 h-4 w-4"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                  >
+                                    <path
+                                      fillRule="evenodd"
+                                      d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                                      clipRule="evenodd"
+                                    />
+                                  </svg>
+                                </Link>
+                              </div>
+
+                              <p className="mb-3 text-sm text-gray-600">
+                                Comprehensive solutions tailored to your
+                                business needs
+                              </p>
+
+                              <div className="grid grid-cols-2 gap-4">
+                                {latestServices.services.map(
+                                  (service, index) => {
+                                    const Icon =
+                                      FaIcons[
+                                        service.icon as keyof typeof FaIcons
+                                      ];
+                                    const colorClass =
+                                      index % 2 === 0
+                                        ? "bg-secondary/10 text-secondary"
+                                        : "bg-primary/10 text-primary";
+                                    return (
+                                      <div
+                                        key={service.id}
+                                        className={`group rounded-lg border border-gray-100 bg-white p-3 shadow-sm transition-all  ${colorClass}`}
+                                      >
+                                        <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-full bg-blue-50 ">
+                                          <Icon />
+                                        </div>
+                                        <h4 className="mb-1 font-medium text-gray-900 transition-colors ">
+                                          {service.title}
+                                        </h4>
+                                        <p className="text-xs text-gray-600">
+                                          {service.description}
+                                        </p>
+                                      </div>
+                                    );
+                                  },
+                                )}
+                              </div>
+
+                              <div className="mt-4">
+                                <Link
+                                  href={ROUTES.CONTACT}
+                                  className="flex w-full items-center justify-center rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700"
+                                >
+                                  Request a Consultation
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="ml-1 h-4 w-4"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                  >
+                                    <path
+                                      fillRule="evenodd"
+                                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                      clipRule="evenodd"
+                                    />
+                                  </svg>
+                                </Link>
+                              </div>
+                            </div>
                           </NavigationMenuContent>
                         )}
                       </>
