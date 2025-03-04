@@ -1,4 +1,5 @@
 import { BlogCard } from "@/components/BlogCard";
+import { NoBlogsFound } from "@/components/NoBlogsFound";
 import { StatsSection } from "@/components/stats-section";
 import { TestimonialCard } from "@/components/testimonial-card";
 import { Badge } from "@/components/ui/badge";
@@ -18,6 +19,12 @@ import {
   FaHospitalUser,
   FaLaptopMedical,
   FaPhoneAlt,
+  FaArrowRight,
+  FaLightbulb,
+  FaHeartbeat,
+  FaBookMedical,
+  FaCommentMedical,
+  FaHandHoldingMedical,
 } from "react-icons/fa";
 import Hero from "~/public/images/hero.png";
 import About from "~/public/images/section-about.png";
@@ -155,10 +162,10 @@ export default async function Home() {
         <div className="container relative z-10 mx-auto flex max-h-[55vh] min-h-[55vh] flex-col items-center justify-center px-4 py-12 text-white">
           <div className="mx-auto max-w-3xl text-center">
             <Badge className="mb-4 bg-white/20 px-4 py-1 text-sm font-medium text-white backdrop-blur-sm">
-              HEALTHCARE TECHNOLOGY SOLUTIONS
+              <FaHeartbeat className="mr-2 h-3 w-3" /> HEALTHCARE SOLUTIONS
             </Badge>
             <h1 className="mb-4 text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
-              Innovative Healthcare Solutions for Modern Medical Practices
+              Modern Healthcare Technology
             </h1>
             <p className="mb-6 text-lg md:text-xl">
               Empowering healthcare providers with technology that enhances
@@ -171,7 +178,9 @@ export default async function Home() {
                 size="lg"
                 className="w-full bg-white text-primary hover:bg-accent hover:text-primary sm:w-auto"
               >
-                <Link href={ROUTES.CONTACT}>Schedule a Consultation</Link>
+                <Link href={ROUTES.CONTACT} className="flex items-center">
+                  <FaHandHoldingMedical className="mr-2 h-4 w-4" /> Get Started
+                </Link>
               </Button>
               <Button
                 asChild
@@ -179,7 +188,9 @@ export default async function Home() {
                 size="lg"
                 className="w-full sm:w-auto"
               >
-                <Link href={ROUTES.SERVICES}>Explore Our Services</Link>
+                <Link href={ROUTES.SERVICES} className="flex items-center">
+                  <FaLightbulb className="mr-2 h-4 w-4" /> Our Services
+                </Link>
               </Button>
             </div>
           </div>
@@ -195,23 +206,18 @@ export default async function Home() {
         <div className="container mx-auto px-4">
           <div className="mb-10 text-center md:mb-16">
             <Badge className="mb-3 bg-primary/10 px-4 py-1 text-xs font-medium text-primary">
-              OUR HEALTHCARE SERVICES
+              <FaLightbulb className="mr-2 h-3 w-3" /> SERVICES
             </Badge>
             <h2 className="mb-4 text-3xl font-bold md:text-4xl">
-              Comprehensive Medical Technology Solutions
+              Healthcare Technology Solutions
             </h2>
-            <p className="mx-auto max-w-2xl text-base text-muted-foreground md:text-lg">
-              We offer a range of healthcare technology solutions designed to
-              help medical practices enhance patient care and improve
-              operational efficiency.
-            </p>
           </div>
 
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((service) => (
               <Card
                 key={service.id}
-                className="overflow-hidden transition-all duration-300"
+                className="overflow-hidden transition-all duration-300 hover:shadow-md"
               >
                 <CardHeader
                   className={`${service.color} flex flex-col items-center p-5`}
@@ -223,7 +229,13 @@ export default async function Home() {
                 </CardHeader>
 
                 <CardContent className="p-5 text-center text-sm text-muted-foreground md:text-base">
-                  {service.description}
+                  <p className="line-clamp-2">{service.description}</p>
+                  <Link
+                    href={ROUTES.SERVICES}
+                    className="mt-4 inline-flex items-center text-primary hover:underline"
+                  >
+                    Learn more <FaArrowRight className="ml-1 h-3 w-3" />
+                  </Link>
                 </CardContent>
               </Card>
             ))}
@@ -231,7 +243,9 @@ export default async function Home() {
 
           <div className="mt-10 text-center">
             <Button asChild size="lg">
-              <Link href={ROUTES.SERVICES}>View All Healthcare Services</Link>
+              <Link href={ROUTES.SERVICES} className="flex items-center">
+                <FaClinicMedical className="mr-2 h-4 w-4" /> View All Services
+              </Link>
             </Button>
           </div>
         </div>
@@ -256,10 +270,10 @@ export default async function Home() {
 
             <div className="order-1 flex flex-col justify-center md:order-2">
               <Badge className="mb-3 w-fit bg-primary/10 px-4 py-1 text-xs font-medium text-primary">
-                ABOUT OUR HEALTHCARE SOLUTIONS
+                <FaBookMedical className="mr-2 h-3 w-3" /> ABOUT US
               </Badge>
               <h2 className="mb-4 text-2xl font-bold md:text-3xl lg:text-4xl">
-                Transforming Healthcare Through Innovative Technology
+                Transforming Healthcare Through Technology
               </h2>
               <div className="space-y-3 text-muted-foreground">
                 <p className="text-base md:text-lg">
@@ -268,10 +282,19 @@ export default async function Home() {
                   effective healthcare technology is the foundation of modern
                   medical practice.
                 </p>
-                <div className="rounded-lg bg-white p-4 shadow-sm">
-                  <p className="text-center text-base font-medium italic text-primary md:text-lg">
-                    "Advancing Patient Care Through Digital Innovation"
+                <div className="relative px-8 py-4">
+                  <div className="absolute -left-2 top-0 text-5xl text-primary/20">
+                    "
+                  </div>
+                  <div className="absolute -right-2 bottom-0 rotate-180 text-5xl text-primary/20">
+                    "
+                  </div>
+                  <p className="relative text-center text-base font-medium italic text-primary md:text-lg">
+                    Advancing Patient Care Through Digital Innovation
                   </p>
+                  <div className="mt-3 flex justify-center">
+                    <div className="h-0.5 w-16 rounded bg-primary/30"></div>
+                  </div>
                 </div>
                 <p className="text-base md:text-lg">
                   Our healthcare technology experts bring years of clinical and
@@ -285,7 +308,9 @@ export default async function Home() {
                   asChild
                   className="bg-secondary text-white hover:bg-secondary/90"
                 >
-                  <Link href={ROUTES.ABOUT}>Learn More About Us</Link>
+                  <Link href={ROUTES.ABOUT} className="flex items-center">
+                    <FaArrowRight className="mr-2 h-4 w-4" /> Learn More
+                  </Link>
                 </Button>
               </div>
             </div>
@@ -298,10 +323,10 @@ export default async function Home() {
         <div className="container mx-auto px-4">
           <div className="mb-10 text-center">
             <Badge className="mb-3 bg-secondary/10 px-4 py-1 text-xs font-medium text-secondary">
-              CLIENT TESTIMONIALS
+              <FaCommentMedical className="mr-2 h-3 w-3" /> TESTIMONIALS
             </Badge>
             <h2 className="mb-4 text-2xl font-bold md:text-3xl lg:text-4xl">
-              What Healthcare Providers Say
+              Client Success Stories
             </h2>
           </div>
 
@@ -313,44 +338,93 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Featured Case Studies */}
+      {/* Blogs Section */}
       <section className="bg-gradient-to-r from-primary to-secondary py-16 text-white md:py-24">
         <div className="container mx-auto px-4">
           <div className="mb-10 text-center">
             <Badge className="mb-3 bg-white/20 px-4 py-1 text-xs font-medium text-white">
-              BLOGS
+              <FaBookMedical className="mr-2 h-3 w-3" /> BLOGS
             </Badge>
             <h2 className="mb-4 text-2xl font-bold md:text-3xl lg:text-4xl">
-              Healthcare Insights and Updates
+              Healthcare Insights
             </h2>
-            <p className="mx-auto max-w-2xl text-base md:text-lg">
-              Stay informed with the latest news and insights in healthcare
-              technology.
-            </p>
           </div>
 
           <div className="flex flex-wrap justify-center gap-4">
-            {recentBlogs.data?.records.map((blog) => (
-              <BlogCard key={blog.id} post={blog} />
-            ))}
-            {recentBlogs.data?.records.length === 0 && (
-              <div className="flex items-center justify-center">
-                <p className="text-white">
-                  We are working on it. Please check back soon.
-                </p>
+            {recentBlogs.data?.records &&
+            recentBlogs.data.records.length > 0 ? (
+              recentBlogs.data.records.map((blog) => (
+                <BlogCard key={blog.id} post={blog} />
+              ))
+            ) : (
+              <div className="w-full max-w-2xl overflow-hidden rounded-lg bg-white/10 backdrop-blur-sm">
+                <div className="relative">
+                  {/* Decorative elements */}
+                  <div className="absolute -left-6 -top-6 h-12 w-12 rounded-full bg-primary/30 blur-xl"></div>
+                  <div className="absolute -bottom-6 -right-6 h-12 w-12 rounded-full bg-secondary/30 blur-xl"></div>
+                  <div className="absolute left-1/2 top-0 h-40 w-40 -translate-x-1/2 transform rounded-full bg-white/5 blur-3xl"></div>
+
+                  {/* Content */}
+                  <div className="relative flex flex-col items-center justify-center p-8 text-center">
+                    <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 p-1">
+                      <div className="flex h-full w-full items-center justify-center rounded-full border border-white/20 bg-white/10">
+                        <FaFileMedical className="h-8 w-8 text-white" />
+                      </div>
+                    </div>
+
+                    <div className="mb-6 max-w-md">
+                      <h3 className="mb-3 text-2xl font-bold">
+                        Healthcare Insights Coming Soon
+                      </h3>
+                      <div className="relative">
+                        <div className="absolute -left-2 top-0 h-full w-1 bg-gradient-to-b from-primary/40 to-secondary/40"></div>
+                        <p className="pl-4 text-white/80">
+                          We're crafting thoughtful articles on healthcare
+                          innovation and medical technology. Subscribe to be
+                          notified when new content is available.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-col space-y-3 sm:flex-row sm:space-x-3 sm:space-y-0">
+                      <Button
+                        variant="outline"
+                        className="border-white/30 bg-white/10 text-white backdrop-blur-sm hover:bg-white hover:text-primary"
+                      >
+                        <FaEnvelope className="mr-2 h-4 w-4" /> Subscribe
+                      </Button>
+                      <Button
+                        asChild
+                        variant="ghost"
+                        className="text-white hover:bg-white/10 hover:text-white"
+                      >
+                        <Link
+                          href={ROUTES.CONTACT}
+                          className="flex items-center"
+                        >
+                          <FaArrowRight className="mr-2 h-4 w-4" /> Contact Us
+                        </Link>
+                      </Button>
+                    </div>
+                  </div>
+                </div>
               </div>
             )}
           </div>
 
-          <div className="mt-8 text-center md:mt-10">
-            <Button
-              asChild
-              size="lg"
-              className="bg-white text-primary hover:bg-accent hover:text-primary"
-            >
-              <Link href={ROUTES.BLOGS}>View All Blogs</Link>
-            </Button>
-          </div>
+          {recentBlogs.data?.records && recentBlogs.data.records.length > 0 && (
+            <div className="mt-8 text-center md:mt-10">
+              <Button
+                asChild
+                size="lg"
+                className="bg-white text-primary hover:bg-accent hover:text-primary"
+              >
+                <Link href={ROUTES.BLOGS} className="flex items-center">
+                  <FaArrowRight className="mr-2 h-4 w-4" /> View All Blogs
+                </Link>
+              </Button>
+            </div>
+          )}
         </div>
       </section>
 
@@ -361,21 +435,16 @@ export default async function Home() {
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
               <div>
                 <Badge className="mb-3 bg-primary/20 px-4 py-1 text-xs font-medium text-primary">
-                  GET IN TOUCH
+                  <FaPhoneAlt className="mr-2 h-3 w-3" /> CONTACT US
                 </Badge>
                 <h2 className="mb-4 text-2xl font-bold md:text-3xl lg:text-4xl">
-                  Ready to Transform Your Healthcare Practice?
+                  Ready to Transform Your Practice?
                 </h2>
-                <p className="mb-6 text-base text-muted-foreground md:text-lg">
-                  Contact our healthcare technology experts today to discuss how
-                  our solutions can help improve patient care and practice
-                  efficiency.
-                </p>
 
-                <div className="space-y-3">
+                <div className="mt-6 space-y-4">
                   <div className="flex items-center">
-                    <div className="mr-3 flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary md:h-10 md:w-10">
-                      <FaPhoneAlt className="h-3 w-3 md:h-4 md:w-4" />
+                    <div className="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
+                      <FaPhoneAlt className="h-4 w-4" />
                     </div>
                     <a
                       href={`tel:${CONSTANTS.PHONE}`}
@@ -386,8 +455,8 @@ export default async function Home() {
                   </div>
 
                   <div className="flex items-center">
-                    <div className="mr-3 flex h-8 w-8 items-center justify-center rounded-full bg-secondary/10 text-secondary md:h-10 md:w-10">
-                      <FaEnvelope className="h-3 w-3 md:h-4 md:w-4" />
+                    <div className="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-secondary/10 text-secondary">
+                      <FaEnvelope className="h-4 w-4" />
                     </div>
                     <a
                       href={`mailto:${CONSTANTS.EMAIL}`}
@@ -404,7 +473,10 @@ export default async function Home() {
                     size="lg"
                     className="bg-primary text-white hover:bg-primary/90"
                   >
-                    <Link href={ROUTES.CONTACT}>Schedule a Consultation</Link>
+                    <Link href={ROUTES.CONTACT} className="flex items-center">
+                      <FaHandHoldingMedical className="mr-2 h-4 w-4" /> Schedule
+                      a Consultation
+                    </Link>
                   </Button>
                 </div>
               </div>
