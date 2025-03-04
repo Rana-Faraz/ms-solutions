@@ -22,8 +22,8 @@ import {
   FaLightbulb,
   FaPhoneAlt,
 } from "react-icons/fa";
-import Hero from "~/public/images/hero.png";
-import About from "~/public/images/section-about.png";
+import Hero from "~/public/images/hero.jpeg";
+import About from "~/public/images/about.png";
 import { getPublicServices } from "../(admin)/admin/services/_actions/service-actions";
 
 export const metadata = {
