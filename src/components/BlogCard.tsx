@@ -20,7 +20,7 @@ interface BlogCardProps {
 
 export function BlogCard({ post }: BlogCardProps) {
   return (
-    <Card className="h-full overflow-hidden transition-all hover:shadow-md">
+    <Card className="h-full max-w-96 overflow-hidden transition-all hover:shadow-md">
       <div className="relative h-48 overflow-hidden bg-muted">
         {post.featuredImage ? (
           <Image

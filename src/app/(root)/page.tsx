@@ -1,8 +1,10 @@
+import { BlogCard } from "@/components/BlogCard";
 import { StatsSection } from "@/components/stats-section";
 import { TestimonialCard } from "@/components/testimonial-card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { getBlogPosts } from "@/lib/actions/blog";
 import { ROUTES } from "@/lib/routes";
 import { CONSTANTS } from "@/static/Constants";
 import Image from "next/image";
@@ -13,18 +15,11 @@ import {
   FaClinicMedical,
   FaEnvelope,
   FaFileMedical,
-  FaHeartbeat,
-  FaHospital,
   FaHospitalUser,
   FaLaptopMedical,
   FaPhoneAlt,
-  FaStethoscope,
 } from "react-icons/fa";
 import Hero from "~/public/images/hero.png";
-import Portfolio1 from "~/public/images/portfolio-1.png";
-import Portfolio2 from "~/public/images/portfolio-2.png";
-import Portfolio3 from "~/public/images/portfolio-3.png";
-import Portfolio4 from "~/public/images/portfolio-4.png";
 import About from "~/public/images/section-about.png";
 
 export const metadata = {
@@ -138,7 +133,10 @@ const testimonials = [
   },
 ];
 
-export default function Home() {
+export default async function Home() {
+  const recentBlogs = await getBlogPosts({
+    limit: 4,
+  });
   return (
     <main className="overflow-hidden">
       {/* Full-width Hero Section with Image Background */}
@@ -320,43 +318,27 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="mb-10 text-center">
             <Badge className="mb-3 bg-white/20 px-4 py-1 text-xs font-medium text-white">
-              CASE STUDIES
+              BLOGS
             </Badge>
             <h2 className="mb-4 text-2xl font-bold md:text-3xl lg:text-4xl">
-              Healthcare Success Stories
+              Healthcare Insights and Updates
             </h2>
             <p className="mx-auto max-w-2xl text-base md:text-lg">
-              See how our healthcare technology solutions have helped medical
-              practices improve patient care and operational efficiency.
+              Stay informed with the latest news and insights in healthcare
+              technology.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {[Portfolio1, Portfolio2, Portfolio3, Portfolio4].map(
-              (image, index) => (
-                <div
-                  key={index}
-                  className="group relative overflow-hidden rounded-lg"
-                >
-                  <div className="relative h-56 w-full overflow-hidden md:h-64">
-                    <Image
-                      src={image}
-                      alt={`Healthcare Case Study ${index + 1}`}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                  </div>
-                  <div className="absolute bottom-0 left-0 right-0 p-4">
-                    <h3 className="mb-1 text-base font-semibold md:text-lg">
-                      Case Study {index + 1}
-                    </h3>
-                    <p className="text-xs text-white/80 md:text-sm">
-                      Healthcare Technology Implementation
-                    </p>
-                  </div>
-                </div>
-              ),
+          <div className="flex flex-wrap justify-center gap-4">
+            {recentBlogs.data?.records.map((blog) => (
+              <BlogCard key={blog.id} post={blog} />
+            ))}
+            {recentBlogs.data?.records.length === 0 && (
+              <div className="flex items-center justify-center">
+                <p className="text-white">
+                  We are working on it. Please check back soon.
+                </p>
+              </div>
             )}
           </div>
 
@@ -366,7 +348,7 @@ export default function Home() {
               size="lg"
               className="bg-white text-primary hover:bg-accent hover:text-primary"
             >
-              <Link href={ROUTES.PORTFOLIO}>View All Case Studies</Link>
+              <Link href={ROUTES.BLOGS}>View All Blogs</Link>
             </Button>
           </div>
         </div>
