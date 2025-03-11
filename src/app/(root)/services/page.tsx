@@ -1,73 +1,16 @@
-import React from "react";
-import Link from "next/link";
-import { ROUTES } from "@/lib/routes";
-import {
-  FaStethoscope,
-  FaLaptopMedical,
-  FaUserMd,
-  FaHospitalUser,
-  FaFileMedical,
-  FaChartBar,
-  FaHeartbeat,
-  FaClinicMedical,
-  FaHandHoldingMedical,
-  FaTablets,
-  FaBriefcaseMedical,
-  FaHospital,
-} from "react-icons/fa";
-import { CustomAccordion } from "@/components/CustomAccordion";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import ServicesCard from "@/components/services-card";
 import { getPublicServices } from "@/app/(admin)/admin/services/_actions/service-actions";
-
-export const metadata = {
-  title: "Medical Services | Healthcare Solutions Provider",
-  description:
-    "Explore our comprehensive range of healthcare services designed to help medical practices improve patient care and operational efficiency.",
-};
-
-// FAQ data
-const faqItems = [
-  {
-    question: "How do you ensure patient data security with your solutions?",
-    answer:
-      "We implement multiple layers of security including encryption, access controls, and regular security audits. All our solutions are fully HIPAA-compliant and we conduct regular risk assessments to ensure ongoing protection of sensitive patient information.",
-  },
-  {
-    question:
-      "How long does implementation of your healthcare solutions typically take?",
-    answer:
-      "Implementation timelines vary based on the specific solution and the size of your practice. EHR implementations typically take 3-6 months, while telehealth platforms can be deployed in 4-8 weeks. We provide detailed timelines during our initial consultation.",
-  },
-  {
-    question: "Do you work with specific medical specialties?",
-    answer:
-      "We serve healthcare providers across various specialties including primary care, cardiology, orthopedics, pediatrics, and many others. Our solutions are customizable to address the unique workflows and requirements of different medical specialties.",
-  },
-  {
-    question: "What makes your healthcare solutions different from others?",
-    answer:
-      "Our solutions are developed with direct input from practicing clinicians, ensuring they address real-world healthcare challenges. We focus on intuitive design, seamless integration with existing systems, and ongoing support to ensure long-term success.",
-  },
-  {
-    question: "Do you provide training for our medical staff?",
-    answer:
-      "Yes, comprehensive training is included with all our implementations. We offer both in-person and virtual training options, role-specific education, and ongoing support resources to ensure your entire team can effectively utilize our solutions.",
-  },
-  {
-    question: "Can your solutions integrate with our existing medical systems?",
-    answer:
-      "Absolutely! We prioritize interoperability and can integrate with most major EHR systems, laboratory information systems, radiology information systems, and other healthcare platforms. We'll conduct a thorough assessment of your current technology ecosystem during our initial consultation.",
-  },
-];
+import { CustomAccordion } from "@/components/CustomAccordion";
+import ServicesCard from "@/components/services-card";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ROUTES } from "@/lib/routes";
+import Link from "next/link";
+import {
+  FaHandHoldingMedical,
+  FaHospital,
+  FaStethoscope,
+  FaUserMd,
+} from "react-icons/fa";
 
 export default async function ServicesPage() {
   const { services, error } = await getPublicServices();
@@ -92,16 +35,12 @@ export default async function ServicesPage() {
     <main className="container mx-auto px-4 py-16">
       {/* Hero Section */}
       <section className="mb-16 text-center">
-        <h1 className="mb-4 text-4xl font-bold md:text-5xl">
-          Healthcare Services
-        </h1>
+        <h1 className="mb-4 text-4xl font-bold md:text-5xl">Our Services</h1>
         <div className="mx-auto mb-8 h-1 w-24 bg-primary"></div>
         <p className="mx-auto max-w-3xl text-lg text-foreground">
-          We offer a comprehensive range of healthcare technology and consulting
-          services designed to help medical practices enhance patient care,
-          improve operational efficiency, and navigate the complex healthcare
-          landscape. Each service is tailored to meet the specific needs of your
-          healthcare organization.
+          At Stardom Meditech, we offer a range of healthcare technology
+          solutions designed to enhance efficiency, improve patient care, and
+          streamline operations for medical practices.
         </p>
       </section>
 
@@ -121,42 +60,14 @@ export default async function ServicesPage() {
             Our Healthcare Implementation Process
           </h2>
           <p className="mx-auto max-w-2xl text-foreground">
-            We follow a clinically-informed process to ensure seamless
-            integration of our solutions into your healthcare practice.
+            At Stardom Meditech, we are committed to optimizing healthcare
+            operations through technology-driven solutions. Let us help you
+            enhance efficiency and improve patient outcomes.
           </p>
         </div>
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
-          {[
-            {
-              step: 1,
-              title: "Clinical Assessment",
-              description:
-                "We analyze your practice's unique workflows, challenges, and objectives.",
-              icon: FaStethoscope,
-            },
-            {
-              step: 2,
-              title: "Solution Design",
-              description:
-                "We develop a customized implementation plan tailored to your specific clinical needs.",
-              icon: FaUserMd,
-            },
-            {
-              step: 3,
-              title: "Implementation",
-              description:
-                "We execute the plan with minimal disruption to your patient care operations.",
-              icon: FaHospital,
-            },
-            {
-              step: 4,
-              title: "Ongoing Support",
-              description:
-                "We provide continuous optimization and support to ensure long-term success.",
-              icon: FaHandHoldingMedical,
-            },
-          ].map((item) => (
+          {processItems.map((item) => (
             <Card key={item.step} className="relative">
               <div className="absolute -top-4 left-6 flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground">
                 {item.step}
@@ -255,3 +166,75 @@ export default async function ServicesPage() {
     </main>
   );
 }
+
+export const metadata = {
+  title: "Medical Services | Healthcare Solutions Provider",
+  description:
+    "Explore our comprehensive range of healthcare services designed to help medical practices improve patient care and operational efficiency.",
+};
+
+const processItems = [
+  {
+    step: 1,
+    title: "Clinical Assessment",
+    description:
+      "We analyze your practice's unique workflows, challenges, and objectives.",
+    icon: FaStethoscope,
+  },
+  {
+    step: 2,
+    title: "Solution Design",
+    description:
+      "We develop a customized implementation plan tailored to your specific clinical needs.",
+    icon: FaUserMd,
+  },
+  {
+    step: 3,
+    title: "Implementation",
+    description:
+      "We execute the plan with minimal disruption to your patient care operations.",
+    icon: FaHospital,
+  },
+  {
+    step: 4,
+    title: "Ongoing Support",
+    description:
+      "We provide continuous optimization and support to ensure long-term success.",
+    icon: FaHandHoldingMedical,
+  },
+];
+
+// FAQ data
+const faqItems = [
+  {
+    question: "How do you ensure patient data security with your solutions?",
+    answer:
+      "We implement multiple layers of security including encryption, access controls, and regular security audits. All our solutions are fully HIPAA-compliant and we conduct regular risk assessments to ensure ongoing protection of sensitive patient information.",
+  },
+  {
+    question:
+      "How long does implementation of your healthcare solutions typically take?",
+    answer:
+      "Implementation timelines vary based on the specific solution and the size of your practice. EHR implementations typically take 3-6 months, while telehealth platforms can be deployed in 4-8 weeks. We provide detailed timelines during our initial consultation.",
+  },
+  {
+    question: "Do you work with specific medical specialties?",
+    answer:
+      "We serve healthcare providers across various specialties including primary care, cardiology, orthopedics, pediatrics, and many others. Our solutions are customizable to address the unique workflows and requirements of different medical specialties.",
+  },
+  {
+    question: "What makes your healthcare solutions different from others?",
+    answer:
+      "Our solutions are developed with direct input from practicing clinicians, ensuring they address real-world healthcare challenges. We focus on intuitive design, seamless integration with existing systems, and ongoing support to ensure long-term success.",
+  },
+  {
+    question: "Do you provide training for our medical staff?",
+    answer:
+      "Yes, comprehensive training is included with all our implementations. We offer both in-person and virtual training options, role-specific education, and ongoing support resources to ensure your entire team can effectively utilize our solutions.",
+  },
+  {
+    question: "Can your solutions integrate with our existing medical systems?",
+    answer:
+      "Absolutely! We prioritize interoperability and can integrate with most major EHR systems, laboratory information systems, radiology information systems, and other healthcare platforms. We'll conduct a thorough assessment of your current technology ecosystem during our initial consultation.",
+  },
+];

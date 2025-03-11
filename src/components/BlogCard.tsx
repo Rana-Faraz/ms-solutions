@@ -13,12 +13,14 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import { BlogPost } from "@/types/blog";
+import { cn } from "@/lib/utils";
 
 interface BlogCardProps {
   post: BlogPost;
+  variant?: "primary" | "secondary";
 }
 
-export function BlogCard({ post }: BlogCardProps) {
+export function BlogCard({ post, variant = "primary" }: BlogCardProps) {
   return (
     <Card className="h-full max-w-96 overflow-hidden transition-all hover:shadow-md">
       <div className="relative h-48 overflow-hidden bg-muted">
@@ -36,7 +38,9 @@ export function BlogCard({ post }: BlogCardProps) {
           </div>
         )}
       </div>
-      <CardHeader className="p-4 pb-2">
+      <CardHeader
+        className={cn("p-4 pb-2", variant === "secondary" && "bg-secondary/10")}
+      >
         {post.categories && post.categories.length > 0 && (
           <div className="mb-2 flex flex-wrap gap-2">
             {post.categories.slice(0, 2).map((category) => (
@@ -61,13 +65,20 @@ export function BlogCard({ post }: BlogCardProps) {
           </Link>
         </h3>
       </CardHeader>
-      <CardContent className="p-4 pt-0">
+      <CardContent
+        className={cn("p-4 pt-0", variant === "secondary" && "bg-secondary/10")}
+      >
         <p className="line-clamp-3 text-sm text-muted-foreground">
           {post.excerpt ||
             "Discover insights in healthcare technology and clinical best practices."}
         </p>
       </CardContent>
-      <CardFooter className="flex flex-col items-start gap-3 border-t p-4 text-xs text-muted-foreground">
+      <CardFooter
+        className={cn(
+          "flex flex-col items-start gap-3 border-t p-4 text-xs text-muted-foreground",
+          variant === "secondary" && "bg-secondary/10",
+        )}
+      >
         <div className="flex w-full items-center justify-between">
           <div className="flex items-center gap-2">
             {post.author?.image ? (

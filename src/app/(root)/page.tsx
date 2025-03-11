@@ -75,13 +75,16 @@ export default async function Home() {
             <Badge className="mb-4 bg-white/20 px-4 py-1 text-sm font-medium text-white backdrop-blur-sm">
               <FaHeartbeat className="mr-2 h-3 w-3" /> HEALTHCARE SOLUTIONS
             </Badge>
-            <h1 className="mb-4 text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
+            <h1 className="mb-4 text-2xl font-bold leading-tight md:text-4xl lg:text-5xl">
               Modern Healthcare Technology
             </h1>
-            <p className="mb-6 text-lg md:text-xl">
-              Empowering healthcare providers with technology that enhances
-              patient care, streamlines clinical workflows, and optimizes
-              medical practice operations.
+            <p className="mb-6 text-sm md:text-sm">
+              to empowering healthcare providers with cutting-edge technology
+              that enhances patient care, streamlines clinical workflows, and
+              optimizes medical practice operations. Our solutions are designed
+              to improve efficiency, reduce administrative burdens, and support
+              better health outcomes. Join us in shaping the future of
+              healthcare through innovation and technology.
             </p>
             <div className="flex flex-col items-center justify-center space-y-4 sm:flex-row sm:space-x-6 sm:space-y-0">
               <Button
@@ -237,31 +240,11 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Testimonial Section */}
-      <section className="py-16 md:py-24">
+      {/* Blogs Section */}
+      <section className=" py-16 md:py-24">
         <div className="container mx-auto px-4">
           <div className="mb-10 text-center">
             <Badge className="mb-3 bg-secondary/10 px-4 py-1 text-xs font-medium text-secondary">
-              <FaCommentMedical className="mr-2 h-3 w-3" /> TESTIMONIALS
-            </Badge>
-            <h2 className="mb-4 text-2xl font-bold md:text-3xl lg:text-4xl">
-              Client Success Stories
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            {testimonials.map((testimonial, index) => (
-              <TestimonialCard key={index} testimonial={testimonial} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Blogs Section */}
-      <section className="bg-gradient-to-r from-primary to-secondary py-16 text-white md:py-24">
-        <div className="container mx-auto px-4">
-          <div className="mb-10 text-center">
-            <Badge className="mb-3 bg-white/20 px-4 py-1 text-xs font-medium text-white">
               <FaBookMedical className="mr-2 h-3 w-3" /> BLOGS
             </Badge>
             <h2 className="mb-4 text-2xl font-bold md:text-3xl lg:text-4xl">
@@ -273,10 +256,10 @@ export default async function Home() {
             {recentBlogs.data?.records &&
             recentBlogs.data.records.length > 0 ? (
               recentBlogs.data.records.map((blog) => (
-                <BlogCard key={blog.id} post={blog} />
+                <BlogCard variant="secondary" key={blog.id} post={blog} />
               ))
             ) : (
-              <div className="w-full max-w-2xl overflow-hidden rounded-lg bg-white/10 backdrop-blur-sm">
+              <div className="w-full max-w-2xl overflow-hidden rounded-lg bg-gradient-to-r from-primary to-secondary backdrop-blur-sm">
                 <div className="relative">
                   {/* Decorative elements */}
                   <div className="absolute -left-6 -top-6 h-12 w-12 rounded-full bg-primary/30 blur-xl"></div>
@@ -292,12 +275,12 @@ export default async function Home() {
                     </div>
 
                     <div className="mb-6 max-w-md">
-                      <h3 className="mb-3 text-2xl font-bold">
+                      <h3 className="mb-3 text-2xl font-bold text-white">
                         Healthcare Insights Coming Soon
                       </h3>
                       <div className="relative">
                         <div className="absolute -left-2 top-0 h-full w-1 bg-gradient-to-b from-primary/40 to-secondary/40"></div>
-                        <p className="pl-4 text-white/80">
+                        <p className="pl-4 text-slate-400">
                           We're crafting thoughtful articles on healthcare
                           innovation and medical technology. Subscribe to be
                           notified when new content is available.
@@ -306,12 +289,6 @@ export default async function Home() {
                     </div>
 
                     <div className="flex flex-col space-y-3 sm:flex-row sm:space-x-3 sm:space-y-0">
-                      <Button
-                        variant="outline"
-                        className="border-white/30 bg-white/10 text-white backdrop-blur-sm hover:bg-white hover:text-primary"
-                      >
-                        <FaEnvelope className="mr-2 h-4 w-4" /> Subscribe
-                      </Button>
                       <Button
                         asChild
                         variant="ghost"
@@ -333,11 +310,7 @@ export default async function Home() {
 
           {recentBlogs.data?.records && recentBlogs.data.records.length > 0 && (
             <div className="mt-8 text-center md:mt-10">
-              <Button
-                asChild
-                size="lg"
-                className="bg-white text-primary hover:bg-accent hover:text-primary"
-              >
+              <Button asChild size="lg">
                 <Link href={ROUTES.BLOGS} className="flex items-center">
                   <FaArrowRight className="mr-2 h-4 w-4" /> View All Blogs
                 </Link>
