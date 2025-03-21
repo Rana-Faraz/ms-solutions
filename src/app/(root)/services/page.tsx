@@ -168,7 +168,7 @@ export default async function ServicesPage() {
 }
 
 export const metadata = {
-  title: "Medical Services | Healthcare Solutions Provider",
+  title: "Medical Services",
   description:
     "Explore our comprehensive range of healthcare services designed to help medical practices improve patient care and operational efficiency.",
 };

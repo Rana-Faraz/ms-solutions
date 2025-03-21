@@ -15,7 +15,7 @@ import {
 } from "react-icons/fa";
 
 export const metadata = {
-  title: "Contact Us | Healthcare Solutions Provider",
+  title: "Contact Us",
   description:
     "Get in touch with our healthcare team to discuss how we can help improve your medical practice with our innovative solutions.",
 };

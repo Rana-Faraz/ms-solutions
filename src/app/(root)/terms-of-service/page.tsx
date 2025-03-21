@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 
 export const metadata = {
-  title: "Terms of Service | Healthcare Services",
+  title: "Terms of Service",
   description:
     "Terms and conditions for using our healthcare services and platform",
 };

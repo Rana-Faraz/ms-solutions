@@ -21,7 +21,7 @@ import {
 import { MdEmail, MdLocationOn, MdPhone } from "react-icons/md";
 
 export const metadata = {
-  title: "About Us | Medical Solutions Provider",
+  title: "About Us",
   description:
     "Learn about our healthcare team, our mission, and how we help medical practices and healthcare providers deliver better patient care.",
 };
@@ -90,15 +90,13 @@ export default async function AboutPage() {
         <div className="container relative mx-auto px-4">
           <div className="mx-auto max-w-3xl text-center">
             <h1 className="mb-6 text-4xl font-bold md:text-5xl">
-              About Our Healthcare Solutions
+              Moderenized Healthcare
             </h1>
             <div className="mx-auto mb-8 h-1 w-24 bg-white"></div>
             <p className="mb-8 text-lg md:text-xl">
-              We are a dedicated team of healthcare professionals and technology
-              experts committed to improving patient care through innovative
-              medical solutions. With deep industry expertise and a
-              patient-first approach, we help healthcare providers deliver
-              exceptional care efficiently.
+              Empowering healthcare professionals with Stradom tech-services to
+              optimize patient care, streamline clinical workflows, minimize
+              administrative burdens, and ensure overall health outcomes.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Button
@@ -125,7 +123,7 @@ export default async function AboutPage() {
           <div className="mb-12 flex items-center justify-center">
             <FaStethoscope className="mr-3 h-8 w-8 text-primary" />
             <h2 id="our-mission" className="text-3xl font-bold md:text-4xl">
-              Our Mission
+              MISSION
             </h2>
           </div>
 
@@ -133,33 +131,36 @@ export default async function AboutPage() {
             <div className="order-2 md:order-1">
               <div className="mb-6 rounded-lg bg-accent p-4">
                 <p className="italic text-accent-foreground">
-                  "We're dedicated to transforming healthcare delivery through
-                  innovative solutions that empower providers and improve
-                  patient outcomes."
+                  "Enabling optimized care for sustainable healthcare growth."
                 </p>
               </div>
               <p className="mb-4 text-foreground">
-                Founded in 2015, our company began with a clear vision: to
-                address the unique challenges faced by healthcare providers in
-                delivering quality patient care while managing the complexities
-                of modern medical practice.
+                We are dedicated to enabling healthcare professionals with
+                innovative solutions that optimize care and streamline
+                operations, ensuring sustainable growth within their practices.
+                By offering specialised resources that ensures patient care,
+                reduce administrative burdens, and improve workflow efficiency,
+                we help providers focus more on what matters most—delivering
+                exceptional care. Our commitment is to support healthcare
+                businesses in achieving both immediate and long-term success,
+                enhancing the quality of care while maintaining operational
+                excellence.
               </p>
               <p className="mb-4 text-foreground">
-                We recognized that many healthcare organizations struggle with
-                outdated systems, inefficient workflows, and limited resources
-                that can impact patient care. Our team of medical professionals
-                and technology experts came together to create solutions
-                specifically designed for the healthcare environment.
+                We understand the unique challenges healthcare providers face,
+                from complex regulations to rising patient expectations and cost
+                pressures. That's why we offer accessible, effective technology
+                solutions designed to deliver measurable results.
               </p>
               <p className="mb-4 text-foreground">
-                Since then, we've partnered with hundreds of healthcare
-                providers—from small private practices to large hospital
-                systems—to implement solutions that enhance clinical outcomes,
-                improve operational efficiency, and elevate the patient
-                experience.
+                With decades of experience in healthcare and technology, our
+                team is driven by a shared passion for improving patient care
+                through innovation. We measure our success by your clinical and
+                operational outcomes, committed to being your trusted partner in
+                healthcare transformation.
               </p>
 
-              <div className="mt-8 flex flex-wrap gap-4">
+              {/* <div className="mt-8 flex flex-wrap gap-4">
                 {MILESTONES.map((milestone, index) => (
                   <div key={index} className="flex items-start">
                     <div className="mr-2 rounded-full bg-primary/10 px-3 py-1 text-sm font-bold text-primary">
@@ -170,7 +171,7 @@ export default async function AboutPage() {
                     </div>
                   </div>
                 ))}
-              </div>
+              </div> */}
             </div>
 
             <div className="order-1 md:order-2">

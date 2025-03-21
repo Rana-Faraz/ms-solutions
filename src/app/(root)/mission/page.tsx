@@ -1,37 +1,22 @@
-import React from "react";
-import Link from "next/link";
-import { ROUTES } from "@/lib/routes";
-import {
-  FaStethoscope,
-  FaHeartbeat,
-  FaChartLine,
-  FaUsers,
-  FaHospital,
-  FaGlobe,
-  FaCheckCircle,
-  FaHandHoldingMedical,
-  FaCompass,
-  FaUserMd,
-  FaLaptopMedical,
-  FaFileMedical,
-  FaClinicMedical,
-  FaFlask,
-  FaTablets,
-  FaHospitalUser,
-  FaBriefcaseMedical,
-  FaQuoteRight,
-} from "react-icons/fa";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ROUTES } from "@/lib/routes";
+import Link from "next/link";
 import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+  FaChartLine,
+  FaCheckCircle,
+  FaCompass,
+  FaGlobe,
+  FaHandHoldingMedical,
+  FaHeartbeat,
+  FaLaptopMedical,
+  FaStethoscope,
+  FaUserMd,
+  FaUsers,
+} from "react-icons/fa";
 
 export const metadata = {
-  title: "Our Mission | Healthcare Solutions Provider",
+  title: "Our Mission",
   description:
     "Learn about our mission and values that drive us to improve healthcare delivery and patient outcomes through innovative technology solutions.",
 };

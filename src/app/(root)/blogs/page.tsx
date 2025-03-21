@@ -21,11 +21,11 @@ import {
 } from "react-icons/fa";
 
 export const metadata: Metadata = {
-  title: "Healthcare Blog | Medical Insights and Updates",
+  title: "Healthcare Blog",
   description:
     "Read our latest articles on healthcare technology, medical practice management, and clinical innovations to help your healthcare organization thrive.",
   openGraph: {
-    title: "Healthcare Blog | Medical Insights and Updates",
+    title: "Healthcare Blog",
     description:
       "Read our latest articles on healthcare technology, medical practice management, and clinical innovations to help your healthcare organization thrive.",
     type: "website",

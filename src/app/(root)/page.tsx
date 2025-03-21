@@ -26,29 +26,6 @@ import Hero from "~/public/images/hero.jpeg";
 import About from "~/public/images/about.png";
 import { getPublicServices } from "../(admin)/admin/services/_actions/service-actions";
 
-export const metadata = {
-  title:
-    "Healthcare Solutions Provider | Medical Technology for Modern Practices",
-  description:
-    "Innovative healthcare technology solutions designed to improve patient care, streamline clinical workflows, and optimize medical practice operations.",
-};
-
-// Testimonials
-const testimonials = [
-  {
-    quote:
-      "Implementing their EHR solution has transformed our practice. Patient wait times have decreased by 30%, documentation is more efficient, and our providers can focus more on patient care rather than paperwork.",
-    name: "Dr. Rebecca Chen",
-    position: "Medical Director, Westside Family Practice",
-  },
-  {
-    quote:
-      "The telehealth platform has allowed us to expand our reach and provide care to patients who previously had difficulty accessing our services. The implementation was smooth and the ongoing support is exceptional.",
-    name: "Dr. Michael Johnson",
-    position: "Chief of Cardiology, Metro Heart Center",
-  },
-];
-
 export default async function Home() {
   const recentBlogs = await getBlogPosts({
     limit: 4,

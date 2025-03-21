@@ -1,7 +1,7 @@
 import { Shield, Lock, Eye, FileText, Server, UserCheck } from "lucide-react";
 
 export const metadata = {
-  title: "Privacy Policy | Healthcare Services",
+  title: "Privacy Policy",
   description:
     "Our commitment to protecting your personal and health information",
 };

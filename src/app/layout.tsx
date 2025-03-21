@@ -21,8 +21,12 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "M&S Solutions",
-  description: "M&S Solutions is a software development company.",
+  title: {
+    default: "Stradom Meditech",
+    template: "%s | Stradom Meditech",
+  },
+  description:
+    "Innovative healthcare technology solutions designed to improve patient care, streamline clinical workflows, and optimize medical practice operations.",
   icons: [
     {
       rel: "icon",
