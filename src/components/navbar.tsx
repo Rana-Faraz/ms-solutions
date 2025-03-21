@@ -35,7 +35,6 @@ const NAV_ITEMS = [
   { href: ROUTES.HOME, label: "Home", hasDropdown: false },
   { href: ROUTES.ABOUT, label: "About Us", hasDropdown: false },
   { href: ROUTES.SERVICES, label: "Services", hasDropdown: true },
-  { href: ROUTES.MISSION, label: "Mission", hasDropdown: false },
   { href: ROUTES.BLOGS, label: "Blogs", hasDropdown: true },
   { href: ROUTES.CONTACT, label: "Contact Us", hasDropdown: false },
 ];
