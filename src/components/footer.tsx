@@ -7,7 +7,7 @@ import {
   Twitter,
 } from "lucide-react";
 // import Logo from "../../public/images/logo.svg";
-import Logo from "../../public/images/stardom-logo-footer.webp";
+import Logo from "../../public/images/download.png";
 import Image from "next/image";
 import Services from "@/static/services.json";
 import { ROUTES } from "@/lib/routes";
@@ -24,11 +24,7 @@ const Footer = () => {
             href={ROUTES.HOME}
             className="transition-opacity hover:opacity-90"
           >
-            <Image
-              src={Logo}
-              alt="Logo"
-              className="h-24 w-auto invert filter"
-            />
+            <Image src={Logo} alt="Logo" className="h-16 w-auto " />
           </Link>
 
           <div className="flex items-center gap-4">

@@ -60,8 +60,8 @@ const Sidebar = ({ latestBlogs }: { latestBlogs: BlogPost[] }) => {
       </SheetTrigger>
       <SheetContent className="flex w-[300px] flex-col">
         <SheetHeader className="border-b pb-4">
-          <div className="flex items-center justify-center py-4">
-            <Image src={Logo} alt="Logo" className="h-8 w-auto" />
+          <div className="flex items-center justify-center">
+            <Image src={Logo} alt="Logo" className="h-14 w-auto" />
           </div>
         </SheetHeader>
 
@@ -224,11 +224,7 @@ export default async function Navbar() {
           {/* Logo/Branding (Left Section) */}
           <div className="flex items-center">
             <Link href={ROUTES.HOME} className="flex items-center">
-              <Image
-                src={Logo}
-                alt="Logo"
-                className="h-8 w-auto invert filter"
-              />
+              <Image src={Logo} alt="Logo" className="h-14 w-auto " />
             </Link>
           </div>
 
