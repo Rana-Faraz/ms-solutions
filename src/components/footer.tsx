@@ -13,6 +13,7 @@ import Services from "@/static/services.json";
 import { ROUTES } from "@/lib/routes";
 import Link from "next/link";
 import { CONSTANTS } from "@/static/Constants";
+import { MdWhatsapp } from "react-icons/md";
 
 const Footer = () => {
   return (
@@ -46,19 +47,19 @@ const Footer = () => {
             </a>
             <a
               target="_blank"
-              href={`${CONSTANTS.TWITTER}`}
-              aria-label="Twitter"
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 transition-all hover:bg-primary hover:text-background"
-            >
-              <Twitter size={18} />
-            </a>
-            <a
-              target="_blank"
               href={`${CONSTANTS.LINKEDIN}`}
               aria-label="LinkedIn"
               className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 transition-all hover:bg-primary hover:text-background"
             >
               <Linkedin size={18} />
+            </a>
+            <a
+              target="_blank"
+              href={`${CONSTANTS.WHATSAPP}`}
+              aria-label="Whatsapp"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 transition-all hover:bg-primary hover:text-background"
+            >
+              <MdWhatsapp size={18} />
             </a>
           </div>
         </div>

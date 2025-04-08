@@ -4,19 +4,11 @@ import * as React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import {
-  FaPaperPlane,
-  FaUser,
-  FaEnvelope,
-  FaTag,
-  FaComment,
-} from "react-icons/fa";
 
 import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -25,6 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
+import { createContactSubmission } from "@/app/(admin)/admin/contacts/_actions/contact-actions";
 
 // Define the form schema with Zod
 const formSchema = z.object({
@@ -43,6 +36,8 @@ const formSchema = z.object({
 });
 
 export function ContactForm() {
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+
   // Initialize the form with react-hook-form and zod validation
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -55,15 +50,32 @@ export function ContactForm() {
   });
 
   // Handle form submission
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // In a real application, you would send this data to your backend
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      setIsSubmitting(true);
 
-    // Show success toast
-    toast.success("Message sent successfully! We'll get back to you soon.");
+      // Submit to the server action
+      const result = await createContactSubmission(values);
 
-    // Reset the form
-    form.reset();
+      if (result.success) {
+        // Show success toast
+        toast.success("Message sent successfully! We'll get back to you soon.");
+
+        // Reset the form
+        form.reset();
+      } else {
+        // Show error toast
+        toast.error(`Failed to send message: ${result.error}`);
+      }
+    } catch (error) {
+      // Show error toast
+      toast.error(
+        "An error occurred while sending your message. Please try again later.",
+      );
+      console.error("Form submission error:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -142,10 +154,10 @@ export function ContactForm() {
         <Button
           type="submit"
           className="group flex items-center gap-2"
-          disabled={form.formState.isSubmitting}
+          disabled={isSubmitting}
         >
           <span>Send Message</span>
-          {form.formState.isSubmitting && (
+          {isSubmitting && (
             <span className="ml-2 inline-block h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent"></span>
           )}
         </Button>

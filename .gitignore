@@ -13,6 +13,8 @@
 /.next/
 /out/
 
+.specstory/*
+
 # production
 /build
 

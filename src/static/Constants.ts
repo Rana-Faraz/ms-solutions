@@ -5,13 +5,14 @@ import { FaAward } from "react-icons/fa";
 import { FaBriefcaseMedical, FaHeart } from "react-icons/fa";
 
 export const CONSTANTS = {
-  PHONE: "+1 (800) 123-4567",
-  EMAIL: "info@example.com",
-  ADDRESS: "311 TRAVIS AVE ELMONT, NY 11003",
-  INSTAGRAM: "https://www.instagram.com/example",
-  FACEBOOK: "https://www.facebook.com/example",
+  PHONE: "+1 (504) 503-3436",
+  EMAIL: "info@stradommeditech.com",
+  ADDRESS: "311 TRAVIS AVE, ELMONT, NY 11003",
+  INSTAGRAM: "https://www.instagram.com/stardommeditech/",
+  FACEBOOK: "https://www.facebook.com/profile.php?id=61571830727044",
   TWITTER: "https://www.twitter.com/example",
-  LINKEDIN: "https://www.linkedin.com/company/example",
+  LINKEDIN: "https://www.linkedin.com/company/stardom-meditech/",
+  WHATSAPP: "https://wa.me/15045033436"
 } as const;
 
 export const STATS = [
