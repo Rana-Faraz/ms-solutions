@@ -18,7 +18,8 @@ export const metadata = {
 export default async function TeamPreviewPage({
   params,
 }: TeamPreviewPageProps) {
-  const { id } = await params;
+  const awaitedParams = await params;
+  const id = awaitedParams.id;
 
   // Fetch the team member
   const { member, error } = await getTeamMemberById(id);

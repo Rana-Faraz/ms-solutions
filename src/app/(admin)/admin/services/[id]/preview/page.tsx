@@ -18,7 +18,8 @@ interface ServicePreviewPageProps {
 export default async function ServicePreviewPage({
   params,
 }: ServicePreviewPageProps) {
-  const { id } = await params;
+  const awaitedParams = await params;
+  const id = awaitedParams.id;
 
   // Get service data
   const { service, error } = await getServiceById(id);
@@ -50,7 +51,7 @@ export default async function ServicePreviewPage({
       </div>
 
       <div className="space-y-6">
-        <ServiceDetailPage params={{ slug: service.slug }} />
+        <ServiceDetailPage params={Promise.resolve({ slug: service.slug })} />
       </div>
     </div>
   );

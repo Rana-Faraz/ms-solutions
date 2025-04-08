@@ -30,9 +30,10 @@ export async function generateMetadata({
 export default async function ServiceDetailPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const { service, error } = await getServiceBySlug(params.slug);
+  const awaitedParams = await params;
+  const { service, error } = await getServiceBySlug(awaitedParams.slug);
 
   if (error || !service) {
     console.error("Error loading service:", error);
