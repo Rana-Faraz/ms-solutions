@@ -31,9 +31,9 @@ import {
 } from "../_actions/contact-actions";
 
 interface ContactDetailPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 export async function generateMetadata({
@@ -75,6 +75,7 @@ async function toggleArchiveStatus(id: string, isArchived: boolean) {
 export default async function ContactDetailPage({
   params,
 }: ContactDetailPageProps) {
+  const id = (await params).id;
   // Verify authentication
   const session = await auth.api.getSession({
     headers: await headers(),
@@ -92,7 +93,7 @@ export default async function ContactDetailPage({
 
   // Get the contact submission
   const { contactSubmission: submission, error } =
-    await getContactSubmissionById(params.id);
+    await getContactSubmissionById(id);
 
   if (error || !submission) {
     notFound();
